@@ -1,6 +1,6 @@
 {
-  "name": "reflex",
-  "version": "1.0.0",
+  "name": "@ksplat/reflex",
+  "version": "1.0.0-beta",
   "description": "A javascript game engine.",
   "main": "Reflex.js",
   "scripts": {
@@ -20,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/ksplatdev/Reflex/issues"
   },
-  "homepage": "https://github.com/ksplatdev/Reflex#readme"
+  "homepage": "https://github.com/ksplatdev/Reflex#readme",
+  "devDependencies": {
+    "fs": "0.0.1-security",
+    "jsdoc-to-markdown": "^7.0.1"
+  }
 }
