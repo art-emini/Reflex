@@ -282,5 +282,5 @@ Emits particles from a particle
 | [options.axis] | <code>String</code> | "x" or "y". Direction of particle emitter force |
 | [options.force] | <code>Number</code> | The force being applied. Negative number is left for axis = x, up for axis = y. Positive number is right for axis = x, down for axis = y.                                  Does not work if options.attached is present |
 | [options.attached] | [<code>Sprite</code>](#Sprite) | If you want to attach the particle emitter to a sprite. |
-| options.amount | [<code>Sprite</code>](#Sprite) | Amount of particles |
+| options.amount | [<code>Number</code>](#Sprite) | Amount of particles |
 

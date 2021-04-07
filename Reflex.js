@@ -444,7 +444,7 @@ class ParticleEmitter extends Reflex {
      * @param {Number} [options.force] The force being applied. Negative number is left for axis = x, up for axis = y. Positive number is right for axis = x, down for axis = y.
      *                                  Does not work if options.attached is present
      * @param {Sprite} [options.attached] If you want to attach the particle emitter to a sprite.
-     * @param {Sprite} options.amount Amount of particles
+     * @param {Number} options.amount Amount of particles
      * 
      * @memberof ParticleEmitter
      */
