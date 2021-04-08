@@ -20,9 +20,5 @@
   "bugs": {
     "url": "https://github.com/ksplatdev/Reflex/issues"
   },
-  "homepage": "https://github.com/ksplatdev/Reflex#readme",
-  "devDependencies": {
-    "fs": "0.0.1-security",
-    "jsdoc-to-markdown": "^7.0.1"
-  }
+  "homepage": "https://github.com/ksplatdev/Reflex#readme"
 }

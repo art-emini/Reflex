@@ -1,4 +1,32 @@
-//#region Global Utils
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Reflex.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Reflex.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>//#region Global Utils
 
 
 //#endregion
@@ -159,7 +187,7 @@ class Sprite extends Reflex {
         this.acceleration = this.options.movement.acceleration;
         this.maxSpeed = this.options.movement.maxSpeed;
 
-        if(this.acceleration != undefined && this.maxSpeed == undefined) throw "acceleration is defined while maxSpeed is undefined";
+        if(this.acceleration != undefined &amp;&amp; this.maxSpeed == undefined) throw "acceleration is defined while maxSpeed is undefined";
 
         window.addEventListener("keydown", (e) => {this.keyListener(e)});
         window.addEventListener("keyup", (e) => {this.keyListener(e)});
@@ -176,9 +204,9 @@ class Sprite extends Reflex {
 
         // acceleration
 
-        if(this.acceleration != undefined && this.maxSpeed != undefined) {
+        if(this.acceleration != undefined &amp;&amp; this.maxSpeed != undefined) {
             if(this.controller.up || this.controller.down || this.controller.left || this.controller.right) {
-                if(this.vel < this.maxSpeed) {
+                if(this.vel &lt; this.maxSpeed) {
                     this.vel += this.acceleration;
                 };
             }else{
@@ -191,19 +219,19 @@ class Sprite extends Reflex {
 
         //#region movement
 
-        if(this.controller.up && (this.options.movement.type == "TopDown" || this.options.movement.type == "Jump" || this.options.movement.type == "UpDown")) {
+        if(this.controller.up &amp;&amp; (this.options.movement.type == "TopDown" || this.options.movement.type == "Jump" || this.options.movement.type == "UpDown")) {
             this.y -= this.options.movement.speed;
         };
 
-        if(this.controller.down && (this.options.movement.type == "TopDown" || this.options.movement.type == "UpDown")) {
+        if(this.controller.down &amp;&amp; (this.options.movement.type == "TopDown" || this.options.movement.type == "UpDown")) {
             this.y += this.options.movement.speed;
         };
 
-        if(this.controller.left && (this.options.movement.type == "TopDown" || this.options.movement.type == "LeftRight")) {
+        if(this.controller.left &amp;&amp; (this.options.movement.type == "TopDown" || this.options.movement.type == "LeftRight")) {
             this.x -= this.options.movement.speed;
         };
 
-        if(this.controller.right && (this.options.movement.type == "TopDown" || this.options.movement.type == "LeftRight")) {
+        if(this.controller.right &amp;&amp; (this.options.movement.type == "TopDown" || this.options.movement.type == "LeftRight")) {
             this.x += this.options.movement.speed;
         };
 
@@ -357,7 +385,7 @@ class Rect extends Reflex {
         this.acceleration = this.options.movement.acceleration;
         this.maxSpeed = this.options.movement.maxSpeed;
 
-        if(this.acceleration != undefined && this.maxSpeed == undefined) throw "acceleration is defined while maxSpeed is undefined";
+        if(this.acceleration != undefined &amp;&amp; this.maxSpeed == undefined) throw "acceleration is defined while maxSpeed is undefined";
 
         window.addEventListener("keydown", (e) => {this.keyListener(e)});
         window.addEventListener("keyup", (e) => {this.keyListener(e)});
@@ -373,9 +401,9 @@ class Rect extends Reflex {
 
         // acceleration
 
-        if(this.acceleration != undefined && this.maxSpeed != undefined) {
+        if(this.acceleration != undefined &amp;&amp; this.maxSpeed != undefined) {
             if(this.controller.up || this.controller.down || this.controller.left || this.controller.right) {
-                if(this.vel < this.maxSpeed) {
+                if(this.vel &lt; this.maxSpeed) {
                     this.vel += this.acceleration;
                 };
             }else{
@@ -387,19 +415,19 @@ class Rect extends Reflex {
 
         //#region movement
 
-        if(this.controller.up && (this.options.movement.type == "TopDown" || this.options.movement.type == "Jump" || this.options.movement.type == "UpDown")) {
+        if(this.controller.up &amp;&amp; (this.options.movement.type == "TopDown" || this.options.movement.type == "Jump" || this.options.movement.type == "UpDown")) {
             this.y -= this.vel;
         };
 
-        if(this.controller.down && (this.options.movement.type == "TopDown" || this.options.movement.type == "UpDown")) {
+        if(this.controller.down &amp;&amp; (this.options.movement.type == "TopDown" || this.options.movement.type == "UpDown")) {
             this.y += this.vel;
         };
 
-        if(this.controller.left && (this.options.movement.type == "TopDown" || this.options.movement.type == "LeftRight")) {
+        if(this.controller.left &amp;&amp; (this.options.movement.type == "TopDown" || this.options.movement.type == "LeftRight")) {
             this.x -= this.vel;
         };
 
-        if(this.controller.right && (this.options.movement.type == "TopDown" || this.options.movement.type == "LeftRight")) {
+        if(this.controller.right &amp;&amp; (this.options.movement.type == "TopDown" || this.options.movement.type == "LeftRight")) {
             this.x += this.vel;
         };
 
@@ -554,7 +582,7 @@ class Circle extends Reflex {
         this.acceleration = this.options.movement.acceleration;
         this.maxSpeed = this.options.movement.maxSpeed;
 
-        if(this.acceleration != undefined && this.maxSpeed == undefined) throw "acceleration is defined while maxSpeed is undefined";
+        if(this.acceleration != undefined &amp;&amp; this.maxSpeed == undefined) throw "acceleration is defined while maxSpeed is undefined";
 
         window.addEventListener("keydown", (e) => {this.keyListener(e)});
         window.addEventListener("keyup", (e) => {this.keyListener(e)});
@@ -572,9 +600,9 @@ class Circle extends Reflex {
 
         // acceleration
 
-        if(this.acceleration != undefined && this.maxSpeed != undefined) {
+        if(this.acceleration != undefined &amp;&amp; this.maxSpeed != undefined) {
             if(this.controller.up || this.controller.down || this.controller.left || this.controller.right) {
-                if(this.vel < this.maxSpeed) {
+                if(this.vel &lt; this.maxSpeed) {
                     this.vel += this.acceleration;
                 };
             }else{
@@ -586,19 +614,19 @@ class Circle extends Reflex {
 
         //#region movement
 
-        if(this.controller.up && (this.options.movement.type == "TopDown" || this.options.movement.type == "Jump" || this.options.movement.type == "UpDown")) {
+        if(this.controller.up &amp;&amp; (this.options.movement.type == "TopDown" || this.options.movement.type == "Jump" || this.options.movement.type == "UpDown")) {
             this.y -= this.vel;
         };
 
-        if(this.controller.down && (this.options.movement.type == "TopDown" || this.options.movement.type == "UpDown")) {
+        if(this.controller.down &amp;&amp; (this.options.movement.type == "TopDown" || this.options.movement.type == "UpDown")) {
             this.y += this.vel;
         };
 
-        if(this.controller.left && (this.options.movement.type == "TopDown" || this.options.movement.type == "LeftRight")) {
+        if(this.controller.left &amp;&amp; (this.options.movement.type == "TopDown" || this.options.movement.type == "LeftRight")) {
             this.x -= this.vel;
         };
 
-        if(this.controller.right && (this.options.movement.type == "TopDown" || this.options.movement.type == "LeftRight")) {
+        if(this.controller.right &amp;&amp; (this.options.movement.type == "TopDown" || this.options.movement.type == "LeftRight")) {
             this.x += this.vel;
         };
 
@@ -757,7 +785,7 @@ class RoundRect extends Reflex {
         this.acceleration = this.options.movement.acceleration;
         this.maxSpeed = this.options.movement.maxSpeed;
 
-        if(this.acceleration != undefined && this.maxSpeed == undefined) throw "acceleration is defined while maxSpeed is undefined";
+        if(this.acceleration != undefined &amp;&amp; this.maxSpeed == undefined) throw "acceleration is defined while maxSpeed is undefined";
 
         window.addEventListener("keydown", (e) => {this.keyListener(e)});
         window.addEventListener("keyup", (e) => {this.keyListener(e)});
@@ -768,8 +796,8 @@ class RoundRect extends Reflex {
      */
 
     draw() {
-        if (this.w < 2 * this.r) this.r = this.w / 2;
-        if (this.h < 2 * this.r) this.r = this.h / 2;
+        if (this.w &lt; 2 * this.r) this.r = this.w / 2;
+        if (this.h &lt; 2 * this.r) this.r = this.h / 2;
         this.ctx.beginPath();
         this.ctx.moveTo(this.x+this.r, this.y);
         this.ctx.arcTo(this.x+this.w, this.y,   this.x+this.w, this.y+this.h, this.r);
@@ -782,9 +810,9 @@ class RoundRect extends Reflex {
 
         // acceleration
 
-        if(this.acceleration != undefined && this.maxSpeed != undefined) {
+        if(this.acceleration != undefined &amp;&amp; this.maxSpeed != undefined) {
             if(this.controller.up || this.controller.down || this.controller.left || this.controller.right) {
-                if(this.vel < this.maxSpeed) {
+                if(this.vel &lt; this.maxSpeed) {
                     this.vel += this.acceleration;
                 };
             }else{
@@ -796,19 +824,19 @@ class RoundRect extends Reflex {
 
         //#region movement
 
-        if(this.controller.up && (this.options.movement.type == "TopDown" || this.options.movement.type == "Jump" || this.options.movement.type == "UpDown")) {
+        if(this.controller.up &amp;&amp; (this.options.movement.type == "TopDown" || this.options.movement.type == "Jump" || this.options.movement.type == "UpDown")) {
             this.y -= this.vel;
         };
 
-        if(this.controller.down && (this.options.movement.type == "TopDown" || this.options.movement.type == "UpDown")) {
+        if(this.controller.down &amp;&amp; (this.options.movement.type == "TopDown" || this.options.movement.type == "UpDown")) {
             this.y += this.vel;
         };
 
-        if(this.controller.left && (this.options.movement.type == "TopDown" || this.options.movement.type == "LeftRight")) {
+        if(this.controller.left &amp;&amp; (this.options.movement.type == "TopDown" || this.options.movement.type == "LeftRight")) {
             this.x -= this.vel;
         };
 
-        if(this.controller.right && (this.options.movement.type == "TopDown" || this.options.movement.type == "LeftRight")) {
+        if(this.controller.right &amp;&amp; (this.options.movement.type == "TopDown" || this.options.movement.type == "LeftRight")) {
             this.x += this.vel;
         };
 
@@ -954,9 +982,9 @@ class Particle extends Reflex {
 
         // check if all required params are there for a shape
 
-        if(this.shape == "rect" && this.w == undefined || this.h == undefined) throw `Particle shape is rect while w or h is undefined`;
-        if(this.shape == "roundrect" && this.w == undefined || this.h == undefined || this.r == undefined) throw `Particle shape is roundrect while w or h or r is undefined`;
-        if(this.shape == "circle" && this.r == undefined) throw `Particle shape is circle while r is undefined`;
+        if(this.shape == "rect" &amp;&amp; this.w == undefined || this.h == undefined) throw `Particle shape is rect while w or h is undefined`;
+        if(this.shape == "roundrect" &amp;&amp; this.w == undefined || this.h == undefined || this.r == undefined) throw `Particle shape is roundrect while w or h or r is undefined`;
+        if(this.shape == "circle" &amp;&amp; this.r == undefined) throw `Particle shape is circle while r is undefined`;
 
         // convert HTML to Hex if possible
 
@@ -1078,7 +1106,7 @@ class ParticleEmitter extends Reflex {
      */
 
     emit() {
-        for (let i = 0; i < this.amount; i++) {
+        for (let i = 0; i &lt; this.amount; i++) {
             this.list.push(this.particle);
         };
         this.emmiting = true;
@@ -1087,11 +1115,11 @@ class ParticleEmitter extends Reflex {
                 this.x = this.attached.x;
                 this.y = this.attached.y;
             };
-            if(this.attached == undefined && this.force != undefined) {
+            if(this.attached == undefined &amp;&amp; this.force != undefined) {
                 this.addForce(this.axis, this.force);
             };
 
-            for (let i = 0; i < this.list.length; i++) {
+            for (let i = 0; i &lt; this.list.length; i++) {
                 this.list[i].draw();
             };
             
@@ -1145,4 +1173,26 @@ class ParticleEmitter extends Reflex {
     };
 };
 
-//#endregion
+//#endregion</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Circle.html">Circle</a></li><li><a href="Particle.html">Particle</a></li><li><a href="Particle.Particle.html">Particle</a></li><li><a href="ParticleEmitter.html">ParticleEmitter</a></li><li><a href="ParticleEmitter.ParticleEmitter.html">ParticleEmitter</a></li><li><a href="Rect.html">Rect</a></li><li><a href="Reflex.html">Reflex</a></li><li><a href="Reflex.Reflex.html">Reflex</a></li><li><a href="RoundRect.html">RoundRect</a></li><li><a href="Sprite.html">Sprite</a></li><li><a href="Sprite.Sprite.html">Sprite</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Wed Apr 07 2021 23:09:07 GMT-0400 (Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
