@@ -100,7 +100,7 @@ class Reflex {
     
 };
 
-//#region Sprite, Rect, Circle, and RoundRect classes
+//#region All Objects
 
 
 
@@ -910,6 +910,7 @@ class RoundRect extends Reflex {
 
 
 
+
 //#endregion
 
 //#region Particles
@@ -1146,3 +1147,44 @@ class ParticleEmitter extends Reflex {
 };
 
 //#endregion
+
+
+/**
+ * @class Background
+ * @description Creates a background
+ */
+
+class Background extends Reflex {
+
+    /**
+     * @description Creates a background
+     * @param {Number} x X pos
+     * @param {Number} y Y pos
+     * @param {Number} w Width
+     * @param {Number} h Height
+     * @param {String} imgPath imgPath, file or link
+     *
+     * @memberof Background
+     */
+
+    constructor(x, y, w, h, imgPath) {
+        super(ReflexConfig);
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+        this.imgPath = imgPath;
+
+    };
+
+    /**
+     * @description Draws Background
+     */
+
+    draw() {
+        var imgObj = new Image();
+        imgObj.src = this.imgPath;
+        this.ctx.drawImage(imgObj, this.x, this.y, this.w, this.h);
+    };
+
+};

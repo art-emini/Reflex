@@ -12,12 +12,17 @@ var Engine = new Reflex({loop: loop, debug: false});
 
 // create a round rect
 
-var myRoundRect = new RoundRect(50, 50, 50, 50, 15, "blue", {movement: {type: "TopDown", speed: 0.5, maxSpeed: 4, acceleration: 0.15}})
+var myRoundRect = new RoundRect(50, 50, 50, 50, 15, "red", {movement: {type: "TopDown", speed: 0.5, maxSpeed: 4, acceleration: 0.15}})
+
+// create a background
+
+var background = new Background(0, 0, Engine.canvas.width, Engine.canvas.width, "https://upload.wikimedia.org/wikipedia/commons/b/b5/800x600_Wallpaper_Blue_Sky.png");
 
 
 function loop() {
     Engine.ctx.clearRect(0, 0, Engine.canvas.width, Engine.canvas.height);
 
+    background.draw();
     myRoundRect.draw();
     
     requestAnimationFrame(loop);
