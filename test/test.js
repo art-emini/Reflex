@@ -12,7 +12,7 @@ var Engine = new Reflex({loop: loop, debug: false});
 
 // create a round rect
 
-var myRoundRect = new RoundRect(50, 50, 50, 50, 15, "red", {movement: {type: "TopDown", speed: 0.5, maxSpeed: 4, acceleration: 0.15}})
+var myRoundRect = new RoundRect(50, 50, 50, 50, 15, "red", {movement: {type: "TopDown", maxSpeed: 4, acceleration: 0.05}})
 
 // create a background
 

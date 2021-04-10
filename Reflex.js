@@ -15,7 +15,7 @@ let ReflexConfig = {}
  * @author Bleart Emini
  * @license MIT
  * @since 1.0.0-beta
- * @version 1.0.0-beta
+ * @version 1.0.1-beta
  */
 
 
@@ -154,8 +154,7 @@ class Sprite extends Reflex {
             right: false
         };
 
-        this.speed = this.options.movement.speed;
-        this.vel = this.options.movement.speed;
+        this.vel = 0 || this.options.movement.speed;
         this.acceleration = this.options.movement.acceleration;
         this.maxSpeed = this.options.movement.maxSpeed;
 
@@ -182,7 +181,7 @@ class Sprite extends Reflex {
                     this.vel += this.acceleration;
                 };
             }else{
-                this.vel = this.speed;
+                this.vel = 0;
             };
         };
 
@@ -352,8 +351,7 @@ class Rect extends Reflex {
             right: false
         };
 
-        this.speed = this.options.movement.speed;
-        this.vel = this.options.movement.speed;
+        this.vel = 0 || this.options.movement.speed;
         this.acceleration = this.options.movement.acceleration;
         this.maxSpeed = this.options.movement.maxSpeed;
 
@@ -379,7 +377,7 @@ class Rect extends Reflex {
                     this.vel += this.acceleration;
                 };
             }else{
-                this.vel = this.speed;
+                this.vel = 0;
             };
         };
 
@@ -526,7 +524,7 @@ class Circle extends Reflex {
      * @param {String} [options.movement.type="Jump"] W SPACE UP
      * @param {String} [options.movement.type="LeftRight"] A D LEFT RIGHT
      * @param {String} [options.movement.type="UpDown"] W D
-     * @param {Number} [options.movement.speed=2.5] Speed of Circle
+     * @param {Number} [options.movement.speed=2.5] Speed of Circle, do not put if you are using acceleration
      * @param {Number} [options.movement.acceleration=0.15] Acceleration of Circle
      * @param {Number} [options.movement.maxSpeed=0.4] Max speed of Circle, Only needed if acceleration is present
      */
@@ -549,8 +547,7 @@ class Circle extends Reflex {
             right: false
         };
 
-        this.speed = this.options.movement.speed;
-        this.vel = this.options.movement.speed;
+        this.vel = 0 || this.options.movement.speed;
         this.acceleration = this.options.movement.acceleration;
         this.maxSpeed = this.options.movement.maxSpeed;
 
@@ -578,7 +575,7 @@ class Circle extends Reflex {
                     this.vel += this.acceleration;
                 };
             }else{
-                this.vel = this.speed;
+                this.vel = 0;
             };
         };
 
@@ -728,7 +725,7 @@ class RoundRect extends Reflex {
      * @param {String} [options.movement.type="Jump"] W SPACE UP
      * @param {String} [options.movement.type="LeftRight"] A D LEFT RIGHT
      * @param {String} [options.movement.type="UpDown"] W D
-     * @param {Number} [options.movement.speed=2.5] Speed of RoundRect
+     * @param {Number} [options.movement.speed=2.5] Speed of RoundRect, do not put if you are using acceleration
      * @param {Number} [options.movement.acceleration=0.15] Acceleration of RoundRect
      * @param {Number} [options.movement.maxSpeed=0.4] Max speed of RoundRect, Only needed if acceleration is present
      */
@@ -752,8 +749,7 @@ class RoundRect extends Reflex {
             right: false
         };
 
-        this.speed = this.options.movement.speed;
-        this.vel = this.options.movement.speed;
+        this.vel = 0 || this.options.movement.speed;
         this.acceleration = this.options.movement.acceleration;
         this.maxSpeed = this.options.movement.maxSpeed;
 
@@ -788,7 +784,7 @@ class RoundRect extends Reflex {
                     this.vel += this.acceleration;
                 };
             }else{
-                this.vel = this.speed;
+                this.vel = 0;
             };
         };
 
