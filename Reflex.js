@@ -15,7 +15,7 @@ let ReflexConfig = {}
  * @author Bleart Emini
  * @license MIT
  * @since 1.0.0-beta
- * @version 1.0.1-beta
+ * @version 1.0.2-beta
  */
 
 
@@ -925,9 +925,9 @@ class Particle extends Reflex {
      * @description Creates an instance of a Particle
      * @param {String} graphic Hex color without "#", link, or file path.
      * @param {String} [shape] Shape of particle. Circle, Rect, or RoundRect. If graphic is a link/file shape is ignored. Optional.
-     * @param {String} [w] Width of rect or round rect. Required for rect and round rect. Ignored if graphic is link/file.
-     * @param {String} [h] Height of rect or round rect. Required for rect and round rect. Ignored if graphic is link/file.
-     * @param {String} [r] Radius of round rect or circle. Required for circle and round rect. Ignored if graphic is link/file.
+     * @param {Number} [w] Width of rect or round rect. Required for rect and round rect. Ignored if graphic is link/file.
+     * @param {Number} [h] Height of rect or round rect. Required for rect and round rect. Ignored if graphic is link/file.
+     * @param {Number} [r] Radius of round rect or circle. Required for circle and round rect. Ignored if graphic is link/file.
      * @memberof Particle
      */
 
@@ -939,7 +939,7 @@ class Particle extends Reflex {
 
         shape = shape || undefined;
         this.shape = shape;
-        this.shape = String.toLowerCase(this.shape);
+        this.shape = this.shape.toLowerCase();
 
         w = w || undefined;
         h = h || undefined;
@@ -986,7 +986,9 @@ class Particle extends Reflex {
      * @description Draws particle
      */
 
-    draw() {
+    draw(x, y) {
+        this.x = x;
+        this.y = y;
         switch(this.shape) {
                 case "circle":
                     this.ctx.beginPath();
@@ -1001,8 +1003,17 @@ class Particle extends Reflex {
                 break;
 
                 case "roundrect":
-                    this.ctx.fillStyle = this.graphic;
-                    this.ctx.roundRect(-100, -100, this.w, this.h, this.r).fill();
+                    if (this.w < 2 * this.r) this.r = this.w / 2;
+                    if (this.h < 2 * this.r) this.r = this.h / 2;
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(this.x+this.r, this.y);
+                    this.ctx.arcTo(this.x+this.w, this.y,   this.x+this.w, this.y+this.h, this.r);
+                    this.ctx.arcTo(this.x+this.w, this.y+this.h, this.x,   this.y+this.h, this.r);
+                    this.ctx.arcTo(this.x,   this.y+this.h, this.x,   this.y,   this.r);
+                    this.ctx.arcTo(this.x,   this.y,   this.x+this.w, this.y,   this.r);
+                    this.ctx.closePath();
+                    this.ctx.fillStyle = this.color;
+                    this.ctx.fill();
                 break;
 
                 case undefined:
@@ -1020,129 +1031,7 @@ class Particle extends Reflex {
 
 };
 
-/**
- * @class ParticleEmitter
- * @description Emits particles
- */
 
-class ParticleEmitter extends Reflex {
-
-    /**
-     * @description Emits particles from a particle
-     * @param {Particle} particle An instance of the Particle Class
-     * @param {Number} x X pos
-     * @param {Number} y Y pos
-     * @param {Object} options Option object, holds many different options
-     * @param {String} [options.axis] "x" or "y". Direction of particle emitter force
-     * @param {Number} [options.force] The force being applied. Negative number is left for axis = x, up for axis = y. Positive number is right for axis = x, down for axis = y.
-     *                                  Does not work if options.attached is present
-     * @param {Sprite} [options.attached] If you want to attach the particle emitter to a sprite.
-     * @param {Number} options.amount Amount of particles
-     * 
-     * @memberof ParticleEmitter
-     */
-
-    constructor(particle, x, y, options) {
-        super(ReflexConfig);
-        this.particle = particle;
-        this.x = x;
-        this.y = y;
-        this.options = options;
-        this.emmiting = false;
-
-        this.axis = undefined;
-        this.force = undefined;
-        this.attached = undefined;
-        this.amount = options.amount;
-
-        options.axis = options.axis || undefined;
-        options.force = options.force || undefined;
-        options.attached = options.attached || undefined;
-
-        if(options.axis != undefined) this.axis = options.axis;
-        if(options.force != undefined) this.force = options.force;
-        if(options.attached != undefined) this.attached = options.attached;
-
-        if(this.amount == undefined) throw `ParticleEmitter amount is undefined`;
-        if(typeof this.amount != "number") throw `ParticleEmitter amount is not typeof number and is typeof ${typeof this.amount}`;
-
-        this.list = [];
-
-    };
-
-    /**
-     * @description Makes ParticleEmitter start emitting
-     */
-
-    emit() {
-        for (let i = 0; i < this.amount; i++) {
-            this.list.push(this.particle);
-        };
-        this.emmiting = true;
-        if(this.emmiting == true) {
-            if(this.attached != undefined) {
-                this.x = this.attached.x;
-                this.y = this.attached.y;
-            };
-            if(this.attached == undefined && this.force != undefined) {
-                this.addForce(this.axis, this.force);
-            };
-
-            for (let i = 0; i < this.list.length; i++) {
-                this.list[i].draw();
-            };
-            
-        };
-        
-    };
-
-    /**
-     * @description Makes ParticleEmitter stop emitting
-     */
-
-    stop() {
-        this.emmiting = false;
-    };
-
-    /**
-     * 
-     * @param {String} axis The axis of the force being applied. "x" or "y".
-     * @param {Number} force The force being applied. Negative number is left for axis = x, up for axis = y. Positive number is right for axis = x, down for axis = y.
-     * @description Adds a force to an axis.
-     */
-
-    addForce(axis, force) {
-        if(typeof force != "number") {
-            throw `Force if not typeof number. Force is typeof ${typeof force}`
-        };
-        if(typeof axis == "string") {
-            
-            if(axis == "x") {
-                if(Math.sign(force) == 1) {
-                    this.x += force;
-                }else if(Math.sign(force) == -1) {
-                    this.x -= force;
-                }else{
-                    throw `Force cannot be 0`;
-                };
-            }else if(axis == "y") {
-                if(Math.sign(force) == 1) {
-                    this.y += force;
-                }else if(Math.sign(force) == -1) {
-                    this.y -= force;
-                }else{
-                    throw `Force cannot be 0`;
-                };
-            }else{
-                throw `Cannot add force to axis of ${axis}`;
-            };
-        }else{
-            throw `Axis is not type of string. Axis is typeof ${typeof axis}`;
-        };
-    };
-};
-
-//#endregion
 
 
 /**
