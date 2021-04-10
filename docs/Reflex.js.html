@@ -43,7 +43,7 @@ let ReflexConfig = {}
  * @author Bleart Emini
  * @license MIT
  * @since 1.0.0-beta
- * @version 1.0.0-beta
+ * @version 1.0.1-beta
  */
 
 
@@ -128,7 +128,7 @@ class Reflex {
     
 };
 
-//#region Sprite, Rect, Circle, and RoundRect classes
+//#region All Objects
 
 
 
@@ -182,8 +182,7 @@ class Sprite extends Reflex {
             right: false
         };
 
-        this.speed = this.options.movement.speed;
-        this.vel = this.options.movement.speed;
+        this.vel = 0 || this.options.movement.speed;
         this.acceleration = this.options.movement.acceleration;
         this.maxSpeed = this.options.movement.maxSpeed;
 
@@ -210,7 +209,7 @@ class Sprite extends Reflex {
                     this.vel += this.acceleration;
                 };
             }else{
-                this.vel = this.speed;
+                this.vel = 0;
             };
         };
 
@@ -380,8 +379,7 @@ class Rect extends Reflex {
             right: false
         };
 
-        this.speed = this.options.movement.speed;
-        this.vel = this.options.movement.speed;
+        this.vel = 0 || this.options.movement.speed;
         this.acceleration = this.options.movement.acceleration;
         this.maxSpeed = this.options.movement.maxSpeed;
 
@@ -407,7 +405,7 @@ class Rect extends Reflex {
                     this.vel += this.acceleration;
                 };
             }else{
-                this.vel = this.speed;
+                this.vel = 0;
             };
         };
 
@@ -554,7 +552,7 @@ class Circle extends Reflex {
      * @param {String} [options.movement.type="Jump"] W SPACE UP
      * @param {String} [options.movement.type="LeftRight"] A D LEFT RIGHT
      * @param {String} [options.movement.type="UpDown"] W D
-     * @param {Number} [options.movement.speed=2.5] Speed of Circle
+     * @param {Number} [options.movement.speed=2.5] Speed of Circle, do not put if you are using acceleration
      * @param {Number} [options.movement.acceleration=0.15] Acceleration of Circle
      * @param {Number} [options.movement.maxSpeed=0.4] Max speed of Circle, Only needed if acceleration is present
      */
@@ -577,8 +575,7 @@ class Circle extends Reflex {
             right: false
         };
 
-        this.speed = this.options.movement.speed;
-        this.vel = this.options.movement.speed;
+        this.vel = 0 || this.options.movement.speed;
         this.acceleration = this.options.movement.acceleration;
         this.maxSpeed = this.options.movement.maxSpeed;
 
@@ -606,7 +603,7 @@ class Circle extends Reflex {
                     this.vel += this.acceleration;
                 };
             }else{
-                this.vel = this.speed;
+                this.vel = 0;
             };
         };
 
@@ -756,7 +753,7 @@ class RoundRect extends Reflex {
      * @param {String} [options.movement.type="Jump"] W SPACE UP
      * @param {String} [options.movement.type="LeftRight"] A D LEFT RIGHT
      * @param {String} [options.movement.type="UpDown"] W D
-     * @param {Number} [options.movement.speed=2.5] Speed of RoundRect
+     * @param {Number} [options.movement.speed=2.5] Speed of RoundRect, do not put if you are using acceleration
      * @param {Number} [options.movement.acceleration=0.15] Acceleration of RoundRect
      * @param {Number} [options.movement.maxSpeed=0.4] Max speed of RoundRect, Only needed if acceleration is present
      */
@@ -780,8 +777,7 @@ class RoundRect extends Reflex {
             right: false
         };
 
-        this.speed = this.options.movement.speed;
-        this.vel = this.options.movement.speed;
+        this.vel = 0 || this.options.movement.speed;
         this.acceleration = this.options.movement.acceleration;
         this.maxSpeed = this.options.movement.maxSpeed;
 
@@ -816,7 +812,7 @@ class RoundRect extends Reflex {
                     this.vel += this.acceleration;
                 };
             }else{
-                this.vel = this.speed;
+                this.vel = 0;
             };
         };
 
@@ -935,6 +931,7 @@ class RoundRect extends Reflex {
 
 
 };
+
 
 
 
@@ -1173,7 +1170,48 @@ class ParticleEmitter extends Reflex {
     };
 };
 
-//#endregion</code></pre>
+//#endregion
+
+
+/**
+ * @class Background
+ * @description Creates a background
+ */
+
+class Background extends Reflex {
+
+    /**
+     * @description Creates a background
+     * @param {Number} x X pos
+     * @param {Number} y Y pos
+     * @param {Number} w Width
+     * @param {Number} h Height
+     * @param {String} imgPath imgPath, file or link
+     *
+     * @memberof Background
+     */
+
+    constructor(x, y, w, h, imgPath) {
+        super(ReflexConfig);
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+        this.imgPath = imgPath;
+
+    };
+
+    /**
+     * @description Draws Background
+     */
+
+    draw() {
+        var imgObj = new Image();
+        imgObj.src = this.imgPath;
+        this.ctx.drawImage(imgObj, this.x, this.y, this.w, this.h);
+    };
+
+};</code></pre>
         </article>
     </section>
 
@@ -1183,13 +1221,13 @@ class ParticleEmitter extends Reflex {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Circle.html">Circle</a></li><li><a href="Particle.html">Particle</a></li><li><a href="Particle.Particle.html">Particle</a></li><li><a href="ParticleEmitter.html">ParticleEmitter</a></li><li><a href="ParticleEmitter.ParticleEmitter.html">ParticleEmitter</a></li><li><a href="Rect.html">Rect</a></li><li><a href="Reflex.html">Reflex</a></li><li><a href="Reflex.Reflex.html">Reflex</a></li><li><a href="RoundRect.html">RoundRect</a></li><li><a href="Sprite.html">Sprite</a></li><li><a href="Sprite.Sprite.html">Sprite</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Background.html">Background</a></li><li><a href="Background.Background.html">Background</a></li><li><a href="Circle.html">Circle</a></li><li><a href="Particle.html">Particle</a></li><li><a href="Particle.Particle.html">Particle</a></li><li><a href="ParticleEmitter.html">ParticleEmitter</a></li><li><a href="ParticleEmitter.ParticleEmitter.html">ParticleEmitter</a></li><li><a href="Rect.html">Rect</a></li><li><a href="Reflex.html">Reflex</a></li><li><a href="Reflex.Reflex.html">Reflex</a></li><li><a href="RoundRect.html">RoundRect</a></li><li><a href="Sprite.html">Sprite</a></li><li><a href="Sprite.Sprite.html">Sprite</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Wed Apr 07 2021 23:12:07 GMT-0400 (Eastern Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Sat Apr 10 2021 14:07:42 GMT-0400 (Eastern Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>
