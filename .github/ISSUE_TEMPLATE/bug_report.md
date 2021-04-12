@@ -11,7 +11,3 @@ assignees: ''
 
 A clear and concise description of what the bug is.
 
-**Screenshots**
-
-1. Screenshot of all set options
-
