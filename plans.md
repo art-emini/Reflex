@@ -8,11 +8,12 @@
 - [ ] Add sound class with howl
 - [ ] Add SpriteSheet class to load and return a spritesheet object
 - [ ] Add RigidBody imgPath could be a SpriteSheet class by using an object
-- [ ] Add RigidBody options.spritesheet to specify how many images per row, how big in width and height one item is, etc..
+- [ ] Add RigidBody imgPath spritesheet detection with imgPath.contructor.name to specify how many images per row, how big in width and height one item is, etc..
 - [ ] Add friction
-- [ ] Add Reflex Stack to preload images and more
-- [ ] Add Reflex.preload(imgArray) to preload images into stack
-- [ ] Add RigidBody preload support
+- [ ] Add inertia so that u dont have to restart accelerating if you stop holding the key
+- [ ] Add Reflex Stack for different props
+- [ ] Add RigidBody and background exists property
+- [x] Add Reflex.started to check if loop has started or not
 - [x] Add start msg
 - [x] Add othersAttached array
 - [x] Add attach() to attach an object to another
