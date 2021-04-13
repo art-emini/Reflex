@@ -1,18 +1,25 @@
 // Init Reflex
 
-var Engine = new Reflex({loop: loop, debug: false});
+var Engine = new Reflex({loop: loop, debug: false, depInstall: true});
 
-// create a rect
+// create a rigid body rect
 
-//var myRect = new Rect(Engine.canvas.width/2-25, Engine.canvas.width/2-25, 50, 50, "blue", {movement: {type: "TopDown", speed: 0.5, maxSpeed: 4, acceleration: 0.15}});
+var myRoundRect = new RigidBody(50, 50, 50, 50, 15, "roundrect", "#0000FF", undefined, {movement: {type: "TopDown", maxSpeed: 4, acceleration: 0.02}});
 
-// create a circle
+// create a rigid body rect
 
-//var myCircle = new Circle(50, 50, 15, "blue", {movement: {type: "TopDown", speed: 0.5, maxSpeed: 4, acceleration: 0.15}});
+var myRect = new RigidBody(250, 250, 40, 40, 0, "rect", "#FF0000");
 
-// create a round rect
+// create a rigid body circle
 
-var myRoundRect = new RoundRect(50, 50, 50, 50, 15, "red", {movement: {type: "TopDown", maxSpeed: 4, acceleration: 0.05}})
+var myCircle = new RigidBody(400, 200, 0, 0, 15, "circle", "#006400");
+
+// create sprite
+
+var mySprite = new RigidBody(450, 50, 50, 50, 0, "sprite", undefined, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThpefIg1QQCIDB3U-9Hkft05D9l9jKCZoBwg&usqp=CAU", undefined)
+
+// create a sprite with SpriteSheet
+// https://www.pinclipart.com/picdir/middle/542-5425619_coin-sprite-sheet-png-clipart.png
 
 // create a background
 
@@ -20,12 +27,16 @@ var background = new Background(0, 0, Engine.canvas.width, Engine.canvas.width, 
 
 
 function loop() {
-    Engine.ctx.clearRect(0, 0, Engine.canvas.width, Engine.canvas.height);
+    Engine.clear(); // clears canvas
 
     background.draw();
+
+    myCircle.draw();
+    myRect.draw();
     myRoundRect.draw();
+    mySprite.draw();
     
     requestAnimationFrame(loop);
 };
 
-Engine.start();
+Engine.start(); // starts loop and adds dependencies if config depInstall is true

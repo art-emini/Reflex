@@ -1,3 +1,16 @@
+// dependiences 
+/*
+
+    - HowlerJS
+        Audio Player
+        Copyright (c) 2013-2020 James Simpson and GoldFire Studios, Inc.
+        https://github.com/goldfire/howler.js/blob/master/LICENSE.md
+        https://github.com/goldfire/howler.js
+
+
+*/
+
+
 //#region Global Utils
 
 
@@ -11,11 +24,11 @@ let ReflexConfig = {}
 /**
  * Reflex
  *
- * @description A Javascript game engine.
+ * @description A simple Javascript game engine.
  * @author Bleart Emini
  * @license MIT
  * @since 1.0.0-beta
- * @version 1.0.2-beta
+ * @version 1.0.0
  */
 
 
@@ -31,28 +44,90 @@ class Reflex {
      * @param {Object} config Config Object.
      * @param {Function} config.loop Main loop. Must be a animationFrame loop.
      * @param {Boolean} [config.debug=false] If enabled, Reflex will console log anything it needs to. Errors will be thrown regardless. Optional, off by default.
+     * @param {Boolean} config.depInstall If enabled, Reflex will install all dependencies as a script tag in the head of your page automaticlly.
      * @description Creates a new instance of Relfex.
      * @memberof Reflex
      */
 
     constructor(config) {
+
         this.config = config;
         ReflexConfig = this.config;
+
+        this.stack = {
+            started: false
+        };
+
 
         this.canvas = document.querySelector("canvas");
         this.ctx = this.canvas.getContext("2d");
         this.loop = this.config.loop;
-        this.debug = this.config.debug || false;
+        this.depInstall = this.config.depInstall;
+
+        config.debug = config.debug || false;
+        this.debug = this.config.debug;
+
         if(typeof this.loop != "function") throw "Loop is not a function";
     };
 
     start() {
+        // append howlerjs
+
+        if(this.depInstall == true) {
+            let script = document.createElement("script");
+            script.src = "https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js";
+            script.integrity = "sha512-L6Z/YtIPQ7eU3BProP34WGU5yIRk7tNHk7vaC2dB1Vy1atz6wl9mCkTPPZ2Rn1qPr+vY2mZ9odZLdGYuaBk7dQ==";
+            script.crossOrigin = "anonymous";
+            document.head.appendChild(script);
+        };
+
         this.loop();
+        this.stack.started = true;
+        this.startMsg = `
+        
+        
+             ____    _____   _____   _       _____  ___  _
+            /  __\\  /  __/  /    /  / \\     /  __/  \\  \\//
+            |  \\/|  |  \\    |  __\\  | |     |  \\     \\  / 
+            |    /  |  /_   | |     | |_/\\  |  /_    /  \\ 
+            \\_/\\_\\  \\____\\  \\_/     \\____/  \\____\\  /__/\\
+                                      
+                                      
+                                 By
+
+                              ksplatdev
+
+                             Twt: @ksplat_
+                           Disc: ksplat#9147
+                           
+                             MIT License
+                     Copyright (c) 2021 Bleart Emini
+
+
+            Github: https://github.com/ksplatdev/Reflex
+
+            Docs: https://ksplatdev.github.io/Reflex/
+
+            Download: https://github.com/ksplatdev/Reflex/releases/latest
+
+        
+        `;
+
+        console.log(this.startMsg);
+        if(this.depInstall) {
+            console.log(`
+Using HowlerJS for sound 
+https://github.com/goldfire/howler.js 
+Copyright (c) 2013-2020 James Simpson and GoldFire Studios, Inc.
+More license info at https://github.com/goldfire/howler.js/blob/master/LICENSE.md
+            `)
+        };
     };
 
     clear() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     };
+
 
     //#region Class Utils
 
@@ -109,43 +184,57 @@ class Reflex {
 /**
  *
  *
- * @class Sprite
- * @description Creates a sprite
+ * @class RigidBody
+ * @description Creates a Rigid Body
  */
-class Sprite extends Reflex {
+
+class RigidBody extends Reflex {
     
     /**
-     * @description Creates an instance of Sprite.
+     * @description Creates an instance of Rigid Body.
      * @param {Number} x X pos
      * @param {Number} y Y pos
      * @param {Number} w Width
      * @param {Number} h Height
-     * @param {String} imgPath Img path
+     * @param {Number} [r] Radius, required for roundrect, circle
+     * @param {String} shape Shape of object, rect, circle, roundrect, or sprite
+     * @param {String} [color] Color for rect, circle, or roundrect
+     * @param {String} [imgPath] Img path for sprite, optional
      *
-     * @param {Object} [options={}] Option object, holds many different options
+     * @param {Object} [options={}] Option object, holds many different options, optional
      * @param {Object} [options.movement={}] Movement object, holds movements options
      * @param {String} [options.movement.type="TopDown"] W A S D UP DOWN LEFT RIGHT
      * @param {String} [options.movement.type="Jump"] W SPACE UP
      * @param {String} [options.movement.type="LeftRight"] A D LEFT RIGHT
      * @param {String} [options.movement.type="UpDown"] W D
-     * @param {Number} [options.movement.speed=2.5] Speed of Sprite
-     * @param {Number} [options.movement.acceleration=0.15] Acceleration of Sprite
-     * @param {Number} [options.movement.maxSpeed=4] Max speed of Sprite, Only needed if acceleration is present
+     * @param {Number} [options.movement.speed=2.5] Speed of Rigid Body, only used if acceleration is not present
+     * @param {Number} [options.movement.acceleration=0.15] Acceleration of Rigid Body
+     * @param {Number} [options.movement.maxSpeed=4] Max speed of Rigid Body, Only needed if acceleration is present
      *
-     * @memberof Sprite
+     * @memberof RigidBody
      */
     
-    constructor(x, y, w, h, imgPath, options) {
+    constructor(x, y, w, h, r, shape, color, imgPath, options) {
         super(ReflexConfig);
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
-        this.imgPath = imgPath;
+        this.shape = shape;
+        this.type = "RigidBody";
+        this.selfAttached = false;
 
-        options = options || undefined;
+        this.othersAttached = [];
 
-        this.options = options;
+
+        this.r = r || undefined;
+
+        this.color = color || undefined;
+
+        this.imgPath = imgPath || undefined;
+
+        this.options = options || undefined;
+
 
         this.controller = {
             up: false,
@@ -154,14 +243,18 @@ class Sprite extends Reflex {
             right: false
         };
 
-        this.vel = 0 || this.options.movement.speed;
-        this.acceleration = this.options.movement.acceleration;
-        this.maxSpeed = this.options.movement.maxSpeed;
+        if(this.options != undefined) {
+            this.vel = 0 || this.options.movement.speed;
+            this.acceleration = this.options.movement.acceleration;
+            this.maxSpeed = this.options.movement.maxSpeed;
+            if(this.acceleration != undefined && this.maxSpeed == undefined) throw "acceleration is defined while maxSpeed is undefined";
 
-        if(this.acceleration != undefined && this.maxSpeed == undefined) throw "acceleration is defined while maxSpeed is undefined";
+            window.addEventListener("keydown", (e) => {this.keyListener(e)});
+            window.addEventListener("keyup", (e) => {this.keyListener(e)});
+        };
 
-        window.addEventListener("keydown", (e) => {this.keyListener(e)});
-        window.addEventListener("keyup", (e) => {this.keyListener(e)});
+
+        
     };
 
     /**
@@ -169,9 +262,56 @@ class Sprite extends Reflex {
      */
 
     draw() {
-        var imgObj = new Image();
-        imgObj.src = this.imgPath;
-        this.ctx.drawImage(imgObj, this.x, this.y, this.w, this.h);
+
+        switch(this.shape) {
+            case "rect":
+                this.ctx.fillStyle = this.color;
+                this.ctx.fillRect(this.x, this.y, this.w, this.h);
+            break;
+        
+            case "roundrect":
+                if (this.w < 2 * this.r) this.r = this.w / 2;
+                if (this.h < 2 * this.r) this.r = this.h / 2;
+                this.ctx.beginPath();
+                this.ctx.moveTo(this.x+this.r, this.y);
+                this.ctx.arcTo(this.x+this.w, this.y,   this.x+this.w, this.y+this.h, this.r);
+                this.ctx.arcTo(this.x+this.w, this.y+this.h, this.x,   this.y+this.h, this.r);
+                this.ctx.arcTo(this.x,   this.y+this.h, this.x,   this.y,   this.r);
+                this.ctx.arcTo(this.x,   this.y,   this.x+this.w, this.y,   this.r);
+                this.ctx.closePath();
+                this.ctx.fillStyle = this.color;
+                this.ctx.fill();
+            break;
+        
+            case "circle":
+                this.ctx.beginPath();
+                this.ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
+                this.ctx.fillStyle = this.color;
+                this.ctx.fill();
+            break;
+        
+            case "sprite":
+                let imgObj = new Image();
+                imgObj.src = this.imgPath;
+                this.ctx.drawImage(imgObj, this.x, this.y, this.w, this.h);
+                if(this.debug) {
+                    console.log("Drew sprite");
+                };
+            break;
+        
+            default:
+                throw `${this.shape} is not a rect, roundrect, circle, or sprite.`
+            break;
+        };
+
+        // attached objects
+
+
+
+        this.othersAttached.forEach(obj => {
+            obj.x = this.x + obj.diffX;
+            obj.y = this.y + obj.diffY;
+        });
 
         // acceleration
 
@@ -191,19 +331,19 @@ class Sprite extends Reflex {
         //#region movement
 
         if(this.controller.up && (this.options.movement.type == "TopDown" || this.options.movement.type == "Jump" || this.options.movement.type == "UpDown")) {
-            this.y -= this.options.movement.speed;
+            this.y -= this.vel;
         };
 
         if(this.controller.down && (this.options.movement.type == "TopDown" || this.options.movement.type == "UpDown")) {
-            this.y += this.options.movement.speed;
+            this.y += this.vel;
         };
 
         if(this.controller.left && (this.options.movement.type == "TopDown" || this.options.movement.type == "LeftRight")) {
-            this.x -= this.options.movement.speed;
+            this.x -= this.vel;
         };
 
         if(this.controller.right && (this.options.movement.type == "TopDown" || this.options.movement.type == "LeftRight")) {
-            this.x += this.options.movement.speed;
+            this.x += this.vel;
         };
 
         //#endregion
@@ -295,6 +435,58 @@ class Sprite extends Reflex {
             throw `Axis is not type of string. Axis is typeof ${typeof axis}`;
         };
     };
+
+    /**
+     * 
+     * @param {RigidBody} rigidbody A RigidBody to be attached
+     * @description Attaches a rigidbody to another rigid body
+     */
+
+    attach(rigidbody) {
+        let obj = rigidbody;
+        if(!obj.selfAttached) {
+            obj.selfAttached = true;
+            
+            // set difference x and y
+
+            if(this.x > obj.x) {
+                obj.diffX = this.x - obj.x;
+            };
+
+            if(this.x < obj.x) {
+                obj.diffX = obj.x - this.x;
+            };
+
+            if(this.y > obj.y) {
+                obj.diffY = this.y - obj.y;
+            };
+
+            if(this.y < obj.y) {
+                obj.diffY = obj.y - this.y;
+            };
+
+
+            this.othersAttached.push(obj);
+        }else{
+            throw `Rigid Body is already attached to another ${rigidbody.type}`;
+        };
+    };
+
+    /**
+     * 
+     * @param {RigidBody} rigidbody A RigidBody
+     * @description Detaches a RigidBody
+     */
+
+    detach(rigidbody) {
+        if(rigidbody.selfAttached) {
+            rigidbody.selfAttached = false;
+            let index = this.othersAttached.indexOf(rigidbody);
+            this.othersAttached.splice(index);
+        };
+    };
+
+
 
     get centerX() {
         return this.x + this.w / 2;
@@ -307,731 +499,123 @@ class Sprite extends Reflex {
 };
 
 
-/**
- *
- * @class Rect
- * @description Creates a Rectangle
- */
+//#region Presets
 
-class Rect extends Reflex {
+//#region Airplane
+
+/**
+ * @class Airplane
+ * @description Creates a preset airplane
+ */
+ 
+class Airplane extends Reflex {
+
     /**
-     * 
+     * @description Creates an Airplane preset with built in physics
      * @param {Number} x X pos
      * @param {Number} y Y pos
-     * @param {Number} w Width
-     * @param {Number} h Height
-     * @param {String} color A hex color without the #
+     * @param {String} imgPath Img file path or link
+     * @param {Object} options Option object, holds many options within
+     * @param {Number} [w] Width of img, optional
+     * @param {Number} [h] Height of img, optional
      *
-     * @param {Object} [options={}] Option object, holds many different options
-     * @param {Object} [options.movement={}] Movement object, holds movements options
-     * @param {String} [options.movement.type="TopDown"] W A S D UP DOWN LEFT RIGHT
-     * @param {String} [options.movement.type="Jump"] W SPACE UP
-     * @param {String} [options.movement.type="LeftRight"] A D LEFT RIGHT
-     * @param {String} [options.movement.type="UpDown"] W D
-     * @param {Number} [options.movement.speed=2.5] Speed of Rect
-     * @param {Number} [options.movement.acceleration=0.15] Acceleration of Rect
-     * @param {Number} [options.movement.maxSpeed=0.4] Max speed of Rect, Only needed if acceleration is present
+     * @param {Object} options.movement Movement option object
+     * @param {Boolean} options.movement.enabled Boolean to enable Airplane movement
+     * @param {Object} options.physics Physics option object 
+     * @param {Boolean} options.physics.enabled Boolean to enable Airplane physics
+     * @param {Object} options.ai AI option object 
+     * @param {Boolean} options.ai.enabled Boolean to enable Airplane ai
+     *
+     * @memberof Airplane
      */
-    constructor(x, y, w, h, color, options) {
+
+    constructor(x, y, imgPath, options, w, h) {
         super(ReflexConfig);
         this.x = x;
         this.y = y;
-        this.w = w;
-        this.h = h;
-        this.color = color;
-
-        options = options || undefined;
-
+        this.imgPath = imgPath;
         this.options = options;
-
-        this.controller = {
-            up: false,
-            down: false,
-            left: false,
-            right: false
-        };
-
-        this.vel = 0 || this.options.movement.speed;
-        this.acceleration = this.options.movement.acceleration;
-        this.maxSpeed = this.options.movement.maxSpeed;
-
-        if(this.acceleration != undefined && this.maxSpeed == undefined) throw "acceleration is defined while maxSpeed is undefined";
-
-        window.addEventListener("keydown", (e) => {this.keyListener(e)});
-        window.addEventListener("keyup", (e) => {this.keyListener(e)});
-    };
-
-    /**
-     * @description Draws rect to canvas
-     */
-
-    draw() {
-        this.ctx.fillStyle = this.color;
-        this.ctx.fillRect(this.x, this.y, this.w, this.h);
-
-        // acceleration
-
-        if(this.acceleration != undefined && this.maxSpeed != undefined) {
-            if(this.controller.up || this.controller.down || this.controller.left || this.controller.right) {
-                if(this.vel < this.maxSpeed) {
-                    this.vel += this.acceleration;
-                };
-            }else{
-                this.vel = 0;
-            };
-        };
-
-        // movement
-
-        //#region movement
-
-        if(this.controller.up && (this.options.movement.type == "TopDown" || this.options.movement.type == "Jump" || this.options.movement.type == "UpDown")) {
-            this.y -= this.vel;
-        };
-
-        if(this.controller.down && (this.options.movement.type == "TopDown" || this.options.movement.type == "UpDown")) {
-            this.y += this.vel;
-        };
-
-        if(this.controller.left && (this.options.movement.type == "TopDown" || this.options.movement.type == "LeftRight")) {
-            this.x -= this.vel;
-        };
-
-        if(this.controller.right && (this.options.movement.type == "TopDown" || this.options.movement.type == "LeftRight")) {
-            this.x += this.vel;
-        };
-
-        //#endregion
-    };
-
-    /**
-     * @description Listens for key presses
-     */
-
-    keyListener(event) {
-        let key_state = (event.type == "keydown") ? true : false;
         
-
-        switch(event.keyCode) {
-            case 37: // left arrow
-                this.controller.left = key_state;
-            break;
-
-            case 38: // up arrow
-                this.controller.up = key_state;
-            break;
-
-            case 39: // right arrow
-                this.controller.right = key_state;
-            break;
-
-            case 40: // down arrow
-                this.controller.down = key_state;
-            break;
-        
-            
-            case 65: // a
-                this.controller.left = key_state;
-            break;
-
-            case 87: // w
-                this.controller.up = key_state;
-            break;
-
-            case 68: // d
-                this.controller.right = key_state;
-            break;
-
-            case 83: // s
-                this.controller.down = key_state;
-            break;
-
-            case 32: // space
-                if(this.options.movement.type == "Jump") {
-                    this.controller.up = key_state;
-                };
-            break;
-        
-            
-        };
-
-    };
-
-
-    /**
-     * 
-     * @param {String} axis The axis of the force being applied. "x" or "y".
-     * @param {Number} force The force being applied. Negative number is left for axis = x, up for axis = y. Positive number is right for axis = x, down for axis = y.
-     * @description Adds a force to an axis.
-     */
-
-    addForce(axis, force) {
-        if(typeof force != "number") {
-            throw `Force if not typeof number. Force is typeof ${typeof force}`
-        };
-        if(typeof axis == "string") {
-            if(axis == "x") {
-                if(Math.sign(force) == 1) {
-                    this.x += force;
-                }else if(Math.sign(force) == -1) {
-                    this.x -= force;
-                }else{
-                    throw `Force cannot be 0`;
-                };
-            }else if(axis == "y") {
-                if(Math.sign(force) == 1) {
-                    this.y += force;
-                }else if(Math.sign(force) == -1) {
-                    this.y -= force;
-                }else{
-                    throw `Force cannot be 0`;
-                };
-            }else{
-                throw `Cannot add force to axis of ${axis}`;
-            };
-        }else{
-            throw `Axis is not type of string. Axis is typeof ${typeof axis}`;
-        };
-    };
-
-    get centerX() {
-        return this.x + this.w / 2;
-    };
-
-    get centerY() {
-        return this.y + this.h / 2;
-    };
-};
-
-
-/**
- *
- * @class Circle
- * @description Creates a Circle
- */
-
-class Circle extends Reflex {
-    /**
-     * 
-     * @param {Number} x X pos
-     * @param {Number} y Y pos
-     * @param {Number} r Radius
-     * @param {String} color A hex color without the #
-     *
-     * @param {Object} [options={}] Option object, holds many different options
-     * @param {Object} [options.movement={}] Movement object, holds movements options
-     * @param {String} [options.movement.type="TopDown"] W A S D UP DOWN LEFT RIGHT
-     * @param {String} [options.movement.type="Jump"] W SPACE UP
-     * @param {String} [options.movement.type="LeftRight"] A D LEFT RIGHT
-     * @param {String} [options.movement.type="UpDown"] W D
-     * @param {Number} [options.movement.speed=2.5] Speed of Circle, do not put if you are using acceleration
-     * @param {Number} [options.movement.acceleration=0.15] Acceleration of Circle
-     * @param {Number} [options.movement.maxSpeed=0.4] Max speed of Circle, Only needed if acceleration is present
-     */
-    constructor(x, y, r, color, options) {
-        super(ReflexConfig);
-        this.x = x;
-        this.y = y;
-        this.r = r;
-
-        this.color = color;
-
-        options = options || undefined;
-
-        this.options = options;
-
-        this.controller = {
-            up: false,
-            down: false,
-            left: false,
-            right: false
-        };
-
-        this.vel = 0 || this.options.movement.speed;
-        this.acceleration = this.options.movement.acceleration;
-        this.maxSpeed = this.options.movement.maxSpeed;
-
-        if(this.acceleration != undefined && this.maxSpeed == undefined) throw "acceleration is defined while maxSpeed is undefined";
-
-        window.addEventListener("keydown", (e) => {this.keyListener(e)});
-        window.addEventListener("keyup", (e) => {this.keyListener(e)});
-    };
-
-    /**
-     * @description Draws circle to canvas
-     */
-
-    draw() {
-        this.ctx.beginPath();
-        this.ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
-        this.ctx.fillStyle = this.color;
-        this.ctx.fill();
-
-        // acceleration
-
-        if(this.acceleration != undefined && this.maxSpeed != undefined) {
-            if(this.controller.up || this.controller.down || this.controller.left || this.controller.right) {
-                if(this.vel < this.maxSpeed) {
-                    this.vel += this.acceleration;
-                };
-            }else{
-                this.vel = 0;
-            };
-        };
-
-        // movement
-
-        //#region movement
-
-        if(this.controller.up && (this.options.movement.type == "TopDown" || this.options.movement.type == "Jump" || this.options.movement.type == "UpDown")) {
-            this.y -= this.vel;
-        };
-
-        if(this.controller.down && (this.options.movement.type == "TopDown" || this.options.movement.type == "UpDown")) {
-            this.y += this.vel;
-        };
-
-        if(this.controller.left && (this.options.movement.type == "TopDown" || this.options.movement.type == "LeftRight")) {
-            this.x -= this.vel;
-        };
-
-        if(this.controller.right && (this.options.movement.type == "TopDown" || this.options.movement.type == "LeftRight")) {
-            this.x += this.vel;
-        };
-
-        //#endregion
-    };
-
-    /**
-     * @description Listens for key presses
-     */
-
-    keyListener(event) {
-        let key_state = (event.type == "keydown") ? true : false;
-        
-
-        switch(event.keyCode) {
-            case 37: // left arrow
-                this.controller.left = key_state;
-            break;
-
-            case 38: // up arrow
-                this.controller.up = key_state;
-            break;
-
-            case 39: // right arrow
-                this.controller.right = key_state;
-            break;
-
-            case 40: // down arrow
-                this.controller.down = key_state;
-            break;
-        
-            
-            case 65: // a
-                this.controller.left = key_state;
-            break;
-
-            case 87: // w
-                this.controller.up = key_state;
-            break;
-
-            case 68: // d
-                this.controller.right = key_state;
-            break;
-
-            case 83: // s
-                this.controller.down = key_state;
-            break;
-
-            case 32: // space
-                if(this.options.movement.type == "Jump") {
-                    this.controller.up = key_state;
-                };
-            break;
-        
-            
-        };
-
-    };
-
-
-    /**
-     * 
-     * @param {String} axis The axis of the force being applied. "x" or "y".
-     * @param {Number} force The force being applied. Negative number is left for axis = x, up for axis = y. Positive number is right for axis = x, down for axis = y.
-     * @description Adds a force to an axis.
-     */
-
-    addForce(axis, force) {
-        if(typeof force != "number") {
-            throw `Force if not typeof number. Force is typeof ${typeof force}`
-        };
-        if(typeof axis == "string") {
-            if(axis == "x") {
-                if(Math.sign(force) == 1) {
-                    this.x += force;
-                }else if(Math.sign(force) == -1) {
-                    this.x -= force;
-                }else{
-                    throw `Force cannot be 0`;
-                };
-            }else if(axis == "y") {
-                if(Math.sign(force) == 1) {
-                    this.y += force;
-                }else if(Math.sign(force) == -1) {
-                    this.y -= force;
-                }else{
-                    throw `Force cannot be 0`;
-                };
-            }else{
-                throw `Cannot add force to axis of ${axis}`;
-            };
-        }else{
-            throw `Axis is not type of string. Axis is typeof ${typeof axis}`;
-        };
-    };
-
-    get centerX() {
-        return this.x + this.r / 2;
-    };
-
-    get centerY() {
-        return this.y + this.r / 2;
-    };
-
-
-};
-
-/**
- *
- * @class RoundRect
- * @description Creates a Round Rectangle
- */
-
-class RoundRect extends Reflex {
-    /**
-     * 
-     * @param {Number} x X pos
-     * @param {Number} y Y pos
-     * @param {Number} w Width
-     * @param {Number} h Height
-     * @param {Number} r Radius
-     * @param {String} color A hex color without the #
-     *
-     * @param {Object} [options={}] Option object, holds many different options
-     * @param {Object} [options.movement={}] Movement object, holds movements options
-     * @param {String} [options.movement.type="TopDown"] W A S D UP DOWN LEFT RIGHT
-     * @param {String} [options.movement.type="Jump"] W SPACE UP
-     * @param {String} [options.movement.type="LeftRight"] A D LEFT RIGHT
-     * @param {String} [options.movement.type="UpDown"] W D
-     * @param {Number} [options.movement.speed=2.5] Speed of RoundRect, do not put if you are using acceleration
-     * @param {Number} [options.movement.acceleration=0.15] Acceleration of RoundRect
-     * @param {Number} [options.movement.maxSpeed=0.4] Max speed of RoundRect, Only needed if acceleration is present
-     */
-    constructor(x, y, w, h, r, color, options) {
-        super(ReflexConfig);
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.h = h;
-        this.r = r;
-        this.color = color;
-
-        options = options || undefined;
-
-        this.options = options;
-
-        this.controller = {
-            up: false,
-            down: false,
-            left: false,
-            right: false
-        };
-
-        this.vel = 0 || this.options.movement.speed;
-        this.acceleration = this.options.movement.acceleration;
-        this.maxSpeed = this.options.movement.maxSpeed;
-
-        if(this.acceleration != undefined && this.maxSpeed == undefined) throw "acceleration is defined while maxSpeed is undefined";
-
-        window.addEventListener("keydown", (e) => {this.keyListener(e)});
-        window.addEventListener("keyup", (e) => {this.keyListener(e)});
-    };
-
-    /**
-     * @description Draws roundRect to canvas
-     */
-
-    draw() {
-        if (this.w < 2 * this.r) this.r = this.w / 2;
-        if (this.h < 2 * this.r) this.r = this.h / 2;
-        this.ctx.beginPath();
-        this.ctx.moveTo(this.x+this.r, this.y);
-        this.ctx.arcTo(this.x+this.w, this.y,   this.x+this.w, this.y+this.h, this.r);
-        this.ctx.arcTo(this.x+this.w, this.y+this.h, this.x,   this.y+this.h, this.r);
-        this.ctx.arcTo(this.x,   this.y+this.h, this.x,   this.y,   this.r);
-        this.ctx.arcTo(this.x,   this.y,   this.x+this.w, this.y,   this.r);
-        this.ctx.closePath();
-        this.ctx.fillStyle = this.color;
-        this.ctx.fill();
-
-        // acceleration
-
-        if(this.acceleration != undefined && this.maxSpeed != undefined) {
-            if(this.controller.up || this.controller.down || this.controller.left || this.controller.right) {
-                if(this.vel < this.maxSpeed) {
-                    this.vel += this.acceleration;
-                };
-            }else{
-                this.vel = 0;
-            };
-        };
-
-        // movement
-
-        //#region movement
-
-        if(this.controller.up && (this.options.movement.type == "TopDown" || this.options.movement.type == "Jump" || this.options.movement.type == "UpDown")) {
-            this.y -= this.vel;
-        };
-
-        if(this.controller.down && (this.options.movement.type == "TopDown" || this.options.movement.type == "UpDown")) {
-            this.y += this.vel;
-        };
-
-        if(this.controller.left && (this.options.movement.type == "TopDown" || this.options.movement.type == "LeftRight")) {
-            this.x -= this.vel;
-        };
-
-        if(this.controller.right && (this.options.movement.type == "TopDown" || this.options.movement.type == "LeftRight")) {
-            this.x += this.vel;
-        };
-
-        //#endregion
-    };
-
-    /**
-     * @description Listens for key presses
-     */
-
-    keyListener(event) {
-        let key_state = (event.type == "keydown") ? true : false;
-        
-
-        switch(event.keyCode) {
-            case 37: // left arrow
-                this.controller.left = key_state;
-            break;
-
-            case 38: // up arrow
-                this.controller.up = key_state;
-            break;
-
-            case 39: // right arrow
-                this.controller.right = key_state;
-            break;
-
-            case 40: // down arrow
-                this.controller.down = key_state;
-            break;
-        
-            
-            case 65: // a
-                this.controller.left = key_state;
-            break;
-
-            case 87: // w
-                this.controller.up = key_state;
-            break;
-
-            case 68: // d
-                this.controller.right = key_state;
-            break;
-
-            case 83: // s
-                this.controller.down = key_state;
-            break;
-
-            case 32: // space
-                if(this.options.movement.type == "Jump") {
-                    this.controller.up = key_state;
-                };
-            break;
-        
-            
-        };
-
-    };
-
-
-    /**
-     * 
-     * @param {String} axis The axis of the force being applied. "x" or "y".
-     * @param {Number} force The force being applied. Negative number is left for axis = x, up for axis = y. Positive number is right for axis = x, down for axis = y.
-     * @description Adds a force to an axis.
-     */
-
-    addForce(axis, force) {
-        if(typeof force != "number") {
-            throw `Force if not typeof number. Force is typeof ${typeof force}`
-        };
-        if(typeof axis == "string") {
-            if(axis == "x") {
-                if(Math.sign(force) == 1) {
-                    this.x += force;
-                }else if(Math.sign(force) == -1) {
-                    this.x -= force;
-                }else{
-                    throw `Force cannot be 0`;
-                };
-            }else if(axis == "y") {
-                if(Math.sign(force) == 1) {
-                    this.y += force;
-                }else if(Math.sign(force) == -1) {
-                    this.y -= force;
-                }else{
-                    throw `Force cannot be 0`;
-                };
-            }else{
-                throw `Cannot add force to axis of ${axis}`;
-            };
-        }else{
-            throw `Axis is not type of string. Axis is typeof ${typeof axis}`;
-        };
-    };
-
-
-};
-
-
-
-
-//#endregion
-
-//#region Particles
-
-/**
- *
- *
- * @class Particle
- * @description Creates a Particle
- */
-
-class Particle extends Reflex {
-
-    /**
-     * 
-     * @description Creates an instance of a Particle
-     * @param {String} graphic Hex color without "#", link, or file path.
-     * @param {String} [shape] Shape of particle. Circle, Rect, or RoundRect. If graphic is a link/file shape is ignored. Optional.
-     * @param {Number} [w] Width of rect or round rect. Required for rect and round rect. Ignored if graphic is link/file.
-     * @param {Number} [h] Height of rect or round rect. Required for rect and round rect. Ignored if graphic is link/file.
-     * @param {Number} [r] Radius of round rect or circle. Required for circle and round rect. Ignored if graphic is link/file.
-     * @memberof Particle
-     */
-
-    constructor(graphic, shape, w, h, r) {
-        super(ReflexConfig);
-        this.graphic = graphic;
-        this.graphicType;
-
-
-        shape = shape || undefined;
-        this.shape = shape;
-        this.shape = this.shape.toLowerCase();
-
         w = w || undefined;
-        h = h || undefined;
-        h = h || undefined;
-
         this.w = w;
+        
+        h = h || undefined;
         this.h = h;
-        this.r = r;
+        
+        options = options || undefined;
+        this.options = options;
 
-        // check if all required params are there for a shape
+        this.vx = 0;
+        this.vy = 0;
+        this.accX = 0.007;
+        this.accY = 0.01;
+        this.minSpeed = this.options
 
-        if(this.shape == "rect" && this.w == undefined || this.h == undefined) throw `Particle shape is rect while w or h is undefined`;
-        if(this.shape == "roundrect" && this.w == undefined || this.h == undefined || this.r == undefined) throw `Particle shape is roundrect while w or h or r is undefined`;
-        if(this.shape == "circle" && this.r == undefined) throw `Particle shape is circle while r is undefined`;
+        this.isFlying = false;
 
-        // convert HTML to Hex if possible
+        this.doPhysics = this.options.physics.enabled;
+        this.doMovement = this.options.movement.enabled;
+        this.doAi = this.options.ai.enabled;
 
-        if(this.nameTohex(this.graphic)) {
-            this.graphic = this.nameTohex(this.graphic); 
-            this.graphicType = "hex";
+        this.airplaneAI = undefined;
+
+        if(this.doAi) {
+            this.airplaneAI = new AirplaneAi()
+            this.airplaneAI.startAI();
         };
 
-        // detect if it is rgb and if it throw
 
-        if(this.graphic.includes("rgb")) throw `Particle graphic includes rgb. Use hex colors without "#" instead.`;
 
-        // detect if it is a file/link
+    };
 
-        if(this.graphic.includes("/")) {
-            this.graphicType = "file"
-            this.shape = undefined;
-        };
+    draw() {
 
-        // replace # if found
-        // only if it is a hex
+    };
 
-        if(this.graphicType == "hex") {
-            this.graphic.replace("#", "");
-        };
+    gravity() {
+
+    };
+
+    drag() {
+
+    };
+
+    throttleIncrease() {
+
+    };
+
+    throttleDecrease() {
 
     };
     
-    /**
-     * @description Draws particle
-     */
+};
 
-    draw(x, y) {
-        this.x = x;
-        this.y = y;
-        switch(this.shape) {
-                case "circle":
-                    this.ctx.beginPath();
-                    this.ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
-                    this.ctx.fillStyle = this.graphic;
-                    this.ctx.fill();
-                break;
+/**
+ * @class AirplaneAi
+ * @description Creates an instance of an Airplane AI
+ */
 
-                case "rect":
-                    this.ctx.fillStyle = this.graphic;
-                    this.ctx.fillRect(this.x, this.y, this.w, this.h);
-                break;
+class AirplaneAi extends Airplane {
+    constructor() {
+        if(this.doAi) {
 
-                case "roundrect":
-                    if (this.w < 2 * this.r) this.r = this.w / 2;
-                    if (this.h < 2 * this.r) this.r = this.h / 2;
-                    this.ctx.beginPath();
-                    this.ctx.moveTo(this.x+this.r, this.y);
-                    this.ctx.arcTo(this.x+this.w, this.y,   this.x+this.w, this.y+this.h, this.r);
-                    this.ctx.arcTo(this.x+this.w, this.y+this.h, this.x,   this.y+this.h, this.r);
-                    this.ctx.arcTo(this.x,   this.y+this.h, this.x,   this.y,   this.r);
-                    this.ctx.arcTo(this.x,   this.y,   this.x+this.w, this.y,   this.r);
-                    this.ctx.closePath();
-                    this.ctx.fillStyle = this.color;
-                    this.ctx.fill();
-                break;
-
-                case undefined:
-                    var imgObj = new Image();
-                    imgObj.src = this.imgPath;
-                    this.ctx.drawImage(imgObj, this.x, this.y, this.w, this.h);
-                break;
-                
-                default:
-                   throw `Particle shape is not a circle, roundrect, rect, or link/file. Particle shape is ${this.shape}`;
-                break;
-            };
+        };
     };
 
+    startAI() {
 
+    };
 };
 
 
+// end airplane
+//#endregion
+
+// end presets
+//#endregion
+
+// end object classes
+//#endregion
 
 
 /**
@@ -1060,6 +644,7 @@ class Background extends Reflex {
         this.h = h;
         this.imgPath = imgPath;
 
+
     };
 
     /**
@@ -1072,4 +657,76 @@ class Background extends Reflex {
         this.ctx.drawImage(imgObj, this.x, this.y, this.w, this.h);
     };
 
+};
+
+/**
+ * @class SpriteSheet
+ * @description Creates a SpriteSheet
+ */
+
+
+class SpriteSheet {
+    constructor(rows, column, imgW, imgH, singleW, singleH) {
+        this.rows = rows;
+        this.column = column;
+
+        this.singleW = singleW;
+        this.singleH = singleH;
+
+        this.w = imgW;
+        this.h = imgH;
+
+        this.sX = 0;
+        this.sY = 0;
+
+        this.type = "SpriteSheet"; // instead of contructor.name as minified files can cause problems
+
+    };
+
+    /**
+     * @description Draws frame
+     * @param {Object} frame Frame object
+     * @param {Number} frame.column What column to select the image from, starts at 0
+     * @param {Number} frame.row What row to select the image from, starts at 0
+     */
+
+    draw(frame) { 
+        var imgObj = new Image();
+        imgObj.src = this.imgPath;
+        this.ctx.drawImage(imgObj, this.x, this.y, this.w, this.h, );
+    };
+};
+
+/**
+ * @class Sound
+ * @description Creates a sound with HowlerJS
+ * @requires Howl Class from HowlerJS
+ * @license MIT Copyright (c) 2013-2020 James Simpson and GoldFire Studios, Inc. More info at: https://github.com/goldfire/howler.js/blob/master/LICENSE.md
+ * 
+ * Uses HowlerJS
+ * https://github.com/goldfire/howler.js/
+ */
+
+class Sound {
+
+    /**
+     * @description Creates a sound with HowlerJS
+     * @requires Howl Class from HowlerJS
+     * @license MIT Copyright (c) 2013-2020 James Simpson and GoldFire Studios, Inc. More info at: https://github.com/goldfire/howler.js/blob/master/LICENSE.md
+     * 
+     * Uses HowlerJS
+     * https://github.com/goldfire/howler.js/
+     *
+     * @param {Object} howlerjsOptions HowlerJS options, https://github.com/goldfire/howler.js/blob/master/README.md
+     */
+
+    constructor(howlerjsOptions) {
+
+        if(!Howl) throw `Class Sound requires HowlerJS. Set depInstall config to true.`;
+
+        if(typeof howlerjsOptions != "object") throw `howler js options must be a typeof object and not typeof ${typeof howlerjsOptions}`;
+
+        this.main = new Howl(howlerjsOptions);
+
+    };
 };
