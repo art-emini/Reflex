@@ -617,6 +617,8 @@ class AirplaneAi extends Airplane {
 // end object classes
 //#endregion
 
+//#region Misc
+
 
 /**
  * @class Background
@@ -665,8 +667,9 @@ class Background extends Reflex {
  */
 
 
-class SpriteSheet {
+class SpriteSheet extends Reflex {
     constructor(rows, column, imgW, imgH, singleW, singleH) {
+        super(ReflexConfig);
         this.rows = rows;
         this.column = column;
 
@@ -707,7 +710,7 @@ class SpriteSheet {
  * https://github.com/goldfire/howler.js/
  */
 
-class Sound {
+class Sound extends Reflex {
 
     /**
      * @description Creates a sound with HowlerJS
@@ -718,10 +721,12 @@ class Sound {
      * https://github.com/goldfire/howler.js/
      *
      * @param {Object} howlerjsOptions HowlerJS options, https://github.com/goldfire/howler.js/blob/master/README.md
+     * 
+     * ~ Use Sound.main to access all HowlerJS methods ~
      */
 
     constructor(howlerjsOptions) {
-
+        super(ReflexConfig);
         if(!Howl) throw `Class Sound requires HowlerJS. Set depInstall config to true.`;
 
         if(typeof howlerjsOptions != "object") throw `howler js options must be a typeof object and not typeof ${typeof howlerjsOptions}`;
@@ -730,3 +735,17 @@ class Sound {
 
     };
 };
+
+//#endregion
+
+
+//#region GFX
+
+class Shadow {
+    constructor() {
+        super(ReflexConfig);
+
+    };
+};
+
+//#endregion
