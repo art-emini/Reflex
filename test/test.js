@@ -4,7 +4,7 @@ var Engine = new Reflex({loop: loop, debug: true, depInstall: true});
 
 // create a rigid body rect
 
-var myRoundRect = new RigidBody(50, 50, 50, 50, 15, "roundrect", "#0000FF", undefined, {movement: {type: "TopDown", maxSpeed: 4, acceleration: 0.02}});
+var myRoundRect = new RigidBody(50, 50, 50, 50, 15, "roundrect", "#0000FF", undefined, {movement: {type: "TopDown", maxSpeed: 4, acceleration: 0.02, friction: 0.9}});
 
 // create a rigid body rect
 
@@ -16,7 +16,7 @@ var myCircle = new RigidBody(400, 200, 0, 0, 15, "circle", "#006400");
 
 // create sprite
 
-var mySprite = new RigidBody(450, 50, 50, 50, 0, "sprite", undefined, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThpefIg1QQCIDB3U-9Hkft05D9l9jKCZoBwg&usqp=CAU", undefined)
+var mySprite = new RigidBody(450, 50, 50, 50, 0, "sprite", undefined, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThpefIg1QQCIDB3U-9Hkft05D9l9jKCZoBwg&usqp=CAU", undefined);
 
 // create a sprite with SpriteSheet
 // https://www.pinclipart.com/picdir/middle/542-5425619_coin-sprite-sheet-png-clipart.png
@@ -25,6 +25,12 @@ var mySprite = new RigidBody(450, 50, 50, 50, 0, "sprite", undefined, "https://e
 
 var myShadow = new Shadow(0.3, 40);
 myShadow.appendTo(myRoundRect);
+
+// play sound on load
+// sound from https://freesound.org/people/InspectorJ/sounds/431117/
+
+new Sound({src: "./test-sound.wav", autoplay: true, destroyAfter: true, onPlay: () => console.log("playing"), onEnd: () => console.log("ended"), onDestroy: () => console.log("removed")});
+
 
 // create a background
 

@@ -1,11 +1,7 @@
 // dependiences 
 /*
 
-    - HowlerJS
-        Audio Player
-        Copyright (c) 2013-2020 James Simpson and GoldFire Studios, Inc.
-        https://github.com/goldfire/howler.js/blob/master/LICENSE.md
-        https://github.com/goldfire/howler.js
+    
 
 
 */
@@ -116,14 +112,10 @@ class Reflex {
     };
 
     start() {
-        // append howlerjs
+        // download dep
 
         if(this.depInstall == true) {
-            let script = document.createElement("script");
-            script.src = "https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js";
-            script.integrity = "sha512-L6Z/YtIPQ7eU3BProP34WGU5yIRk7tNHk7vaC2dB1Vy1atz6wl9mCkTPPZ2Rn1qPr+vY2mZ9odZLdGYuaBk7dQ==";
-            script.crossOrigin = "anonymous";
-            document.head.appendChild(script);
+            
         };
 
         this.loop();
@@ -253,7 +245,8 @@ class RigidBody extends Reflex {
      * @param {String} [options.movement.type="LeftRight"] A D LEFT RIGHT
      * @param {String} [options.movement.type="UpDown"] W D
      * @param {Number} [options.movement.speed=2.5] Speed of Rigid Body, only used if acceleration is not present
-     * @param {Number} [options.movement.acceleration=0.15] Acceleration of Rigid Body
+     * @param {Number} [options.movement.acceleration=0.02] Acceleration of Rigid Body
+     * @param {Number} [options.movement.friction=0.007] Friction of Rigid Body
      * @param {Number} [options.movement.maxSpeed=4] Max speed of Rigid Body, Only needed if acceleration is present
      *
      * @memberof RigidBody
@@ -308,6 +301,7 @@ class RigidBody extends Reflex {
 
         if(this.options != undefined) {
             this.vel = 0 || this.options.movement.speed;
+            this.friction = 0 || this.options.movement.friction;
             this.acceleration = this.options.movement.acceleration;
             this.maxSpeed = this.options.movement.maxSpeed;
             if(this.acceleration != undefined && this.maxSpeed == undefined) throw "acceleration is defined while maxSpeed is undefined";
@@ -387,6 +381,7 @@ class RigidBody extends Reflex {
 
         if(this.acceleration != undefined && this.maxSpeed != undefined) {
             if(this.controller.up || this.controller.down || this.controller.left || this.controller.right) {
+                // accelerate
                 if(this.vel < this.maxSpeed) {
                     this.vel += this.acceleration;
                 };
@@ -394,6 +389,7 @@ class RigidBody extends Reflex {
                 this.vel = 0;
             };
         };
+        
 
 
         // movement
@@ -794,26 +790,106 @@ class SpriteSheet extends Reflex {
 class Sound extends Reflex {
 
     /**
-     * @description Creates a sound with HowlerJS
-     * @requires Howl Class from HowlerJS
-     * @license MIT Copyright (c) 2013-2020 James Simpson and GoldFire Studios, Inc. More info at: https://github.com/goldfire/howler.js/blob/master/LICENSE.md
+     * @description Creates a sound 
+     * @param {Object} options Option object
+     * @param {String} options.src A file path or link to the audio src
+     * @param {Boolean} [options.autoplay=false] Autoplay sound, off by default
+     * @param {Boolean} [options.destroyAfter=false] Remove audio element after playing
+     * @param {Boolean} [options.loop=false] Loop sound, off by default
+     * @param {Function} [options.onPlay] An on play event, optional
+     * @param {Function} [options.onPause] An on pause event, optional
+     * @param {Function} [options.onVolumeChange] An on volume change event, optional
+     * @param {Function} [options.onEnd] An on end event, optional
+     * @param {Function} [options.onAppend] A custom event, fires once audio is appened
+     * @param {Function} [options.onDestroy] A custom event, fires if destoryAfter is true and once it ended and removed
      * 
-     * Uses HowlerJS
-     * https://github.com/goldfire/howler.js/
-     *
-     * @param {Object} howlerjsOptions HowlerJS options, https://github.com/goldfire/howler.js/blob/master/README.md
-     * 
-     * ~ Use Sound.main to access all HowlerJS methods ~
+     * @memberof Sound
      */
 
-    constructor(howlerjsOptions) {
+    constructor(options) {
         super(ReflexConfig);
-        if(!Howl) throw `Class Sound requires HowlerJS. Set depInstall config to true.`;
 
-        if(typeof howlerjsOptions != "object") throw `howler js options must be a typeof object and not typeof ${typeof howlerjsOptions}`;
+        this.options = options;
+        this.src = this.options.src;
 
-        this.main = new Howl(howlerjsOptions);
+        // optional params
+        this.autoplay = this.options.autoplay || false;
+        this.destroyAfter = this.options.destroyAfter || false;
+        this.loop = this.options.loop || false;
+        this.volume = this.options.volume || 1;
 
+        this.onPlay = this.options.onPlay || function () {};
+        this.onPause = this.options.onPause || function () {};
+        this.onVolumeChange = this.options.onVolumeChange || function () {};
+        this.onEnd = this.options.onEnd || function () {};
+        
+        this.onAppend = this.options.onAppend || function () {};
+        this.onDestroy = this.options.onDestroy || function () {};
+
+        // throw typeof errors
+        if(typeof this.options != "object") throw `options must be a typeof object`;
+        if(typeof this.src != "string") throw `src must be a string`;
+        if(typeof this.autoplay != "boolean") throw `autoplay must be typeof boolean`;
+        if(typeof this.onPlay != "function") throw `onPlay must be typeof function`;
+        if(typeof this.onPause != "function") throw `onPause must be typeof function`;
+        if(typeof this.onVolumeChange != "function") throw `onVolumeChange must be typeof function`;
+        if(typeof this.onEnd != "function") throw `onEnd must be typeof function`;
+        if(typeof this.onDestroy != "function") throw `onDestroy must be typeof function`;
+        if(typeof this.volume != "number") throw `volume must be typeof number`;
+
+        
+        // Main Sound Functionality
+        
+        this.element = document.createElement("audio");
+
+        // main attr
+        this.element.volume = this.volume;
+        this.element.autoplay = this.autoplay;
+        this.element.loop = this.loop;
+        this.element.src = this.src;
+
+        // events
+        this.element.onerror = (err) => {throw err};
+        this.element.onwaiting = () => {if(this.debug) console.warn(`Audio waiting/buffering`)};
+
+        this.element.onplay = this.onPlay;
+        this.element.onpause = this.onPause;
+        this.element.onvolumechange = this.onVolumeChange;
+        this.element.onended = this.onEnd;
+
+        // destroyAfter
+
+        if(this.destroyAfter) {
+            this.element.addEventListener("ended", () => {this.element.onDestroy(); this.element.remove()})
+        };
+        
+        // custom events
+
+        this.element.onAppend = this.onAppend;
+        this.element.onDestroy = this.onDestroy;
+
+        document.body.appendChild(this.element);
+
+    };
+
+    play() {
+
+    };
+
+    pause() {
+
+    };
+
+    changeVolume(volume) {
+
+    };
+
+    end() {
+
+    };
+
+    remove() {
+        this.element.remove();
     };
 };
 
