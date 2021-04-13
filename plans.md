@@ -5,14 +5,14 @@
 
 - [x] Merge object classes into RigidBody Class
 - [ ] Add preset classes like airplane and maybe more
-- [ ] Add sound class with howl
+- [ ] Add sound class with [howlerjs](https://github.com/goldfire/howler.js)
 - [ ] Add SpriteSheet class to load and return a spritesheet object
 - [ ] Add RigidBody imgPath could be a SpriteSheet class by using an object
-- [ ] Add RigidBody imgPath spritesheet detection with imgPath.contructor.name to specify how many images per row, how big in width and height one item is, etc..
+- [ ] Add RigidBody imgPath spritesheet detection with imgPath.type to specify how many images per row, how big in width and height one item is, etc..
 - [ ] Add friction
 - [ ] Add inertia so that u dont have to restart accelerating if you stop holding the key
 - [ ] Add Reflex Stack for different props
-- [ ] Add RigidBody and background exists property
+- [ ] Add Shadow Class and Shadow.append(RigidBody), check if rigidbody with .type
 - [x] Add Reflex.started to check if loop has started or not
 - [x] Add start msg
 - [x] Add othersAttached array
