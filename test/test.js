@@ -1,6 +1,6 @@
 // Init Reflex
 
-var Engine = new Reflex({loop: loop, debug: false, depInstall: true});
+var Engine = new Reflex({loop: loop, debug: true, depInstall: true});
 
 // create a rigid body rect
 
@@ -21,6 +21,11 @@ var mySprite = new RigidBody(450, 50, 50, 50, 0, "sprite", undefined, "https://e
 // create a sprite with SpriteSheet
 // https://www.pinclipart.com/picdir/middle/542-5425619_coin-sprite-sheet-png-clipart.png
 
+// create a shadow and append it to myRoundRect
+
+var myShadow = new Shadow(0.3, 40);
+myShadow.appendTo(myRoundRect);
+
 // create a background
 
 var background = new Background(0, 0, Engine.canvas.width, Engine.canvas.width, "https://upload.wikimedia.org/wikipedia/commons/b/b5/800x600_Wallpaper_Blue_Sky.png");
@@ -35,6 +40,7 @@ function loop() {
     myRect.draw();
     myRoundRect.draw();
     mySprite.draw();
+    myShadow.draw();
     
     requestAnimationFrame(loop);
 };

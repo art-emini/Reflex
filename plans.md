@@ -12,7 +12,9 @@
 - [ ] Add friction
 - [ ] Add inertia so that u dont have to restart accelerating if you stop holding the key
 - [x] Add Reflex Stack for different props
-- [ ] Add Shadow Class and Shadow.append(RigidBody), check if rigidbody with .type
+- [x] Add RigidBody.hasShadow and RigidBody.selfShadow
+- [x] Add Shadow Class and Shadow.appendTo(RigidBody), check if rigidbody with .type
+- [ ] Add Particles class which creates and emits particles in one class
 - [x] Add Reflex.started to check if loop has started or not
 - [x] Add start msg
 - [x] Add othersAttached array
