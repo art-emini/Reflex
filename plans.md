@@ -5,7 +5,8 @@
 
 - [x] Merge object classes into RigidBody Class
 - [ ] Add preset classes like airplane and maybe more
-- [x] Add sound class with [HowlerJS](https://github.com/goldfire/howler.js)
+- [x] Add Sound class
+- [ ] Add ProximitySound class where volume lowers the farther you are and vice versa
 - [ ] Add SpriteSheet class to load and return a spritesheet object
 - [ ] Add RigidBody imgPath could be a SpriteSheet class by using an object
 - [ ] Add RigidBody imgPath spritesheet detection with imgPath.type to specify how many images per row, how big in width and height one item is, etc..
@@ -23,6 +24,13 @@
 - [x] Add this.type to say rigid body or anything else (for future plans)
 
 
+# In between 1.0.0 -> 2.0.0
+
+- [ ] Add rect, round rect, and sprite collision detection and response
+- [ ] Add circle collision detection and response
+
+
+
 # 2.0.0
 
 __Future__ _Plans_
@@ -31,3 +39,5 @@ __Many__ _updates in between 1.0.0 -> 2.0.0_
 
 - [ ] Add Camera Class
 - [ ] Add Camera Support for Rigid Bodies, Background, Particles, presets, and more
+- [ ] Add dynamic lighting with rays
+- [ ] Add Sound Sprites into Sound Class

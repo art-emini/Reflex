@@ -152,12 +152,7 @@ class Reflex {
 
         console.log(this.startMsg);
         if(this.depInstall) {
-            console.log(`
-Using HowlerJS for sound 
-https://github.com/goldfire/howler.js 
-Copyright (c) 2013-2020 James Simpson and GoldFire Studios, Inc.
-More license info at https://github.com/goldfire/howler.js/blob/master/LICENSE.md
-            `)
+            
         };
     };
 
@@ -777,14 +772,11 @@ class SpriteSheet extends Reflex {
     };
 };
 
+//#region Sound
+
 /**
  * @class Sound
- * @description Creates a sound with HowlerJS
- * @requires Howl Class from HowlerJS
- * @license MIT Copyright (c) 2013-2020 James Simpson and GoldFire Studios, Inc. More info at: https://github.com/goldfire/howler.js/blob/master/LICENSE.md
- * 
- * Uses HowlerJS
- * https://github.com/goldfire/howler.js/
+ * @description Creates a Sound
  */
 
 class Sound extends Reflex {
@@ -796,6 +788,7 @@ class Sound extends Reflex {
      * @param {Boolean} [options.autoplay=false] Autoplay sound, off by default
      * @param {Boolean} [options.destroyAfter=false] Remove audio element after playing
      * @param {Boolean} [options.loop=false] Loop sound, off by default
+     * @param {Boolean} [options.volume=1] Volume of sound, 0-1, 1 by default
      * @param {Function} [options.onPlay] An on play event, optional
      * @param {Function} [options.onPause] An on pause event, optional
      * @param {Function} [options.onVolumeChange] An on volume change event, optional
@@ -850,7 +843,7 @@ class Sound extends Reflex {
 
         // events
         this.element.onerror = (err) => {throw err};
-        this.element.onwaiting = () => {if(this.debug) console.warn(`Audio waiting/buffering`)};
+        this.element.onwaiting = () => {if(this.debug) console.warn(`Audio waited/buffered, ignore if u seeked or ended the audio`)};
 
         this.element.onplay = this.onPlay;
         this.element.onpause = this.onPause;
@@ -869,30 +862,172 @@ class Sound extends Reflex {
         this.element.onDestroy = this.onDestroy;
 
         document.body.appendChild(this.element);
+        this.onAppend();
 
     };
+
+    /**
+     * @description Plays the sound
+     */
 
     play() {
-
+        this.element.play();
     };
+
+    /**
+     * @description Plays another sound after the first has ended
+     * @param {Sound} sound An instance of a sound
+     */
+
+    playAfter(sound) {
+        this.element.addEventListener("ended", () => {
+            sound.play();
+        }); 
+    };
+
+    /**
+     * @description Pauses the sound
+     */
 
     pause() {
-
+        this.element.pause();
     };
+
+    /**
+     * @description Changes the volume of the Sound
+     * @param {Number} volume Number between 0-1
+     */
 
     changeVolume(volume) {
-
+        this.element.volume = volume;
     };
+
+    /**
+     * @description Ends the current audio
+     */
 
     end() {
-
+        this.element.currentTime = this.element.duration + 1;
     };
+
+    /**
+     * @description Removes the audio element
+     */
 
     remove() {
         this.element.remove();
     };
+
+    /**
+     * @description Seeks the audio
+     * @param {Number} time 0 - Sound Duration
+     */
+
+    seek(time) {
+        this.element.currentTime = time;
+    };
 };
 
+/**
+ * @class ProximitySound
+ * @description Creates a ProximitySound
+ */
+
+class ProximitySound extends Reflex {
+
+    /**
+     * @description Creates a ProximitySound
+     * @param {Number} x X pos
+     * @param {Number} y Y pos
+     * @param {Sound} sound An instance of the Sound Class
+     * @param {Object} options A object that holds all configuration for ProximitySound
+     * @param {Number} [options.volume=1] Volume when entered, default is 1
+     * @param {Number} [options.debugCirlce=false] Show the circle/area where it is activated
+     * @param {Object[]} options.radius Radius of hearing the ProximitySound
+     * @param {Object[]} affects An array of RigidBodies that get affected by Proximity Sound
+     *
+     * @memberof ProximitySound
+     */
+
+    constructor(x, y, sound, options, affects) {
+        super(ReflexConfig);
+        this.x = x;
+        this.y = y;
+        this.color = "rgba(0, 0, 0, 0)"
+
+        this.sound = sound;
+        this.options = options;
+        this.affects = affects;
+        this.volume = this.options.volume || 1;
+        this.showDebugCircle = this.options.debugCirlce || false;
+
+        if(this.showDebugCircle) {
+            this.color = "rgba(0, 0, 0, 0.1)"
+        };
+
+        this.r = this.options.radius;
+
+        this.sound.changeVolume(0);
+
+        // throw typeof errors
+        if(typeof this.options != "object") throw `options is not an object`;
+        if(!Array.isArray(this.affects)) throw `affects is not an array`;
+
+
+    };
+
+    /**
+     * @description Draws the ProximitySound
+     */
+
+    draw() {
+        this.ctx.beginPath();
+        this.ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
+        this.ctx.fillStyle = this.color;
+        this.ctx.fill();
+        this.affects.forEach(obj => {
+            let a = this.x - obj.centerX;
+            let b = this.y - obj.centerY;
+            let DistToMid = Math.sqrt(a * a + b * b);
+            
+            if(DistToMid >= this.r) {
+                this.sound.changeVolume(0);
+                this.sound.pause();
+            };
+            if(DistToMid <= this.r) {
+                this.sound.changeVolume(this.volume);
+                this.sound.play();
+            };
+
+
+
+            
+        });
+    };
+
+    /**
+     * @description Attachs a ProximitySound to a RigidBody
+     * @param {RigidBody} RigidBody A RigidBody
+     */
+
+    attachTo(RigidBody) {
+
+    };
+
+    /**
+     * @description Detachs a ProximitySound from a RigidBody
+     * @param {RigidBody} RigidBody A RigidBody
+     */
+
+    detach(RigidBody) {
+
+    };
+};
+
+// end sound
+//#endregion
+
+// end misc
 //#endregion
 
 

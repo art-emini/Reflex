@@ -29,8 +29,12 @@ myShadow.appendTo(myRoundRect);
 // play sound on load
 // sound from https://freesound.org/people/InspectorJ/sounds/431117/
 
-new Sound({src: "./test-sound.wav", autoplay: true, destroyAfter: true, onPlay: () => console.log("playing"), onEnd: () => console.log("ended"), onDestroy: () => console.log("removed")});
+// let mySound = new Sound({src: "./test-sound.wav", autoplay: true, destroyAfter: true, onPlay: () => console.log("playing"), onEnd: () => console.log("ended"), onDestroy: () => console.log("removed")});
+// mySound.playAfter(new Sound({src: "./bg-music.mp3", destroyAfter: true}));
 
+// ProximitySound
+let mySound1 = new Sound({src: "./bg-music.mp3", autoplay: true, loop: true})
+let myProxSound = new ProximitySound(450, 50, mySound1, {volume: 1, radius: 250, debugCirlce: true}, [myRoundRect]);
 
 // create a background
 
@@ -40,14 +44,19 @@ var background = new Background(0, 0, Engine.canvas.width, Engine.canvas.width, 
 function loop() {
     Engine.clear(); // clears canvas
 
+    // draw background and shadows first
     background.draw();
+    myShadow.draw();
+
 
     myCircle.draw();
     myRect.draw();
     myRoundRect.draw();
     mySprite.draw();
-    myShadow.draw();
-    
+
+    // draw proxsound
+    myProxSound.draw();
+
     requestAnimationFrame(loop);
 };
 

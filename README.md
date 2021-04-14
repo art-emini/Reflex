@@ -14,14 +14,15 @@ A simple Javascript game engine.
 3. Preset Classes with preset physics. Ex: Airplane
 4. Background loader with methods.
 5. Attaching different shapes to one main object.
-6. Sound player with HowlerJS.
-7. Spritesheet loader.
-8. Different shapes like rect, roundrect, circle, and sprite _(img)_
-9. Entity Management.
-10. Sound Sprites with HowlerJS.
-11. Auto append/install dependencies.
-12. Weekly updates/patches.
-13. And way more.
+6. Sound player.
+7. Proximity sounds.
+8. Spritesheet loader.
+9. Different shapes like rect, roundrect, circle, and sprite _(img)_
+10. Entity Management.
+11. Basic Shadow.
+12. Future Plans like dynamic lighting.
+13. Weekly updates/patches
+14. And way more.
 
 <br>
 
