@@ -4,7 +4,7 @@ var Engine = new Reflex({loop: loop, debug: true, depInstall: true});
 
 // create a rigid body rect
 
-var myRoundRect = new RigidBody(50, 50, 50, 50, 15, "roundrect", "#0000FF", undefined, {movement: {type: "TopDown", maxSpeed: 4, acceleration: 0.02, friction: 0.9}});
+var myRoundRect = new RigidBody(50, 50, 50, 50, 15, "roundrect", "#0000FF", undefined, {movement: {type: "TopDown", maxSpeed: 4, acceleration: 0.02, friction: 0.9}}); 
 
 // create a rigid body rect
 
@@ -29,16 +29,18 @@ myShadow.appendTo(myRoundRect);
 // play sound on load
 // sound from https://freesound.org/people/InspectorJ/sounds/431117/
 
-// let mySound = new Sound({src: "./test-sound.wav", autoplay: true, destroyAfter: true, onPlay: () => console.log("playing"), onEnd: () => console.log("ended"), onDestroy: () => console.log("removed")});
+//let mySound = new Sound({src: "./test-sound.wav", autoplay: true, destroyAfter: true, onPlay: () => console.log("playing"), onEnd: () => console.log("ended"), onDestroy: () => console.log("removed")});
 // mySound.playAfter(new Sound({src: "./bg-music.mp3", destroyAfter: true}));
 
 // ProximitySound
+
 let mySound1 = new Sound({src: "./bg-music.mp3", autoplay: true, loop: true})
 let myProxSound = new ProximitySound(450, 50, mySound1, {volume: 1, radius: 250, debugCirlce: true}, [myRoundRect]);
 
 // create a background
 
-var background = new Background(0, 0, Engine.canvas.width, Engine.canvas.width, "https://upload.wikimedia.org/wikipedia/commons/b/b5/800x600_Wallpaper_Blue_Sky.png");
+var background = new Background(0, 0, Engine.canvas.width + 100, Engine.canvas.width + 100, "https://upload.wikimedia.org/wikipedia/commons/b/b5/800x600_Wallpaper_Blue_Sky.png");
+background.wobble(0.25, 100);
 
 
 function loop() {

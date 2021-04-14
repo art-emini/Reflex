@@ -305,6 +305,12 @@ class RigidBody extends Reflex {
             window.addEventListener("keyup", (e) => {this.keyListener(e)});
         };
 
+        // create one imgObj if shape is sprite instead of creating a million and recieving the flash effect
+
+        if(this.shape == "sprite") {
+            this.imgObj = new Image();
+        };
+
 
         
     };
@@ -353,9 +359,8 @@ class RigidBody extends Reflex {
             break;
         
             case "sprite":
-                let imgObj = new Image();
-                imgObj.src = this.imgPath;
-                this.ctx.drawImage(imgObj, this.x, this.y, this.w, this.h);
+                this.imgObj.src = this.imgPath;
+                this.ctx.drawImage(this.imgObj, this.x, this.y, this.w, this.h);
             break;
         
             default:
@@ -573,115 +578,7 @@ class RigidBody extends Reflex {
 
 //#region Presets
 
-//#region Airplane
 
-/**
- * @class Airplane
- * @description Creates a preset airplane
- */
- 
-class Airplane extends Reflex {
-
-    /**
-     * @description Creates an Airplane preset with built in physics
-     * @param {Number} x X pos
-     * @param {Number} y Y pos
-     * @param {String} imgPath Img file path or link
-     * @param {Object} options Option object, holds many options within
-     * @param {Number} [w] Width of img, optional
-     * @param {Number} [h] Height of img, optional
-     *
-     * @param {Object} options.movement Movement option object
-     * @param {Boolean} options.movement.enabled Boolean to enable Airplane movement
-     * @param {Object} options.physics Physics option object 
-     * @param {Boolean} options.physics.enabled Boolean to enable Airplane physics
-     * @param {Object} options.ai AI option object 
-     * @param {Boolean} options.ai.enabled Boolean to enable Airplane ai
-     *
-     * @memberof Airplane
-     */
-
-    constructor(x, y, imgPath, options, w, h) {
-        super(ReflexConfig);
-        this.x = x;
-        this.y = y;
-        this.imgPath = imgPath;
-        this.options = options;
-        
-        w = w || undefined;
-        this.w = w;
-        
-        h = h || undefined;
-        this.h = h;
-        
-        options = options || undefined;
-        this.options = options;
-
-        this.vx = 0;
-        this.vy = 0;
-        this.accX = 0.007;
-        this.accY = 0.01;
-        this.minSpeed = this.options
-
-        this.isFlying = false;
-
-        this.doPhysics = this.options.physics.enabled;
-        this.doMovement = this.options.movement.enabled;
-        this.doAi = this.options.ai.enabled;
-
-        this.airplaneAI = undefined;
-
-        if(this.doAi) {
-            this.airplaneAI = new AirplaneAi()
-            this.airplaneAI.startAI();
-        };
-
-
-
-    };
-
-    draw() {
-
-    };
-
-    gravity() {
-
-    };
-
-    drag() {
-
-    };
-
-    throttleIncrease() {
-
-    };
-
-    throttleDecrease() {
-
-    };
-    
-};
-
-/**
- * @class AirplaneAi
- * @description Creates an instance of an Airplane AI
- */
-
-class AirplaneAi extends Airplane {
-    constructor() {
-        if(this.doAi) {
-
-        };
-    };
-
-    startAI() {
-
-    };
-};
-
-
-// end airplane
-//#endregion
 
 // end presets
 //#endregion
@@ -717,7 +614,7 @@ class Background extends Reflex {
         this.w = w;
         this.h = h;
         this.imgPath = imgPath;
-
+        this.imgObj = new Image();
 
     };
 
@@ -726,11 +623,58 @@ class Background extends Reflex {
      */
 
     draw() {
-        var imgObj = new Image();
-        imgObj.src = this.imgPath;
-        this.ctx.drawImage(imgObj, this.x, this.y, this.w, this.h);
+        this.imgObj.src = this.imgPath;
+        this.ctx.drawImage(this.imgObj, this.x, this.y, this.w, this.h);
     };
 
+    /**
+     * 
+     * @param {String} axis The axis of the force being applied. "x" or "y".
+     * @param {Number} force The force being applied. Negative number is left for axis = x, up for axis = y. Positive number is right for axis = x, down for axis = y.
+     * @description Adds a force to an axis.
+     */
+
+    addForce(axis, force) {
+        if(typeof force != "number") throw `Force if not typeof number. Force is typeof ${typeof force}`;
+        if(typeof axis == "string") {
+            
+            if(axis == "x") {
+                if(Math.sign(force) == 1) {
+                    this.x += force;
+                }else if(Math.sign(force) == -1) {
+                    this.x -= force;
+                }else{
+                    throw `Force cannot be 0`;
+                };
+            }else if(axis == "y") {
+                if(Math.sign(force) == 1) {
+                    this.y += force;
+                }else if(Math.sign(force) == -1) {
+                    this.y -= force;
+                }else{
+                    throw `Force cannot be 0`;
+                };
+            }else{
+                throw `Cannot add force to axis of ${axis}`;
+            };
+        }else{
+            throw `Axis is not type of string. Axis is typeof ${typeof axis}`;
+        };
+    };
+
+    wobble(intenstiy, ms) {
+        setInterval(() => {
+            let random = Math.floor(Math.random() * (6 - 1 + 1) + 1);
+            if(random >= 4) {
+                this.x += intenstiy;
+                this.y -= intenstiy;
+                
+            }else{
+                this.y += intenstiy;
+                this.x -= intenstiy;
+            };
+        }, ms);
+    };
 };
 
 /**

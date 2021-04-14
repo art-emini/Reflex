@@ -4,9 +4,8 @@
 
 
 - [x] Merge object classes into RigidBody Class
-- [ ] Add preset classes like airplane and maybe more
 - [x] Add Sound class
-- [ ] Add ProximitySound class where volume lowers the farther you are and vice versa
+- [ ] Add ProximitySound class
 - [ ] Add SpriteSheet class to load and return a spritesheet object
 - [ ] Add RigidBody imgPath could be a SpriteSheet class by using an object
 - [ ] Add RigidBody imgPath spritesheet detection with imgPath.type to specify how many images per row, how big in width and height one item is, etc..
@@ -14,21 +13,25 @@
 - [x] Add RigidBody.hasShadow and RigidBody.selfShadow
 - [x] Add Shadow Class and Shadow.appendTo(RigidBody), check if rigidbody with .type
 - [ ] Add Particles class which creates and emits particles in one class
-- [ ] Add Background.wobble(intenstiy) to wobble/move over time slightly
-- [ ] Add Background.addForce(axis, force) to move the background
+- [x] Add Background.wobble(intenstiy) to wobble/move over time slightly
+- [x] Add Background.addForce(axis, force) to move the background
 - [x] Add Reflex.started to check if loop has started or not
 - [x] Add start msg
 - [x] Add othersAttached array
 - [x] Add attach() to attach an object to another
 - [x] Add detach() to detach an object from another
 - [x] Add this.type to say rigid body or anything else (for future plans)
+- [x] Fix sprite & background performance impact as draw creates new / DOM Nodes all the time
+- - [x] Fixes flashing effect for sprites and background
 
 
 # In between 1.0.0 -> 2.0.0
 
 - [ ] Add rect, round rect, and sprite collision detection and response
 - [ ] Add circle collision detection and response
-
+- [ ] Add global entity management 
+- - [ ] Add support for all object classes, particles, and backgrounds
+- [ ] Add better ProximitySound 
 
 
 # 2.0.0
@@ -41,3 +44,7 @@ __Many__ _updates in between 1.0.0 -> 2.0.0_
 - [ ] Add Camera Support for Rigid Bodies, Background, Particles, presets, and more
 - [ ] Add dynamic lighting with rays
 - [ ] Add Sound Sprites into Sound Class
+- [ ] Add tilemap support
+- - [ ] Add Tilemap class
+- - [ ] Add Tilemap RigidBody
+- - [ ] Add Tilemap collisions and physics
