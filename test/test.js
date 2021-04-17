@@ -6,6 +6,12 @@ var Engine = new Reflex({loop: loop, debug: true, depInstall: true});
 
 var myRoundRect = new RigidBody(50, 50, 50, 50, 15, "roundrect", "#0000FF", undefined, {movement: {type: "TopDown", maxSpeed: 4, acceleration: 0.02, friction: 0.9}}); 
 
+// rigid body event listener
+
+myRoundRect.on("move", () => {
+    console.log("moved");
+});
+
 // create a rigid body rect
 
 var myRect = new RigidBody(250, 250, 40, 40, 0, "rect", "#FF0000");
@@ -40,7 +46,7 @@ let myProxSound = new ProximitySound(450, 50, mySound1, {volume: 1, radius: 250,
 // create particles
 
 let myParticles = new Particles("roundrect", "#eb4934", {
-    amount: 25,
+    amount: 24,
     minX: 200,
     maxX: 400,
     minY: 200,

@@ -359,6 +359,8 @@ class RigidBody extends Reflex {
             this.imgObj = new Image();
         };
 
+        // for RigidBody.on event listener
+        this.isMoving = false;
 
         
     };
@@ -439,6 +441,12 @@ class RigidBody extends Reflex {
         };
         
 
+        // for RigidBody.on event listener
+
+        if(!this.controller.up && !this.controller.down && !this.controller.left && !this.controller.right) {
+            this.isMoving = false;
+        };
+
 
         // movement
 
@@ -446,18 +454,22 @@ class RigidBody extends Reflex {
 
         if(this.controller.up && (this.options.movement.type == "TopDown" || this.options.movement.type == "Jump" || this.options.movement.type == "UpDown")) {
             this.y -= this.vel;
+            this.isMoving = true;
         };
 
         if(this.controller.down && (this.options.movement.type == "TopDown" || this.options.movement.type == "UpDown")) {
             this.y += this.vel;
+            this.isMoving = true;
         };
 
         if(this.controller.left && (this.options.movement.type == "TopDown" || this.options.movement.type == "LeftRight")) {
             this.x -= this.vel;
+            this.isMoving = true;
         };
 
         if(this.controller.right && (this.options.movement.type == "TopDown" || this.options.movement.type == "LeftRight")) {
             this.x += this.vel;
+            this.isMoving = true;
         };
 
         //#endregion
@@ -600,7 +612,43 @@ class RigidBody extends Reflex {
         };
     };
 
+    /**
+     * @description RigidBody Event listener
+     * @param {String} event The event to listen for, valid events: move, colorChange, or imageChange
+     * @param {Function} callback A callback function with no parameters
+     */
 
+    on(event, callback) {
+        // throw errors
+        // typeof
+        if(typeof event != "string") throw `RigidBody.on event is not typeof string and is typeof ${typeof event} instead`; else event = event.toLowerCase();
+        if(typeof callback != "function") throw `RigidBody.on callback is not typeof function and is typeof ${typeof callback} instead`;
+
+        // color change and image change vars
+        let color = this.color;
+        let imgSrc = this.imgPath;
+
+        let int = setInterval(() => {
+            if(event == "move") {
+                if(this.isMoving) {
+                    callback();
+                };
+            };
+
+            if(event == "colorChange") {
+                if(color != this.color) {
+                    callback();
+                };
+            };
+
+            if(event == "imageChange") {
+                if(imgSrc != this.imgPath) {
+                    callback();
+                };
+            };
+        }, 20);
+
+    };
 
 
     get getCenterX() {

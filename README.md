@@ -11,17 +11,17 @@ A simple Javascript game engine.
 
 1. Rigid Bodies.
 2. Basic rigid body physics.
-3. Background loader with methods.
-4. Attaching different shapes to one main object.
-5. Sound player.
-6. Proximity sounds.
-7. Spritesheet loader.
+3. RigidBody custom event listener.
+4. Background loader with methods.
+5. Attaching different shapes to one main object.
+6. Sound player with event listeners and custom events.
+7. Proximity sounds.
 8. Different shapes like rect, roundrect, circle, and sprite _(img)_
 9. Entity Management.
-10. Particles with images or colors and preset animations.
+10. Particles with images or colors and preset animations such as explosion and smoke.
 11. Basic Shadow.
 12. Future Plans like dynamic lighting.
-13. Weekly updates/patches
+13. Weekly updates/patches.
 14. And way more.
 
 <br>
