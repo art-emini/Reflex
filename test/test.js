@@ -37,6 +37,18 @@ myShadow.appendTo(myRoundRect);
 let mySound1 = new Sound({src: "./bg-music.mp3", autoplay: true, loop: true})
 let myProxSound = new ProximitySound(450, 50, mySound1, {volume: 1, radius: 250, debugCirlce: true}, [myRoundRect]);
 
+// create particles
+
+let myParticles = new Particles("roundrect", "#eb4934", {
+    amount: 25,
+    minX: 200,
+    maxX: 400,
+    minY: 200,
+    maxY: 400
+}, 15, 15, 5);
+
+myParticles.emit();
+
 // create a background
 
 var background = new Background(0, 0, Engine.canvas.width + 100, Engine.canvas.width + 100, "https://upload.wikimedia.org/wikipedia/commons/b/b5/800x600_Wallpaper_Blue_Sky.png");
@@ -55,6 +67,9 @@ function loop() {
     myRect.draw();
     myRoundRect.draw();
     mySprite.draw();
+
+    myParticles.animate("explosion", 2);
+    myParticles.draw();
 
     // draw proxsound
     myProxSound.draw();

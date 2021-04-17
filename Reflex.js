@@ -1,7 +1,10 @@
 // dependiences 
 /*
 
-    
+
+    None!
+        Everything in Reflex is from Reflex!
+        No need to add an additional script tag!
 
 
 */
@@ -54,6 +57,51 @@ function nameTohex(colour) {
     return false;
 };
 
+function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
+// https://stackoverflow.com/questions/8188548/splitting-a-js-array-into-n-arrays
+
+function chunkify(a, n, balanced) {
+    
+    if (n < 2)
+        return [a];
+
+    var len = a.length,
+            out = [],
+            i = 0,
+            size;
+
+    if (len % n === 0) {
+        size = Math.floor(len / n);
+        while (i < len) {
+            out.push(a.slice(i, i += size));
+        }
+    }
+
+    else if (balanced) {
+        while (i < len) {
+            size = Math.ceil((len - i) / n--);
+            out.push(a.slice(i, i += size));
+        }
+    }
+
+    else {
+
+        n--;
+        size = Math.floor(len / n);
+        if (len % size === 0)
+            size--;
+        while (i < size * n) {
+            out.push(a.slice(i, i += size));
+        }
+        out.push(a.slice(size * n));
+
+    }
+
+    return out;
+};
 
 //#endregion
 
@@ -609,12 +657,17 @@ class Background extends Reflex {
 
     constructor(x, y, w, h, imgPath) {
         super(ReflexConfig);
+
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
         this.imgPath = imgPath;
         this.imgObj = new Image();
+
+        this.type = "Background";
+
+        this.isWobbling = false;
 
     };
 
@@ -628,10 +681,9 @@ class Background extends Reflex {
     };
 
     /**
-     * 
+     * @description Adds a force to an axis.
      * @param {String} axis The axis of the force being applied. "x" or "y".
      * @param {Number} force The force being applied. Negative number is left for axis = x, up for axis = y. Positive number is right for axis = x, down for axis = y.
-     * @description Adds a force to an axis.
      */
 
     addForce(axis, force) {
@@ -662,18 +714,40 @@ class Background extends Reflex {
         };
     };
 
+    /**
+     * @description Wobbles the background
+     * @param {Number} intenstiy Speed of movement
+     * @param {Number} ms Interval in milliseconds
+     */
+
     wobble(intenstiy, ms) {
-        setInterval(() => {
+        this.isWobbling = true;
+
+        if(this.debug) console.log("Started background wobble");
+
+        let int = setInterval(() => {
             let random = Math.floor(Math.random() * (6 - 1 + 1) + 1);
             if(random >= 4) {
                 this.x += intenstiy;
                 this.y -= intenstiy;
-                
             }else{
                 this.y += intenstiy;
                 this.x -= intenstiy;
             };
+
+            if(!this.isWobbling) {
+                clearInterval(int);
+            };
         }, ms);
+    };
+
+    /**
+     * @description Stops the current wobble if there is one
+     */
+
+    stopWobble() {
+        this.isWobbling = false;
+        if(this.debug) console.log("Stopped background wobble");
     };
 };
 
@@ -686,6 +760,7 @@ class Background extends Reflex {
 class SpriteSheet extends Reflex {
     constructor(rows, column, imgW, imgH, singleW, singleH) {
         super(ReflexConfig);
+
         this.rows = rows;
         this.column = column;
 
@@ -748,6 +823,7 @@ class Sound extends Reflex {
 
         this.options = options;
         this.src = this.options.src;
+        this.type = "Sound";
 
         // optional params
         this.autoplay = this.options.autoplay || false;
@@ -897,7 +973,8 @@ class ProximitySound extends Reflex {
         super(ReflexConfig);
         this.x = x;
         this.y = y;
-        this.color = "rgba(0, 0, 0, 0)"
+        this.color = "rgba(0, 0, 0, 0)";
+        this.type = "ProximitySound";
 
         this.sound = sound;
         this.options = options;
@@ -975,7 +1052,7 @@ class ProximitySound extends Reflex {
 //#endregion
 
 
-//#region GFX
+//#region GFX & Others
 
 /**
  * @class Shadow
@@ -1042,6 +1119,268 @@ class Shadow extends Reflex {
         this.isAppened = false;
         this.appenedTo = undefined;
         this.color = `rgba(0, 0, 0, 0)`;
+    };
+};
+
+
+
+class Particles extends Reflex {
+
+    /**
+     * @description Creates Particles
+     * @param {String} shape RigidBody Shape, rect, roundrect, circle, or sprite
+     * @param {String} graphic Hex Color or imgPath/link
+     *
+     * @param {Object} options An object with many options
+     * @param {Number} options.amount Amount of particles to create
+     * @param {Number} options.minX Min X Pos spreading
+     * @param {Number} options.maxX Max X Pos spreading
+     * @param {Number} options.minY Min Y Pos spreading
+     * @param {Number} options.maxY MAX Y Pos spreading
+     *
+     * @param {Number} [w] Width of rect, roundrect or sprite, optional for circle shape
+     * @param {Number} [h] Height of rect, roundrect or sprite, optional for circle shape
+     * @param {NUmber} [r] Radius of roundrect or cirlce, optional for rect and sprite shape
+     *
+     * @memberof Particles
+     */
+
+    constructor(shape, graphic, options, w, h, r) {
+        super(ReflexConfig);
+
+        this.shape = shape.toLowerCase();
+        this.graphic = graphic;
+        this.options = options;
+        this.type = "Particles";
+
+        this.minX = this.options.minX;
+        this.maxX = this.options.maxX;
+        this.minY = this.options.minY;
+        this.maxY = this.options.maxY;
+
+        this.randomX = randomInt(this.minX, this.maxX);
+        this.randomY = randomInt(this.minY, this.maxY);
+        
+        this.w = w;
+        this.h = h;
+        this.r = r;
+
+        this.amount = this.options.amount;
+
+        this.list = [];
+        this.isEmitting = false;
+        this.isWobbling = false;
+        this.isPreset = false;
+        this.currentPreset = "";
+
+        // push particles to list
+        this.create();
+    };
+
+    /**
+     * @description Creates and pushes particles to Particles.list, runs automatically
+     */
+
+    create() {
+        switch(this.shape) {
+            case "rect":
+                for (let i = 0; i < this.amount; i++) {
+                    this.randomX = randomInt(this.minX, this.maxX);
+                    this.randomY = randomInt(this.minY, this.maxY);
+                    this.list.push(new RigidBody(this.randomX, this.randomY, this.w, this.h, 0, "rect", this.graphic));
+                };
+            break;
+        
+            case "roundrect":
+                for (let i = 0; i < this.amount; i++) {
+                    this.randomX = randomInt(this.minX, this.maxX);
+                    this.randomY = randomInt(this.minY, this.maxY);
+                    this.list.push(new RigidBody(this.randomX, this.randomY, this.w, this.h, this.r, "roundrect", this.graphic));
+                };
+            break;
+        
+            case "circle":
+                for (let i = 0; i < this.amount; i++) {
+                    this.randomX = randomInt(this.minX, this.maxX);
+                    this.randomY = randomInt(this.minY, this.maxY);
+                    this.list.push(new RigidBody(this.randomX, this.randomY, 0, 0, this.r, "circle", this.graphic));
+                };
+            break;
+        
+            case "sprite":
+                for (let i = 0; i < this.amount; i++) {
+                    this.randomX = randomInt(this.minX, this.maxX);
+                    this.randomY = randomInt(this.minY, this.maxY);
+                    this.list.push(new RigidBody(this.randomX, this.randomY, this.w, this.h, 0, "sprite", undefined, this.graphic));
+                };
+            break;
+        
+            default:
+                throw "Particles.shape is not a rect, roundrect, circle, or sprite.";
+            break;
+        };
+    };
+
+    /**
+     * @description Draws particles, won't draw if particles are not emitting
+     */
+
+    draw() {
+        if(this.isEmitting) {
+            this.list.forEach(particle => {
+                particle.draw();
+            });
+        };
+    };
+
+    /**
+     * @description Starts emitting particles
+     */
+
+    emit() {
+        this.isEmitting = true;
+        if(this.debug) console.log("Started Emitting Particles");
+    };
+
+    /**
+     * @description Stops emitting particles
+     */
+
+    stopEmitting() {
+        this.isEmitting = false;
+        if(this.debug) console.log("Stopped Emitting Particles");
+    };
+
+    /**
+     * @description Wobbles/Moves particles around randomly
+     * @param {Number} speed Speed of particles
+     */
+
+    wobble(speed) {
+        if(typeof speed != "number") throw `Particles.wobble speed is not a number and is typeof ${typeof speed}`;
+
+        this.list.forEach(particle => {
+            let random = Math.floor(Math.random() * (6 - 1 + 1) + 1);
+            if(random >= 4) {
+                particle.x += speed;
+                particle.y -= speed;
+            }else{
+                particle.y += speed;
+                particle.x -= speed;
+            };
+        });
+        
+    };
+
+    /**
+     * @description Plays a preset animation. Valid Animations: explosion, smoke
+     * @param {String} preset Animation, explosion or smoke
+     * @param {Number} speed Speed of animation
+     */
+
+    animate(preset, speed) {
+        // (very messy code)
+        switch(preset) {
+            case "explosion":
+                let chunked = chunkify(this.list, 8, true); /* returns an array with nested arrays, 8 for 8 different directions,
+                                                             top left, up, top right, right, bottom right, bottom, bottom left, left */
+                // top left
+                for(let i = 0; i < chunked[0].length; i++) {
+                    let particle = chunked[0][i];
+                    particle.x -= speed;
+                    particle.y -= speed;
+                };
+                
+                // top
+                for(let i = 0; i < chunked[1].length; i++) {
+                    let particle = chunked[1][i];
+                    particle.y -= speed;
+                };
+                
+                // top right
+                for(let i = 0; i < chunked[2].length; i++) {
+                    let particle = chunked[2][i];
+                    particle.x += speed;
+                    particle.y += speed;
+                };
+                
+                // right
+                for(let i = 0; i < chunked[3].length; i++) {
+                    let particle = chunked[3][i];
+                    particle.x += speed;
+                };
+                
+                // bottom right
+                for(let i = 0; i < chunked[4].length; i++) {
+                    let particle = chunked[4][i];
+                    particle.x += speed;
+                    particle.y += speed;
+                };
+                
+                // bottom
+                for(let i = 0; i < chunked[5].length; i++) {
+                    let particle = chunked[5][i];
+                    particle.y += speed;
+                };
+                
+                // bottom left
+                for(let i = 0; i < chunked[6].length; i++) {
+                    let particle = chunked[6][i];
+                    particle.x -= speed;
+                    particle.y -= speed;
+                };
+
+                // left
+                for(let i = 0; i < chunked[7].length; i++) {
+                    let particle = chunked[7][i];
+                    particle.x -= speed;
+                };
+                
+            break;
+
+            case "smoke":
+                let random = randomInt(1, 6);
+                if(random >= 4) {
+                    this.list.forEach(particle => {
+                        particle.y -= speed;
+                    });
+                }else{
+                    this.list.forEach(particle => {
+                        particle.y -= speed;
+                        particle.x -= speed / 2;
+                    });
+                };
+            break;
+        
+            default:
+                throw `Particles.animate preset does not match a preset. Valid presets are: "explosion", and "smoke"`
+            break;
+        }
+    };
+
+    /**
+     * @description Removes all or some particles from list and stopsEmitting if amount is passed
+     * @param {Number} [amount] Amount of particles to destroy, optional, default to all particles
+     */
+
+    destroy(amount) {
+        if(amount > this.list.length) throw "Particles.destroy amount is greater than amount of particles";
+
+        amount = amount || this.list.length;
+
+        if(amount != this.list.length) {
+            if(this.debug) console.log(`Destroyed ${amount} particles`);
+
+            for (let i = 0; i < amount; i++) {
+                this.list.splice(i, 1);
+            }; 
+        }else{
+            if(this.debug) console.log("Destroyed all particles");
+
+            this.stopEmitting();
+            this.list.length = 0;
+        };
+        
     };
 };
 

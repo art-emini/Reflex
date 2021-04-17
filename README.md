@@ -18,10 +18,11 @@ A simple Javascript game engine.
 7. Spritesheet loader.
 8. Different shapes like rect, roundrect, circle, and sprite _(img)_
 9. Entity Management.
-10. Basic Shadow.
-11. Future Plans like dynamic lighting.
-12. Weekly updates/patches
-13. And way more.
+10. Particles with images or colors and preset animations.
+11. Basic Shadow.
+12. Future Plans like dynamic lighting.
+13. Weekly updates/patches
+14. And way more.
 
 <br>
 

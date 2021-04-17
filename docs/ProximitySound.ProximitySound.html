@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Reflex</title>
+    <title>JSDoc: Class: ProximitySound</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Reflex</h1>
+    <h1 class="page-title">Class: ProximitySound</h1>
 
     
 
@@ -29,7 +29,7 @@
 <header>
     
         <h2><span class="attribs"><span class="type-signature"></span></span>
-            <span class="ancestors"><a href="Reflex.html">Reflex</a>.</span>Reflex<span class="signature">(config)</span><span class="type-signature"></span></h2>
+            <span class="ancestors"><a href="ProximitySound.html">ProximitySound</a>.</span>ProximitySound<span class="signature">(x, y, sound, options, affects)</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -42,7 +42,7 @@
     
 
     
-    <h4 class="name" id="Reflex"><span class="type-signature"></span>new Reflex<span class="signature">(config)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="ProximitySound"><span class="type-signature"></span>new ProximitySound<span class="signature">(x, y, sound, options, affects)</span><span class="type-signature"></span></h4>
     
 
     
@@ -50,7 +50,7 @@
 
 
 <div class="description">
-    Creates a new instance of Relfex.
+    Creates a ProximitySound
 </div>
 
 
@@ -86,7 +86,76 @@
 
         <tr>
             
-                <td class="name"><code>config</code></td>
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">X pos</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Y pos</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sound</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Sound.html">Sound</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">An instance of the Sound Class</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
             
 
             <td class="type">
@@ -102,7 +171,7 @@
 
             
 
-            <td class="description last">Config Object.
+            <td class="description last">A object that holds all configuration for ProximitySound
                 <h6>Properties</h6>
                 
 
@@ -132,13 +201,13 @@
 
         <tr>
             
-                <td class="name"><code>loop</code></td>
+                <td class="name"><code>volume</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">function</span>
+<span class="param-type">Number</span>
 
 
             
@@ -146,6 +215,8 @@
 
             
                 <td class="attributes">
+                
+                    &lt;optional><br>
                 
 
                 
@@ -157,23 +228,25 @@
             
                 <td class="default">
                 
+                    1
+                
                 </td>
             
 
-            <td class="description last">Main loop. Must be a animationFrame loop.</td>
+            <td class="description last">Volume when entered, default is 1</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>debug</code></td>
+                <td class="name"><code>debugCirlce</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Boolean</span>
+<span class="param-type">Number</span>
 
 
             
@@ -199,20 +272,20 @@
                 </td>
             
 
-            <td class="description last">If enabled, Reflex will console log anything it needs to. Errors will be thrown regardless. Optional, off by default.</td>
+            <td class="description last">Show the circle/area where it is activated</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>depInstall</code></td>
+                <td class="name"><code>radius</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Boolean</span>
+<span class="param-type">Array.&lt;Object></span>
 
 
             
@@ -234,7 +307,7 @@
                 </td>
             
 
-            <td class="description last">If enabled, Reflex will install all dependencies as a script tag in the head of your page automaticlly.</td>
+            <td class="description last">Radius of hearing the ProximitySound</td>
         </tr>
 
     
@@ -242,6 +315,29 @@
 </table>
 
             </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>affects</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;Object></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">An array of RigidBodies that get affected by Proximity Sound</td>
         </tr>
 
     
@@ -282,7 +378,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Reflex.js.html">Reflex.js</a>, <a href="Reflex.js.html#line141">line 141</a>
+        <a href="Reflex.js.html">Reflex.js</a>, <a href="Reflex.js.html#line972">line 972</a>
     </li></ul></dd>
     
 

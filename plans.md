@@ -5,14 +5,21 @@
 
 - [x] Merge object classes into RigidBody Class
 - [x] Add Sound class
-- [ ] Add ProximitySound class
+- [x] Add ProximitySound class
 - [ ] Add SpriteSheet class to load and return a spritesheet object
 - [ ] Add RigidBody imgPath could be a SpriteSheet class by using an object
 - [ ] Add RigidBody imgPath spritesheet detection with imgPath.type to specify how many images per row, how big in width and height one item is, etc..
 - [x] Add Reflex Stack for different props
 - [x] Add RigidBody.hasShadow and RigidBody.selfShadow
 - [x] Add Shadow Class and Shadow.appendTo(RigidBody), check if rigidbody with .type
-- [ ] Add Particles class which creates and emits particles in one class
+- [x] Add Particles class which creates, emits, and draws particles in one class
+- [x] Add Particles.wobble(speed) which wobbles the particles at a certain speed
+- [x] Add Particle presets for Particles.wobble
+- [x] Add Particles.animate(preset, speed) which animates the particales at a preset like explosion and smoke
+- [x] Add Particles.destroy(amount?) which destroys all particles or a certain amount of particles
+- [x] Add Background.stopWobble() which stops the current wobble
+- [ ] Add ProximitySound.attachTo(RigidBody)
+- [ ] Add ProximitySound.detach(RigidBody)
 - [x] Add Background.wobble(intenstiy) to wobble/move over time slightly
 - [x] Add Background.addForce(axis, force) to move the background
 - [x] Add Reflex.started to check if loop has started or not
