@@ -1,7 +1,7 @@
 {
   "name": "@ksplat/reflex",
-  "version": "1.0.2-beta",
-  "description": "A javascript game engine.",
+  "version": "1.0.0",
+  "description": "A simple javascript game engine.",
   "main": "Reflex.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Background</title>
+    <title>JSDoc: Class: ProximitySound</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Background</h1>
+    <h1 class="page-title">Class: ProximitySound</h1>
 
     
 
@@ -29,7 +29,7 @@
 <header>
     
         <h2><span class="attribs"><span class="type-signature"></span></span>
-            <span class="ancestors"><a href="Background.html">Background</a>.</span>Background<span class="signature">(x, y, w, h, imgPath)</span><span class="type-signature"></span></h2>
+            <span class="ancestors"><a href="ProximitySound.html">ProximitySound</a>.</span>ProximitySound<span class="signature">(x, y, sound, options, affects)</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -42,7 +42,7 @@
     
 
     
-    <h4 class="name" id="Background"><span class="type-signature"></span>new Background<span class="signature">(x, y, w, h, imgPath)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="ProximitySound"><span class="type-signature"></span>new ProximitySound<span class="signature">(x, y, sound, options, affects)</span><span class="type-signature"></span></h4>
     
 
     
@@ -50,7 +50,7 @@
 
 
 <div class="description">
-    Creates a background
+    Creates a ProximitySound
 </div>
 
 
@@ -132,7 +132,76 @@
 
         <tr>
             
-                <td class="name"><code>w</code></td>
+                <td class="name"><code>sound</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Sound.html">Sound</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">An instance of the Sound Class</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A object that holds all configuration for ProximitySound
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>volume</code></td>
             
 
             <td class="type">
@@ -145,17 +214,33 @@
             </td>
 
             
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
 
+                
+
+                
+                </td>
             
 
-            <td class="description last">Width</td>
+            
+                <td class="default">
+                
+                    1
+                
+                </td>
+            
+
+            <td class="description last">Volume when entered, default is 1</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>h</code></td>
+                <td class="name"><code>debugCirlce</code></td>
             
 
             <td class="type">
@@ -168,23 +253,81 @@
             </td>
 
             
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
 
+                
+
+                
+                </td>
             
 
-            <td class="description last">Height</td>
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">Show the circle/area where it is activated</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>imgPath</code></td>
+                <td class="name"><code>radius</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type">Array.&lt;Object></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Radius of hearing the ProximitySound</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>affects</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;Object></span>
 
 
             
@@ -194,7 +337,7 @@
 
             
 
-            <td class="description last">imgPath, file or link</td>
+            <td class="description last">An array of RigidBodies that get affected by Proximity Sound</td>
         </tr>
 
     
@@ -235,7 +378,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Reflex.js.html">Reflex.js</a>, <a href="Reflex.js.html#line706">line 706</a>
+        <a href="Reflex.js.html">Reflex.js</a>, <a href="Reflex.js.html#line1020">line 1020</a>
     </li></ul></dd>
     
 
