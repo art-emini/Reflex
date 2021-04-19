@@ -36,6 +36,6 @@ A simple Javascript game engine.
 
 <br>
 
-## [Docs](https://ksplatdev.github.io/Reflex/)
+## [Docs](https://ksplatdev.github.io/Reflex/index.html)
 
 <br>
