@@ -15,8 +15,6 @@
 - [x] Add Particles.animate(preset, speed) which animates the particales at a preset like explosion and smoke
 - [x] Add Particles.destroy(amount?) which destroys all particles or a certain amount of particles
 - [x] Add Background.stopWobble() which stops the current wobble
-- [ ] Add ProximitySound.attachTo(RigidBody)
-- [ ] Add ProximitySound.detach(RigidBody)
 - [x] Add RigidBody.on(event, callback) which is a listener that listens for events like move, colorChange, and imageChange
 - [x] Add Background.wobble(intenstiy) to wobble/move over time slightly
 - [x] Add Background.addForce(axis, force) to move the background
@@ -41,6 +39,9 @@
 - - [ ] Add SpriteSheet class to load and return a spritesheet object
 - - [ ] Add RigidBody imgPath could be a SpriteSheet class by using an object
 - - [ ] Add RigidBody imgPath spritesheet detection with imgPath.type to specify how many images per row, how big in width and height one item is, etc..
+- [ ] Add ProximitySound.attachTo(RigidBody)
+- [ ] Add ProximitySound.detach(RigidBody)
+
 
 # 2.0.0
 
