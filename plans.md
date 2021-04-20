@@ -43,6 +43,7 @@
 - [ ] Add ProximitySound.detach(RigidBody)
 - [ ] Add Text class which creates text on the canvas
 - [ ] Add ButtonUI class which creates a button on the canvas
+- [x] Update docs
 - [x] Add import/export
 
 
