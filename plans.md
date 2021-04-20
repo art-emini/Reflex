@@ -59,3 +59,5 @@ __Many__ _updates in between 1.0.0 -> 2.0.0_
 - - [ ] Add Tilemap class
 - - [ ] Add Tilemap RigidBody
 - - [ ] Add Tilemap collisions and physics
+- [ ] Add more Particle Animations
+- [ ] Add Particles.addForce
