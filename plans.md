@@ -41,6 +41,8 @@
 - - [ ] Add RigidBody imgPath spritesheet detection with imgPath.type to specify how many images per row, how big in width and height one item is, etc..
 - [ ] Add ProximitySound.attachTo(RigidBody)
 - [ ] Add ProximitySound.detach(RigidBody)
+- [ ] Add Text class which creates text on the canvas
+- [ ] Add ButtonUI class which creates a button on the canvas
 
 
 # 2.0.0
