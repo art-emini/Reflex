@@ -117,7 +117,7 @@ let ReflexConfig = {}
  * @author Bleart Emini
  * @license MIT
  * @since 1.0.0-beta
- * @version 1.1.0
+ * @version 1.2.0
  */
 
 
