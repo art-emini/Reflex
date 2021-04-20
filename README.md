@@ -53,3 +53,13 @@ A simple Javascript game engine.
 1. Make sure you started Reflex
 2. Make sure you passed in a valid function
 3. If none of this helped, create a [bug issue](https://github.com/ksplatdev/Reflex/issues/new?assignees=&labels=bug&template=bug_report.md&title=)
+
+<br>
+
+## Branches
+
+- main
+    Master branch, production branch, merge to, do not commit
+
+- features
+    Features to be merged to main on completion

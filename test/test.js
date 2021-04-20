@@ -59,6 +59,18 @@ let myParticles = new Engine.Particles("roundrect", "#eb4934", {
 
 myParticles.emit();
 
+// create some text
+
+let myText = new Engine.Text(400, 400, "Hello!", {
+    font: "50px Arial",
+    color: "#ffffff",
+    textAlign: "center",
+    method: "fillstroke",
+    strokeStyle: "#000000",
+    strokeWidth: 2
+});
+
+
 // create a background
 
 var background = new Engine.Background(0, 0, App.canvas.width + 100, App.canvas.width + 100, "https://upload.wikimedia.org/wikipedia/commons/b/b5/800x600_Wallpaper_Blue_Sky.png");
@@ -78,8 +90,11 @@ function loop() {
     myRoundRect.draw();
     mySprite.draw();
 
-    myParticles.animate("explosion", 2);
+    myParticles.animate("explosion", 5);
     myParticles.draw();
+
+    myText.draw();
+
 
     // draw proxsound
     myProxSound.draw();

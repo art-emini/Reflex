@@ -1170,7 +1170,10 @@ class Shadow extends Reflex {
     };
 };
 
-
+/**
+ * @class Particles
+ * @description Creates Particles
+ */
 
 class Particles extends Reflex {
 
@@ -1432,6 +1435,81 @@ class Particles extends Reflex {
     };
 };
 
+/**
+ * @class Text
+ * @description Creates text on the canvas
+ */
+
+class Text extends Reflex {
+
+    /**
+     * @description Creates text
+     * @param {Number} x X pos
+     * @param {Number} y Y pos
+     * @param {String} text The text to be displayed
+     * @param {Object} styles Style option object
+     * @param {String} styles.font Font in CSS format
+     * @param {String} styles.color Color of text in hex
+     * @param {String} [styles.textAlign="start"] Text align of text, optional, defaults to start
+     * @param {String} styles.method How you want the text rendered, fill, stroke, or fillstroke
+     * @param {String} [styles.strokeStyle="#000000"] Color of stroke in hex, optional, defaults to #000000
+     * @param {Number} [styles.strokeWidth=1] Width of stroke, optional, defaults to 1px
+     */
+
+    constructor(x, y, text, styles) {
+        super(ReflexConfig);
+        this.type = "Text";
+
+        this.x = x;
+        this.y = y;
+        this.text = text;
+        
+        this.styles = styles;
+
+        this.font = this.styles.font;
+        this.color = this.styles.color;
+        this.textAlign = this.styles.textAlign || "start";
+        this.method = this.styles.method;
+        this.strokeStyle = this.styles.strokeStyle || "#000000";
+        this.strokeWidth = this.styles.strokeWidth || 1;
+    };
+
+    /**
+     * @description Draws text
+     */
+
+    draw() {
+        if(this.method == "fill") {
+            this.ctx.font = this.font;
+            this.ctx.fillStyle = this.color;
+            this.ctx.textAlign = this.textAlign;
+            this.ctx.strokeStyle = this.strokeStyle;
+            this.ctx.lineWidth = this.strokeWidth;
+            this.ctx.fillText(this.text, this.x, this.y);
+        };
+
+        if(this.method == "stroke") {
+            this.ctx.font = this.font;
+            this.ctx.fillStyle = this.color;
+            this.ctx.textAlign = this.textAlign;
+            this.ctx.strokeStyle = this.strokeStyle;
+            this.ctx.lineWidth = this.strokeWidth;
+            this.ctx.strokeText(this.text, this.x, this.y);
+        };
+
+        if(this.method == "fillstroke") {
+            this.ctx.font = this.font;
+            this.ctx.fillStyle = this.color;
+            this.ctx.textAlign = this.textAlign;
+            this.ctx.strokeStyle = this.strokeStyle;
+            this.ctx.lineWidth = this.strokeWidth;
+            this.ctx.fillText(this.text, this.x, this.y);
+            this.ctx.strokeText(this.text, this.x, this.y);
+        };
+    };
+};
+
+
 //#endregion
 
 
@@ -1443,5 +1521,6 @@ export {
     Sound, 
     ProximitySound, 
     Shadow, 
-    Particles
+    Particles,
+    Text
 };
