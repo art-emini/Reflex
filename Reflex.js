@@ -117,7 +117,7 @@ let ReflexConfig = {}
  * @author Bleart Emini
  * @license MIT
  * @since 1.0.0-beta
- * @version 1.0.0
+ * @version 1.1.0
  */
 
 
@@ -1433,3 +1433,15 @@ class Particles extends Reflex {
 };
 
 //#endregion
+
+
+export {
+    Reflex, 
+    RigidBody, 
+    Background, 
+    SpriteSheet, 
+    Sound, 
+    ProximitySound, 
+    Shadow, 
+    Particles
+};
