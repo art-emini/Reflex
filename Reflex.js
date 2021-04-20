@@ -109,6 +109,17 @@ function chunkify(a, n, balanced) {
 
 let ReflexConfig = {}
 
+// global entitys
+
+let Entitys = {
+    _RigidBodies: [],
+    _Backgrounds: [],
+    _ProximitySounds: [],
+    _Shadows: [],
+    _Particles: [],
+    _Texts: []
+};
+
 
 /**
  * Reflex
@@ -362,7 +373,7 @@ class RigidBody extends Reflex {
         // for RigidBody.on event listener
         this.isMoving = false;
 
-        
+        Entitys._RigidBodies.push(this);
     };
 
     /**
@@ -717,6 +728,7 @@ class Background extends Reflex {
 
         this.isWobbling = false;
 
+        Entitys._Backgrounds.push(this);
     };
 
     /**
@@ -1011,7 +1023,7 @@ class ProximitySound extends Reflex {
      * @param {Object} options A object that holds all configuration for ProximitySound
      * @param {Number} [options.volume=1] Volume when entered, default is 1
      * @param {Number} [options.debugCirlce=false] Show the circle/area where it is activated
-     * @param {Object[]} options.radius Radius of hearing the ProximitySound
+     * @param {Number} options.radius Radius of hearing the ProximitySound
      * @param {Object[]} affects An array of RigidBodies that get affected by Proximity Sound
      *
      * @memberof ProximitySound
@@ -1042,7 +1054,7 @@ class ProximitySound extends Reflex {
         if(typeof this.options != "object") throw `options is not an object`;
         if(!Array.isArray(this.affects)) throw `affects is not an array`;
 
-
+        Entitys._ProximitySounds.push(this);
     };
 
     /**
@@ -1129,6 +1141,8 @@ class Shadow extends Reflex {
 
         this.isAppened = false;
         this.appenedTo = undefined;
+
+        Entitys._Shadows.push(this);
 
     };
 
@@ -1226,6 +1240,8 @@ class Particles extends Reflex {
 
         // push particles to list
         this.create();
+
+        Entitys._ProximitySounds.push(this);
     };
 
     /**
@@ -1327,9 +1343,10 @@ class Particles extends Reflex {
      * @description Plays a preset animation. Valid Animations: explosion, smoke
      * @param {String} preset Animation, explosion or smoke
      * @param {Number} speed Speed of animation
+     * @param {String} [dir="left"] Direction of preset smoke, valid: left or right, optional, defaults to left if preset is smoke 
      */
 
-    animate(preset, speed) {
+    animate(preset, speed, dir) {
         // (very messy code)
         switch(preset) {
             case "explosion":
@@ -1390,15 +1407,17 @@ class Particles extends Reflex {
             break;
 
             case "smoke":
-                let random = randomInt(1, 6);
-                if(random >= 4) {
+                this.list.forEach(particle => {
+                    particle.y -= speed;
+                });
+                if(dir == "left") {
                     this.list.forEach(particle => {
-                        particle.y -= speed;
-                    });
-                }else{
-                    this.list.forEach(particle => {
-                        particle.y -= speed;
                         particle.x -= speed / 2;
+                    });
+                };
+                if(dir == "right") {
+                    this.list.forEach(particle => {
+                        particle.x += speed / 2;
                     });
                 };
             break;
@@ -1472,6 +1491,8 @@ class Text extends Reflex {
         this.method = this.styles.method;
         this.strokeStyle = this.styles.strokeStyle || "#000000";
         this.strokeWidth = this.styles.strokeWidth || 1;
+
+        Entitys._Texts.push(this);
     };
 
     /**

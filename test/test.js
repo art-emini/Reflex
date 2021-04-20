@@ -49,20 +49,20 @@ let myProxSound = new Engine.ProximitySound(450, 50, mySound1, {volume: 1, radiu
 
 // create particles
 
-let myParticles = new Engine.Particles("roundrect", "#eb4934", {
-    amount: 24,
+let myParticles = new Engine.Particles("roundrect", "#4f4f4f", {
+    amount: 36,
     minX: 200,
     maxX: 400,
     minY: 200,
     maxY: 400
-}, 15, 15, 5);
+}, 25, 25, 5);
 
 myParticles.emit();
 
 // create some text
 
-let myText = new Engine.Text(400, 400, "Hello!", {
-    font: "50px Arial",
+let myText = new Engine.Text(400, 400, "Hello, World!", {
+    font: "45px Arial",
     color: "#ffffff",
     textAlign: "center",
     method: "fillstroke",
@@ -90,7 +90,7 @@ function loop() {
     myRoundRect.draw();
     mySprite.draw();
 
-    myParticles.animate("explosion", 5);
+    myParticles.animate("smoke", 0.5, "left");
     myParticles.draw();
 
     myText.draw();

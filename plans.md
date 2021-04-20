@@ -31,7 +31,6 @@
 # In between 1.0.0 -> 2.0.0
 
 - [ ] Add rect, round rect, and sprite collision detection and response
-- [ ] Add circle collision detection and response
 - [ ] Add global entity management 
 - - [ ] Add support for all object classes, particles, and backgrounds
 - [ ] Add better ProximitySound 
@@ -43,8 +42,10 @@
 - [ ] Add ProximitySound.detach(RigidBody)
 - [x] Add Text class which creates text on the canvas
 - [ ] Add ButtonUI class which creates a button on the canvas
-- [x] Update docs
+- [ ] Re-build docs
+- [x] Add Particles.animate dir prop for smoke preset
 - [x] Add import/export
+- [ ] Add canvasbounds to pervent player leaving canvas
 
 
 # 2.0.0
@@ -54,8 +55,8 @@ __Future__ _Plans_
 __Many__ _updates in between 1.0.0 -> 2.0.0_
 
 - [ ] Add Camera Class
-- [ ] Add Camera Support for Rigid Bodies, Background, Particles, presets, and more
-- [ ] Add dynamic lighting with rays
+- - [ ] Add Camera Support for Rigid Bodies, Background, Particles, presets, and more
+- [ ] Add dynamic lighting with rays?
 - [ ] Add Sound Sprites into Sound Class
 - [ ] Add tilemap support
 - - [ ] Add Tilemap class
@@ -63,3 +64,4 @@ __Many__ _updates in between 1.0.0 -> 2.0.0_
 - - [ ] Add Tilemap collisions and physics
 - [ ] Add more Particle Animations
 - [ ] Add Particles.addForce
+- [ ] Add circle collision detection and response
