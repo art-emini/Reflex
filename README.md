@@ -30,13 +30,19 @@ A simple Javascript game engine.
 
 1. Download the [latest release from github.](https://github.com/ksplatdev/Reflex/releases/latest)
 2. Unzip and copy to your project.
-3. Import Reflex as a module. ([Help here](#help))
+3. Import Reflex as a module. ([Help here](#importing))
 4. Done, [Read The Docs](https://ksplatdev.github.io/Reflex/index.html).
 
 ### NPM
 
 1. Run `npm install @ksplat/reflex`.
-2. Import Reflex as a module. ([Help here](#help))
+2. Import Reflex as a module. ([Help here](#importing))
+3. Done, [Read The Docs](https://ksplatdev.github.io/Reflex/index.html).
+
+### CDN Module
+
+1. Import Reflex as a module. ([Help here](#importing))
+2. Change the from to the [CDN link.](https://cdn.jsdelivr.net/gh/ksplatdev/reflex@1.2.0/Reflex.js)
 3. Done, [Read The Docs](https://ksplatdev.github.io/Reflex/index.html).
 
 
@@ -50,15 +56,15 @@ A simple Javascript game engine.
 
 ### Importing
 
-1. Make sure your script has the attribute type="module"
-2. Import all from Reflex
-3. Look at the [example](test/test.js)
+1. Make sure your script has the attribute type="module".
+2. Import all from Reflex.
+3. Look at the [example](test/test.js).
 
 ### Loop not starting
 
-1. Make sure you started Reflex
-2. Make sure you passed in a valid function
-3. If none of this helped, create a [bug issue](https://github.com/ksplatdev/Reflex/issues/new?assignees=&labels=bug&template=bug_report.md&title=)
+1. Make sure you started Reflex.
+2. Make sure you passed in a valid function.
+3. If none of this helped, create a [bug issue.](https://github.com/ksplatdev/Reflex/issues/new?assignees=&labels=bug&template=bug_report.md&title=)
 
 <br>
 

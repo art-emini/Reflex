@@ -1,6 +1,6 @@
 {
   "name": "@ksplat/reflex",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A simple javascript game engine.",
   "main": "Reflex.js",
   "scripts": {},
