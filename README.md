@@ -57,7 +57,9 @@ A simple Javascript game engine.
 ## Branches
 
 - main
+
     Master branch, production branch, merge to, do not commit
 
 - features
+
     Features to be merged to main on completion
