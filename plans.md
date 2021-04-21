@@ -13,6 +13,9 @@ Plans that have been completed gets removed after it has been merged.
 - [ ] Add ProximitySound.attachTo(RigidBody)
 - [ ] Add ProximitySound.detach(RigidBody)
 - [ ] Add Button class which creates a button on the canvas
+- [x] Add StaticLight class which creates a fake light that brightens objects around it
+- - [x] Make it an entity  
+- [x] Add Lights group
 
 ## 2.0.0
 

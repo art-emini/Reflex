@@ -113,6 +113,7 @@ let ReflexConfig = {}
 
 let Entitys = {
     _RigidBody: [],
+    _StaticLight: [],
     _Background: [],
     _ProximitySound: [],
     _Shadow: [],
@@ -229,7 +230,7 @@ class Reflex {
 
     /**
      * @description Removes/Deletes an Entity
-     * @param {RigidBody|Background|ProximitySound|Shadow|Particles|Text} entity A RigidBody | Background | ProximitySound | Shadow | Particles | Text
+     * @param {RigidBody|Background|ProximitySound|Shadow|Particles|Text|StaticLight} entity A RigidBody | Background | ProximitySound | Shadow | Particles | Text | StaticLight
      */
 
     remove(entity) {
@@ -343,6 +344,8 @@ class RigidBody extends Reflex {
         this.othersAttached = [];
         this.hasShadow = false;
         this.selfShadow = undefined;
+        this.hasLight = false;
+        this.selfLight = undefined;
 
 
         this.r = r || undefined;
@@ -414,6 +417,13 @@ class RigidBody extends Reflex {
         if(this.shape == "circle") {
             this.centerX = this.x + this.r / 2;
             this.centerY = this.y + this.r / 2;
+        };
+
+        // set light pos
+
+        if(this.hasLight) {
+            this.selfLight.x = this.centerX;
+            this.selfLight.y = this.centerY;
         };
 
         switch(this.shape) {
@@ -1635,11 +1645,107 @@ class Text extends Reflex {
 
 //#endregion
 
+//#region Lights
+
+/**
+ * @class StaticLight
+ * @description Creates a StaticLight
+ */
+
+class StaticLight extends Reflex {
+
+    /**
+     * @description Creates a StaticLight which is a "fake" light
+     * @param {Number} x X pos
+     * @param {Number} y Y pos
+     * @param {Number} r Radius of the light
+     * @param {String} color Color of the light, RGBA color
+     * @param {Number} blur Blur intenstity
+     *
+     * @memberof StaticLight
+     */
+
+    constructor(x, y, r, color, blur) {
+        super(ReflexConfig);
+        this.type = "StaticLight"
+        this.id = randomInt(1, 100000);
+
+        this.x = x;
+        this.y = y;
+        this.r = r;
+        this.color = color;
+        this.blur = blur;
+
+        this.isEmitting = false;
+        this.isAttached = false;
+        this.appenedTo = undefined;
+
+        Entitys._StaticLight.push(this);
+    };
+
+    draw() {
+        if(this.isEmitting) {
+            this.ctx.globalCompositeOperation = "lighter";
+            this.ctx.beginPath();
+            this.ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
+            this.ctx.fillStyle = this.color;
+            this.ctx.fill();
+            this.ctx.globalCompositeOperation = "source-over";
+        };
+    };
+
+    /**
+     * @description Starts emitting light
+     */
+
+    emit() {
+        this.isEmitting = true;
+    };
+
+    /**
+     * @description Stops emitting light
+     */
+
+    stopEmitting() {
+        this.isEmitting = false;
+    };
+
+    /**
+     * @description Appends the light to a RigidBdy
+     * @param {RigidBody} rigidbody A RigidBody
+     */
+
+    appendTo(rigidbody) {
+        if(rigidbody.type != "RigidBody") throw `Cannot append shadow to ${rigidbody.type}`;
+        rigidbody.hasLight = true;
+        rigidbody.selfLight = this;
+        this.isAttached = true;
+        this.appenedTo = rigidbody;
+    };
+
+    /**
+     * @description Removes a light from a RigidBdy
+     * @param {RigidBody} rigidbody A RigidBody
+     */
+
+    unappend(rigidbody) {
+        if(rigidbody.type != "RigidBody") throw `Cannot remove light from ${rigidbody.type}`;
+        if(!rigidbody.hasLight) throw `Cannot remove light, ${rigidbody} does not have a light to remove`;
+        rigidbody.selfLight = undefined;
+        rigidbody.hasLight = false;
+        this.isAppened = false;
+        this.appenedTo = undefined;
+    };
+};
+
+// end lights
+//#endregion
+
 //#region Exports and Groups
 
 /**
  * @namespace
- * @description Holder Object classes
+ * @description Reflex Object classes
  * @property {RigidBody} RigidBody
  * @property {Background} Background
  */
@@ -1651,7 +1757,17 @@ let Objects = {
 
 /**
  * @namespace
- * @description Holder UI classes
+ * @description Reflex Light classes
+ * @property {StaticLight} StaticLight
+ */
+
+let Lights = {
+    StaticLight: StaticLight
+};
+
+/**
+ * @namespace
+ * @description Reflex UI classes
  * @property {Text} Text
  */
 
@@ -1661,7 +1777,7 @@ let UI = {
 
 /**
  * @namespace
- * @description Holder GFX classes
+ * @description Reflex GFX classes
  * @property {Shadow} Shadow
  * @property {Particles} Particles
  */
@@ -1673,7 +1789,7 @@ let GFX = {
 
 /**
  * @namespace
- * @description Holder Audio classes
+ * @description Reflex Audio classes
  * @property {Sound} Sound
  * @property {ProximitySound} ProximitySound
  */
@@ -1685,7 +1801,7 @@ let Audio = {
 
 /**
  * @namespace
- * @description Holder Misc classes
+ * @description Reflex Misc classes
  * @property {SpriteSheet} SpriteSheet
  */
 
@@ -1709,6 +1825,7 @@ let Data = {
 export {
     Reflex,
     Objects,
+    Lights,
     Misc, 
     Audio,
     GFX,

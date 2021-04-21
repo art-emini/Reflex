@@ -78,6 +78,10 @@ let myText = new Engine.UI.Text(400, 400, "Hello, World!", {
     strokeWidth: 2
 });
 
+// create a StaticLight
+
+let myStaticLight = new Engine.Lights.StaticLight(250, 250, 75, "rgba(255, 255, 255, 0.1)", 0.3, 30);
+myStaticLight.emit();
 
 // create a background
 
@@ -95,7 +99,7 @@ function loop() {
     // draw background and shadows first
     background.draw();
     myShadow.draw();
-
+    
 
     myCircle.draw();
     myRect.draw();
@@ -107,7 +111,10 @@ function loop() {
 
     myText.draw();
 
+    // draw lights
 
+    myStaticLight.draw();
+    
     // draw proxsound
     myProxSound.draw();
 
