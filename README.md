@@ -2,9 +2,6 @@
 
 A simple Javascript game engine.
 
-**NOT COMPLETE, OFTEN UPDATES**
-
-
 [MIT LICENSE](./LICENSE)
 
 ## Features
@@ -17,9 +14,9 @@ A simple Javascript game engine.
 6. Sound player with event listeners and custom events.
 7. Proximity sounds.
 8. Different shapes such as rect, roundrect, circle, and sprite _(img)_
-9. Entity Management.
+9.  Entity Management.
 10. Particles with images or colors and preset animations such as explosion and smoke.
-11. Text and Button UIs.
+11. Text UI.
 12. Basic Shadow.
 13. Future Plans such as dynamic lighting.
 14. Weekly updates/patches.
