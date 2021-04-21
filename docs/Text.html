@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: ProximitySound</title>
+    <title>JSDoc: Class: Text</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: ProximitySound</h1>
+    <h1 class="page-title">Class: Text</h1>
 
     
 
@@ -28,8 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>
-            <span class="ancestors"><a href="ProximitySound.html">ProximitySound</a>.</span>ProximitySound<span class="signature">(x, y, sound, options, affects)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Text<span class="signature">()</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -42,7 +41,7 @@
     
 
     
-    <h4 class="name" id="ProximitySound"><span class="type-signature"></span>new ProximitySound<span class="signature">(x, y, sound, options, affects)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Text"><span class="type-signature"></span>new Text<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -50,7 +49,230 @@
 
 
 <div class="description">
-    Creates a ProximitySound
+    Creates text on the canvas
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Reflex.js.html">Reflex.js</a>, <a href="Reflex.js.html#line1558">line 1558</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="draw"><span class="type-signature"></span>draw<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Draws text
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Reflex.js.html">Reflex.js</a>, <a href="Reflex.js.html#line1604">line 1604</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>Text<span class="signature">(x, y, text, styles)</span><span class="type-signature"></span></h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+
+    
+    <h4 class="name" id="Text"><span class="type-signature"></span>new Text<span class="signature">(x, y, text, styles)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Creates text
 </div>
 
 
@@ -132,13 +354,13 @@
 
         <tr>
             
-                <td class="name"><code>sound</code></td>
+                <td class="name"><code>text</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><a href="Sound.html">Sound</a></span>
+<span class="param-type">String</span>
 
 
             
@@ -148,14 +370,14 @@
 
             
 
-            <td class="description last">An instance of the Sound Class</td>
+            <td class="description last">The text to be displayed</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>options</code></td>
+                <td class="name"><code>styles</code></td>
             
 
             <td class="type">
@@ -171,7 +393,7 @@
 
             
 
-            <td class="description last">A object that holds all configuration for ProximitySound
+            <td class="description last">Style option object
                 <h6>Properties</h6>
                 
 
@@ -201,7 +423,190 @@
 
         <tr>
             
-                <td class="name"><code>volume</code></td>
+                <td class="name"><code>font</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Font in CSS format</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>color</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Color of text in hex</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>textAlign</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    "start"
+                
+                </td>
+            
+
+            <td class="description last">Text align of text, optional, defaults to start</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>method</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">How you want the text rendered, fill, stroke, or fillstroke</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>strokeStyle</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    "#000000"
+                
+                </td>
+            
+
+            <td class="description last">Color of stroke in hex, optional, defaults to #000000</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>strokeWidth</code></td>
             
 
             <td class="type">
@@ -233,81 +638,7 @@
                 </td>
             
 
-            <td class="description last">Volume when entered, default is 1</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>debugCirlce</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last">Show the circle/area where it is activated</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>radius</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last">Radius of hearing the ProximitySound</td>
+            <td class="description last">Width of stroke, optional, defaults to 1px</td>
         </tr>
 
     
@@ -315,29 +646,6 @@
 </table>
 
             </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>affects</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;Object></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">An array of RigidBodies that get affected by Proximity Sound</td>
         </tr>
 
     
@@ -378,7 +686,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Reflex.js.html">Reflex.js</a>, <a href="Reflex.js.html#line1122">line 1122</a>
+        <a href="Reflex.js.html">Reflex.js</a>, <a href="Reflex.js.html#line1579">line 1579</a>
     </li></ul></dd>
     
 
@@ -425,6 +733,98 @@
 
     
 
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="draw"><span class="type-signature"></span>draw<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Draws text
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Reflex.js.html">Reflex.js</a>, <a href="Reflex.js.html#line1604">line 1604</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
     
 
     

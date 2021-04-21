@@ -31,9 +31,9 @@
 # In between 1.0.0 -> 2.0.0
 
 - [ ] Add rect, round rect, and sprite collision detection and response
-- [ ] Add circle collision detection and response
-- [ ] Add global entity management 
-- - [ ] Add support for all object classes, particles, and backgrounds
+- [x] Add global entity management 
+- - [x] Add support for entity classes (Anything rendered to the screen is an entity);
+- - [x] Make Entitys object global
 - [ ] Add better ProximitySound 
 - [ ] Add SpriteSheet support
 - - [ ] Add SpriteSheet class to load and return a spritesheet object
@@ -41,9 +41,18 @@
 - - [ ] Add RigidBody imgPath spritesheet detection with imgPath.type to specify how many images per row, how big in width and height one item is, etc..
 - [ ] Add ProximitySound.attachTo(RigidBody)
 - [ ] Add ProximitySound.detach(RigidBody)
-- [ ] Add Text class which creates text on the canvas
+- [x] Add Text class which creates text on the canvas
 - [ ] Add ButtonUI class which creates a button on the canvas
+- [x] Re-build docs
+- [x] Add Particles.animate dir prop for smoke preset
 - [x] Add import/export
+- [x] Add canvasbounds to pervent player leaving canvas
+- [x] Add Class Groups
+- - [x] Add Objects group and add RigidBody and Background to it
+- - [x] Add UI group and add text it
+- - [x] Add GFX group and add Particles and Shadow to it
+- - [x] Add Audio group and add Sound and ProximitySound to it
+- - [x] Add Misc group and add SpriteSheet
 
 
 # 2.0.0
@@ -53,8 +62,8 @@ __Future__ _Plans_
 __Many__ _updates in between 1.0.0 -> 2.0.0_
 
 - [ ] Add Camera Class
-- [ ] Add Camera Support for Rigid Bodies, Background, Particles, presets, and more
-- [ ] Add dynamic lighting with rays
+- - [ ] Add Camera Support for Rigid Bodies, Background, Particles, presets, and more
+- [ ] Add dynamic lighting with rays?
 - [ ] Add Sound Sprites into Sound Class
 - [ ] Add tilemap support
 - - [ ] Add Tilemap class
@@ -62,3 +71,4 @@ __Many__ _updates in between 1.0.0 -> 2.0.0_
 - - [ ] Add Tilemap collisions and physics
 - [ ] Add more Particle Animations
 - [ ] Add Particles.addForce
+- [ ] Add circle collision detection and response
