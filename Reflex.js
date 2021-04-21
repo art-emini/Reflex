@@ -1693,10 +1693,15 @@ let Misc = {
     SpriteSheet: SpriteSheet
 };
 
+/**
+ * @namespace
+ * @description Reflex Data objects
+ * @property {Entitys} Entitys
+ */
 
 
 let Data = {
-    Entitys
+    Entitys: Entitys
 };
 
 // export as a module
