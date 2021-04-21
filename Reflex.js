@@ -294,6 +294,7 @@ class RigidBody extends Reflex {
      *
      * @param {Object} [options={}] Option object, holds many different options, optional
      * @param {Object} [options.movement={}] Movement object, holds movements options
+     * @param {Boolean} [options.movement.canvasBounds=false] Keep player from leaving the canvas, defaults to false
      * @param {String} [options.movement.type="TopDown"] W A S D UP DOWN LEFT RIGHT
      * @param {String} [options.movement.type="Jump"] W SPACE UP
      * @param {String} [options.movement.type="LeftRight"] A D LEFT RIGHT
@@ -358,6 +359,7 @@ class RigidBody extends Reflex {
             this.friction = 0 || this.options.movement.friction;
             this.acceleration = this.options.movement.acceleration;
             this.maxSpeed = this.options.movement.maxSpeed;
+            this.canvasBounds = this.options.movement.canvasBounds;
             if(this.acceleration != undefined && this.maxSpeed == undefined) throw "acceleration is defined while maxSpeed is undefined";
 
             window.addEventListener("keydown", (e) => {this.keyListener(e)});
@@ -464,23 +466,86 @@ class RigidBody extends Reflex {
         //#region movement
 
         if(this.controller.up && (this.options.movement.type == "TopDown" || this.options.movement.type == "Jump" || this.options.movement.type == "UpDown")) {
-            this.y -= this.vel;
-            this.isMoving = true;
+            if(this.canvasBounds) {
+                if(this.shape == "rect" || this.shape == "roundrect" || this.shape == "sprite") {
+                    if(this.y > 0) {
+                        this.y -= this.vel;
+                        this.isMoving = true;
+                    };
+                };
+                
+                if(this.shape == "circle") {
+                    if(this.y > 0 + this.r) {
+                        this.y -= this.vel;
+                        this.isMoving = true;
+                    };
+                };
+            }else{
+                this.y -= this.vel;
+                this.isMoving = true;
+            };
         };
 
         if(this.controller.down && (this.options.movement.type == "TopDown" || this.options.movement.type == "UpDown")) {
-            this.y += this.vel;
-            this.isMoving = true;
+            if(this.canvasBounds) {
+                if(this.shape == "rect" || this.shape == "roundrect" || this.shape == "sprite") {
+                    if(this.y < this.canvas.height - this.h) {
+                        this.y += this.vel;
+                        this.isMoving = true;
+                    };
+                };
+                
+                if(this.shape == "circle") {
+                    if(this.y < this.canvas.height - this.r) {
+                        this.y += this.vel;
+                        this.isMoving = true;
+                    };
+                };
+            }else{
+                this.y += this.vel;
+                this.isMoving = true;
+            };
         };
 
         if(this.controller.left && (this.options.movement.type == "TopDown" || this.options.movement.type == "LeftRight")) {
-            this.x -= this.vel;
-            this.isMoving = true;
+            if(this.canvasBounds) {
+                if(this.shape == "rect" || this.shape == "roundrect" || this.shape == "sprite") {
+                    if(this.x > 0) {
+                        this.x -= this.vel;
+                        this.isMoving = true;
+                    };
+                };
+                if(this.shape == "circle") {
+                    if(this.x > 0 + this.r) {
+                        this.x -= this.vel;
+                        this.isMoving = true;
+                    };
+                };
+            }else{
+                this.x -= this.vel;
+                this.isMoving = true;
+            };
         };
 
         if(this.controller.right && (this.options.movement.type == "TopDown" || this.options.movement.type == "LeftRight")) {
-            this.x += this.vel;
-            this.isMoving = true;
+            if(this.canvasBounds) {
+                if(this.shape == "rect" || this.shape == "roundrect" || this.shape == "sprite") {
+                    if(this.x < this.canvas.width - this.w) {
+                        this.x += this.vel;
+                        this.isMoving = true;
+                    };
+                };
+
+                if(this.shape == "circle") {
+                    if(this.x < this.canvas.width - this.r) {
+                        this.x += this.vel;
+                        this.isMoving = true;
+                    };
+                };
+            }else{
+                this.x += this.vel;
+                this.isMoving = true;
+            };
         };
 
         //#endregion
@@ -815,7 +880,6 @@ class Background extends Reflex {
  * @class SpriteSheet
  * @description Creates a SpriteSheet
  */
-
 
 class SpriteSheet extends Reflex {
     constructor(rows, column, imgW, imgH, singleW, singleH) {
@@ -1533,15 +1597,74 @@ class Text extends Reflex {
 
 //#endregion
 
+//#region Exports and Groups
+
+/**
+ * @namespace
+ * @description Holder Object classes
+ * @property {RigidBody} RigidBody
+ * @property {Background} Background
+ */
+
+let Objects = {
+    RigidBody: RigidBody,
+    Background: Background
+};
+
+/**
+ * @namespace
+ * @description Holder UI classes
+ * @property {Text} Text
+ */
+
+let UI = {
+    Text: Text
+};
+
+/**
+ * @namespace
+ * @description Holder GFX classes
+ * @property {Shadow} Shadow
+ * @property {Particles} Particles
+ */
+
+let GFX = {
+    Shadow: Shadow,
+    Particles: Particles
+};
+
+/**
+ * @namespace
+ * @description Holder Audio classes
+ * @property {Sound} Sound
+ * @property {ProximitySound} ProximitySound
+ */
+
+let Audio = {
+    Sound: Sound,
+    ProximitySound: ProximitySound
+};
+
+/**
+ * @namespace
+ * @description Holder Misc classes
+ * @property {SpriteSheet} SpriteSheet
+ */
+
+let Misc = {
+    SpriteSheet: SpriteSheet
+};
+
+// export as a module
 
 export {
     Reflex, 
-    RigidBody, 
-    Background, 
-    SpriteSheet, 
-    Sound, 
-    ProximitySound, 
-    Shadow, 
-    Particles,
-    Text
+    Objects,
+    Misc, 
+    Audio,
+    GFX,
+    UI
 };
+
+
+//#endregion

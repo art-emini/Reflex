@@ -16,13 +16,14 @@ A simple Javascript game engine.
 5. Attaching different shapes to one main object.
 6. Sound player with event listeners and custom events.
 7. Proximity sounds.
-8. Different shapes like rect, roundrect, circle, and sprite _(img)_
+8. Different shapes such as rect, roundrect, circle, and sprite _(img)_
 9. Entity Management.
 10. Particles with images or colors and preset animations such as explosion and smoke.
-11. Basic Shadow.
-12. Future Plans like dynamic lighting.
-13. Weekly updates/patches.
-14. And way more.
+11. Text and Button UIs.
+12. Basic Shadow.
+13. Future Plans such as dynamic lighting.
+14. Weekly updates/patches.
+15. And way more.
 
 <br>
 

@@ -45,7 +45,13 @@
 - [ ] Re-build docs
 - [x] Add Particles.animate dir prop for smoke preset
 - [x] Add import/export
-- [ ] Add canvasbounds to pervent player leaving canvas
+- [x] Add canvasbounds to pervent player leaving canvas
+- [x] Add Class Groups
+- - [x] Add Objects group and add RigidBody and Background to it
+- - [x] Add UI group and add text it
+- - [x] Add GFX group and add Particles and Shadow to it
+- - [x] Add Audio group and add Sound and ProximitySound to it
+- - [x] Add Misc group and add SpriteSheet
 
 
 # 2.0.0
