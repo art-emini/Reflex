@@ -84,6 +84,10 @@ let myText = new Engine.UI.Text(400, 400, "Hello, World!", {
 var background = new Engine.Objects.Background(0, 0, App.canvas.width + 100, App.canvas.width + 100, "https://upload.wikimedia.org/wikipedia/commons/b/b5/800x600_Wallpaper_Blue_Sky.png");
 background.wobble(0.25, 100);
 
+// remove an Entity
+
+//App.remove(myCircle);
+//console.log(Engine.Data.Entitys)
 
 function loop() {
     App.clear(); // clears canvas

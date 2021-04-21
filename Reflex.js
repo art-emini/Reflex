@@ -112,12 +112,12 @@ let ReflexConfig = {}
 // global entitys
 
 let Entitys = {
-    _RigidBodies: [],
-    _Backgrounds: [],
-    _ProximitySounds: [],
-    _Shadows: [],
+    _RigidBody: [],
+    _Background: [],
+    _ProximitySound: [],
+    _Shadow: [],
     _Particles: [],
-    _Texts: []
+    _Text: []
 };
 
 
@@ -170,6 +170,10 @@ class Reflex {
         if(typeof this.loop != "function") throw "Loop is not a function";
     };
 
+    /**
+     * @description Starts Reflex and loop
+     */
+
     start() {
         // download dep
 
@@ -215,9 +219,25 @@ class Reflex {
         };
     };
 
+    /**
+     * @description Clears the current frame
+     */
+
     clear() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     };
+
+    /**
+     * @description Removes/Deletes an Entity
+     * @param {RigidBody|Background|ProximitySound|Shadow|Particles|Text} entity A RigidBody | Background | ProximitySound | Shadow | Particles | Text
+     */
+
+    remove(entity) {
+        entity.draw = () => {};
+        let entIndex = Entitys[`_${entity.type}`].indexOf(entity.id);
+        Entitys[`_${entity.type}`].splice(entIndex, 1);
+    };
+
 
 
     //#region Class Utils
@@ -227,6 +247,7 @@ class Reflex {
      * @param {String} colour Color name
      * @returns Hex Color
      * @description Converts HTML color names to hex
+     * @private
      */
 
     nameTohex(colour) {
@@ -309,14 +330,14 @@ class RigidBody extends Reflex {
     
     constructor(x, y, w, h, r, shape, color, imgPath, options) {
         super(ReflexConfig);
+        this.type = "RigidBody";
+        this.id = randomInt(1, 100000);
 
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
         this.shape = shape;
-        this.type = "RigidBody";
-
 
         this.selfAttached = false;
         this.othersAttached = [];
@@ -375,7 +396,8 @@ class RigidBody extends Reflex {
         // for RigidBody.on event listener
         this.isMoving = false;
 
-        Entitys._RigidBodies.push(this);
+        
+        Entitys._RigidBody.push(this); 
     };
 
     /**
@@ -781,6 +803,8 @@ class Background extends Reflex {
 
     constructor(x, y, w, h, imgPath) {
         super(ReflexConfig);
+        this.type = "Background";
+        this.id = randomInt(1, 100000);
 
         this.x = x;
         this.y = y;
@@ -789,11 +813,10 @@ class Background extends Reflex {
         this.imgPath = imgPath;
         this.imgObj = new Image();
 
-        this.type = "Background";
-
+        
         this.isWobbling = false;
 
-        Entitys._Backgrounds.push(this);
+        Entitys._Background.push(this);
     };
 
     /**
@@ -884,6 +907,8 @@ class Background extends Reflex {
 class SpriteSheet extends Reflex {
     constructor(rows, column, imgW, imgH, singleW, singleH) {
         super(ReflexConfig);
+        this.type = "SpriteSheet"; // instead of contructor.name as minified files can cause problems
+        this.id = randomInt(1, 100000);
 
         this.rows = rows;
         this.column = column;
@@ -897,7 +922,7 @@ class SpriteSheet extends Reflex {
         this.sX = 0;
         this.sY = 0;
 
-        this.type = "SpriteSheet"; // instead of contructor.name as minified files can cause problems
+        
 
     };
 
@@ -944,10 +969,11 @@ class Sound extends Reflex {
 
     constructor(options) {
         super(ReflexConfig);
+        this.type = "Sound";
+        this.id = randomInt(1, 100000);
 
         this.options = options;
         this.src = this.options.src;
-        this.type = "Sound";
 
         // optional params
         this.autoplay = this.options.autoplay || false;
@@ -1095,11 +1121,13 @@ class ProximitySound extends Reflex {
 
     constructor(x, y, sound, options, affects) {
         super(ReflexConfig);
+        this.type = "ProximitySound";
+        this.id = randomInt(1, 100000);
+
         this.x = x;
         this.y = y;
         this.color = "rgba(0, 0, 0, 0)";
-        this.type = "ProximitySound";
-
+        
         this.sound = sound;
         this.options = options;
         this.affects = affects;
@@ -1118,7 +1146,7 @@ class ProximitySound extends Reflex {
         if(typeof this.options != "object") throw `options is not an object`;
         if(!Array.isArray(this.affects)) throw `affects is not an array`;
 
-        Entitys._ProximitySounds.push(this);
+        Entitys._ProximitySound.push(this);
     };
 
     /**
@@ -1195,10 +1223,12 @@ class Shadow extends Reflex {
 
     constructor(alpha, radius, offsetX, offsetY) {
         super(ReflexConfig);
+        this.type = "Shadow";
+        this.id = randomInt(1, 100000);
+        
         this.alpha = alpha;
         this.r = radius;
         this.color = `rgba(0, 0, 0, ${alpha})`
-        this.type = "Shadow";
 
         this.offsetX = offsetX || 0;
         this.offsetY = offsetY || 0;
@@ -1206,7 +1236,7 @@ class Shadow extends Reflex {
         this.isAppened = false;
         this.appenedTo = undefined;
 
-        Entitys._Shadows.push(this);
+        Entitys._Shadow.push(this);
 
     };
 
@@ -1276,11 +1306,12 @@ class Particles extends Reflex {
 
     constructor(shape, graphic, options, w, h, r) {
         super(ReflexConfig);
+        this.type = "Particles";
+        this.id = randomInt(1, 100000);
 
         this.shape = shape.toLowerCase();
         this.graphic = graphic;
         this.options = options;
-        this.type = "Particles";
 
         this.minX = this.options.minX;
         this.maxX = this.options.maxX;
@@ -1305,7 +1336,7 @@ class Particles extends Reflex {
         // push particles to list
         this.create();
 
-        Entitys._ProximitySounds.push(this);
+        Entitys._Particles.push(this);
     };
 
     /**
@@ -1318,7 +1349,9 @@ class Particles extends Reflex {
                 for (let i = 0; i < this.amount; i++) {
                     this.randomX = randomInt(this.minX, this.maxX);
                     this.randomY = randomInt(this.minY, this.maxY);
-                    this.list.push(new RigidBody(this.randomX, this.randomY, this.w, this.h, 0, "rect", this.graphic));
+                    let p = new RigidBody(this.randomX, this.randomY, this.w, this.h, 0, "rect", this.graphic);
+                    p.type = "ParticleChild";
+                    this.list.push(p);
                 };
             break;
         
@@ -1326,7 +1359,9 @@ class Particles extends Reflex {
                 for (let i = 0; i < this.amount; i++) {
                     this.randomX = randomInt(this.minX, this.maxX);
                     this.randomY = randomInt(this.minY, this.maxY);
-                    this.list.push(new RigidBody(this.randomX, this.randomY, this.w, this.h, this.r, "roundrect", this.graphic));
+                    let p = new RigidBody(this.randomX, this.randomY, this.w, this.h, this.r, "roundrect", this.graphic);
+                    p.type = "ParticleChild";
+                    this.list.push(p);
                 };
             break;
         
@@ -1334,7 +1369,9 @@ class Particles extends Reflex {
                 for (let i = 0; i < this.amount; i++) {
                     this.randomX = randomInt(this.minX, this.maxX);
                     this.randomY = randomInt(this.minY, this.maxY);
-                    this.list.push(new RigidBody(this.randomX, this.randomY, 0, 0, this.r, "circle", this.graphic));
+                    let p = new RigidBody(this.randomX, this.randomY, this.w, this.h, this.r, "circle", this.graphic);
+                    p.type = "ParticleChild";
+                    this.list.push(p);
                 };
             break;
         
@@ -1542,6 +1579,7 @@ class Text extends Reflex {
     constructor(x, y, text, styles) {
         super(ReflexConfig);
         this.type = "Text";
+        this.id = randomInt(1, 100000);
 
         this.x = x;
         this.y = y;
@@ -1556,7 +1594,7 @@ class Text extends Reflex {
         this.strokeStyle = this.styles.strokeStyle || "#000000";
         this.strokeWidth = this.styles.strokeWidth || 1;
 
-        Entitys._Texts.push(this);
+        Entitys._Text.push(this);
     };
 
     /**
@@ -1655,15 +1693,22 @@ let Misc = {
     SpriteSheet: SpriteSheet
 };
 
+
+
+let Data = {
+    Entitys
+};
+
 // export as a module
 
 export {
-    Reflex, 
+    Reflex,
     Objects,
     Misc, 
     Audio,
     GFX,
-    UI
+    UI,
+    Data
 };
 
 

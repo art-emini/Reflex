@@ -31,8 +31,9 @@
 # In between 1.0.0 -> 2.0.0
 
 - [ ] Add rect, round rect, and sprite collision detection and response
-- [ ] Add global entity management 
-- - [ ] Add support for all object classes, particles, and backgrounds
+- [x] Add global entity management 
+- - [x] Add support for entity classes (Anything rendered to the screen is an entity);
+- - [x] Make Entitys object global
 - [ ] Add better ProximitySound 
 - [ ] Add SpriteSheet support
 - - [ ] Add SpriteSheet class to load and return a spritesheet object
@@ -42,7 +43,7 @@
 - [ ] Add ProximitySound.detach(RigidBody)
 - [x] Add Text class which creates text on the canvas
 - [ ] Add ButtonUI class which creates a button on the canvas
-- [ ] Re-build docs
+- [x] Re-build docs
 - [x] Add Particles.animate dir prop for smoke preset
 - [x] Add import/export
 - [x] Add canvasbounds to pervent player leaving canvas
