@@ -26,10 +26,18 @@ A simple Javascript game engine.
 
 ## Download
 
-1. [Download the latest release.](https://github.com/ksplatdev/Reflex/releases/latest)
+### Github
+
+1. Download the [latest release from github.](https://github.com/ksplatdev/Reflex/releases/latest)
 2. Unzip and copy to your project.
 3. Import Reflex as a module. ([Help here](#help))
 4. Done, [Read The Docs](https://ksplatdev.github.io/Reflex/index.html).
+
+### NPM
+
+1. Run `npm install @ksplat/reflex`.
+2. Import Reflex as a module. ([Help here](#help))
+3. Done, [Read The Docs](https://ksplatdev.github.io/Reflex/index.html).
 
 
 <br>
