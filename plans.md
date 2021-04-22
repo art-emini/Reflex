@@ -12,10 +12,14 @@ Plans that have been completed gets removed after it has been merged.
 - - [ ] Add RigidBody imgPath spritesheet detection with imgPath.type to specify how many images per row, how big in width and height one item is, etc..
 - [ ] Add ProximitySound.attachTo(RigidBody)
 - [ ] Add ProximitySound.detach(RigidBody)
-- [ ] Add Button class which creates a button on the canvas
+- [x] Add Button class which creates a button on the canvas
+- - [x] Add it to UI group
+- - [x] Make it an Entity
 - [x] Add StaticLight class which creates a fake light that brightens objects around it
 - - [x] Make it an entity  
 - [x] Add Lights group
+- [x] Add Reflex.width and Reflex.height
+- [x] JsDoc Reflex Class Props
 
 ## 2.0.0
 

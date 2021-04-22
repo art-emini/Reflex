@@ -1,3 +1,33 @@
+/*
+
+Reflex
+
+Since April 6, 2021
+
+MIT License
+
+Copyright (c) 2021 Bleart Emini
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+*/
+
 // dependiences 
 /*
 
@@ -118,7 +148,8 @@ let Entitys = {
     _ProximitySound: [],
     _Shadow: [],
     _Particles: [],
-    _Text: []
+    _Text: [],
+    _Button: []
 };
 
 
@@ -145,7 +176,6 @@ class Reflex {
      * @param {Object} config Config Object.
      * @param {Function} config.loop Main loop. Must be a animationFrame loop.
      * @param {Boolean} [config.debug=false] If enabled, Reflex will console log anything it needs to. Errors will be thrown regardless. Optional, off by default.
-     * @param {Boolean} config.depInstall If enabled, Reflex will install all dependencies as a script tag in the head of your page automaticlly.
      * @description Creates a new instance of Relfex.
      * @memberof Reflex
      */
@@ -159,14 +189,23 @@ class Reflex {
             started: false
         };
 
-
+        /**@type {HTMLElement} Canvas Element */
         this.canvas = document.querySelector("canvas");
-        this.ctx = this.canvas.getContext("2d");
-        this.loop = this.config.loop;
-        this.depInstall = this.config.depInstall;
 
-        config.debug = config.debug || false;
-        this.debug = this.config.debug;
+        /**@type {CanvasRenderingContext2D} 2d canvas context */
+        this.ctx = this.canvas.getContext("2d");
+        
+        /**@type {Function} Reflex loop */
+        this.loop = this.config.loop;
+
+        /**@type {Number} Width of canvas */
+        this.width = this.canvas.width;
+
+        /**@type {Number} Height of canvas */
+        this.height = this.canvas.height;
+
+        /**@type {Boolean} Debug boolean */
+        this.debug = this.config.debug || false;
 
         if(typeof this.loop != "function") throw "Loop is not a function";
     };
@@ -176,12 +215,6 @@ class Reflex {
      */
 
     start() {
-        // download dep
-
-        if(this.depInstall == true) {
-            
-        };
-
         this.loop();
         this.stack.started = true;
         this.startMsg = `
@@ -215,9 +248,6 @@ class Reflex {
         `;
 
         console.log(this.startMsg);
-        if(this.depInstall) {
-            
-        };
     };
 
     /**
@@ -225,7 +255,7 @@ class Reflex {
      */
 
     clear() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.clearRect(0, 0, this.width, this.height);
     };
 
     /**
@@ -1565,6 +1595,14 @@ class Particles extends Reflex {
     };
 };
 
+
+
+
+//#endregion
+
+//#region UI
+
+
 /**
  * @class Text
  * @description Creates text on the canvas
@@ -1642,7 +1680,152 @@ class Text extends Reflex {
     };
 };
 
+/**
+ * @class Button
+ * @description Creates a button on the canvas
+ */
 
+class Button extends Reflex {
+
+    /**
+     * @description Creates an interactive Button 
+     * @param {Number} x X pos
+     * @param {Number} y Y pos
+     * @param {Number} w Width of button
+     * @param {Number} h Height of button
+     * @param {Number} [r] Radius of button, optional, required if shape is roundrect
+     * @param {String} text Text to display in the button
+     * @param {Object} styles Object containing all the styles for the button and the text
+     * @param {String} styles.shape Shape of button, rect, roundrect, or image
+     * @param {String} styles.color Hex color(with "#"), rgb, or rgba
+     * @param {String} [styles.imgPath] Img path of button, only required if shape is image
+     * @param {Object} [styles.stroke] Object containing stroke styles for button
+     * @param {String} [styles.stroke.style] Color of stroke
+     * @param {Number} [styles.stroke.width] Width of stroke
+     * @param {Object} styles.text Object containing all text styles
+     * @param {String} styles.text.font Font of text in CSS style
+     * @param {String} styles.text.color Hex Color of text with "#"
+     * @param {String} styles.text.method Text render method, valid: fill, stroke, fillstroke
+     * @param {Function} cb onclick callback
+     *
+     * @memberof Button
+     */
+
+    constructor(x, y, w, h, r, text, styles, cb) {
+        super(ReflexConfig);
+        this.type = "Button"
+        this.id = randomInt(1, 100000);
+
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+        this.r = r || 0;
+        this.text = text;
+        this.styles = styles;
+        this.cb = cb;
+
+        this.shape = this.styles.shape.toLowerCase();
+        this.color = this.styles.color;
+        this.imgPath = this.styles.imgPath || undefined;
+
+        this.stroke = this.styles.stroke || undefined;
+        this.strokeStyle = this.stroke.style || undefined;
+        this.strokeWidth = this.stroke.width || undefined;
+
+        this.font = this.styles.text.font;
+        this.fontColor = this.styles.text.color;
+        this.textMethod = this.styles.text.method;
+
+        this.textX = this.x + this.w/2-this.text.length*1.75;
+        this.textY = this.y + this.y/2;
+
+
+        if(typeof this.cb != "function") throw `Button cb is not a function`;
+
+
+        this.canvas.addEventListener("click", (e) => {
+            let mousePos = this.getMousePos(e);
+
+            if(this.isInside(mousePos, this)) {
+                this.cb();
+            };
+        }, false);
+
+        if(this.imgPath && this.shape == "image") {
+            this.imgObj = new Image();
+        }; 
+
+        Entitys._Button.push(this);
+    };
+
+    draw() {
+        switch(this.shape) {
+            case "rect":
+                this.ctx.fillStyle = this.color;
+                this.ctx.lineWidth = this.strokeWidth;
+                this.ctx.strokeStyle = this.strokeStyle;
+                this.ctx.fillRect(this.x, this.y, this.w, this.h);
+                this.stroke();
+            break;
+        
+            case "roundrect":
+                if (this.w < 2 * this.r) this.r = this.w / 2;
+                if (this.h < 2 * this.r) this.r = this.h / 2;
+                this.ctx.beginPath();
+                this.ctx.moveTo(this.x+this.r, this.y);
+                this.ctx.arcTo(this.x+this.w, this.y,   this.x+this.w, this.y+this.h, this.r);
+                this.ctx.arcTo(this.x+this.w, this.y+this.h, this.x,   this.y+this.h, this.r);
+                this.ctx.arcTo(this.x,   this.y+this.h, this.x,   this.y,   this.r);
+                this.ctx.arcTo(this.x,   this.y,   this.x+this.w, this.y,   this.r);
+                this.ctx.closePath();
+                this.ctx.fillStyle = this.color;
+                this.ctx.lineWidth = this.strokeWidth;
+                this.ctx.strokeStyle = this.strokeStyle;
+                this.ctx.fill();
+                this.ctx.stroke();
+            break;
+
+            case "image":
+                this.imgObj.src = this.imgPath;
+                this.ctx.drawImage(this.imgObj, this.x, this.y, this.w, this.h);
+            break;
+        
+            default:
+                throw `${this.shape} is not a rect, roundrect, or circle.`
+            break;
+        };
+    };
+
+    /**
+     * @description Gets the mouse cursor postion
+     * @param {MouseEvent} event 
+     * @returns {Object} Object with x and y properties
+     */
+
+    getMousePos(event) {
+        let rect = this.canvas.getBoundingClientRect();
+        return {
+            x: event.clientX - rect.left,
+            y: event.clientY - rect.top
+        };
+    };
+
+    /**
+     * @description Detects if button is being pressed
+     * @param {Object} pos Object with x and y pos of mouse cursor
+     * @param {Button} rect Button
+     * @returns Boolean
+     */
+
+    isInside(pos, rect) {
+        return pos.x > rect.x && pos.x < rect.x+rect.w && pos.y < rect.y+rect.h && pos.y > rect.y;
+    };
+
+
+};
+
+// end ui
 //#endregion
 
 //#region Lights
@@ -1769,10 +1952,12 @@ let Lights = {
  * @namespace
  * @description Reflex UI classes
  * @property {Text} Text
+ * @property {Button} Button
  */
 
 let UI = {
-    Text: Text
+    Text: Text,
+    Button: Button
 };
 
 /**
