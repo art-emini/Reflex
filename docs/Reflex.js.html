@@ -26,7 +26,37 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>// dependiences 
+            <pre class="prettyprint source linenums"><code>/*
+
+Reflex
+
+Since April 6, 2021
+
+MIT License
+
+Copyright (c) 2021 Bleart Emini
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+*/
+
+// dependiences 
 /*
 
 
@@ -141,22 +171,30 @@ let ReflexConfig = {}
 
 let Entitys = {
     _RigidBody: [],
+    _StaticLight: [],
     _Background: [],
     _ProximitySound: [],
     _Shadow: [],
     _Particles: [],
-    _Text: []
+    _Text: [],
+    _Button: []
 };
 
 
 /**
  * Reflex
  *
+ * Since April 6, 2021
+ *
+ * MIT License
+ *
+ * Copyright (c) 2021 Bleart Emini
+ *
  * @description A simple Javascript game engine.
  * @author Bleart Emini
  * @license MIT
- * @since 1.0.0-beta
- * @version 1.2.1
+ * @since April 6, 2021, 1.0.0-beta
+ * @version 1.3.0
  */
 
 
@@ -172,7 +210,6 @@ class Reflex {
      * @param {Object} config Config Object.
      * @param {Function} config.loop Main loop. Must be a animationFrame loop.
      * @param {Boolean} [config.debug=false] If enabled, Reflex will console log anything it needs to. Errors will be thrown regardless. Optional, off by default.
-     * @param {Boolean} config.depInstall If enabled, Reflex will install all dependencies as a script tag in the head of your page automaticlly.
      * @description Creates a new instance of Relfex.
      * @memberof Reflex
      */
@@ -186,14 +223,23 @@ class Reflex {
             started: false
         };
 
-
+        /**@type {HTMLElement} */
         this.canvas = document.querySelector("canvas");
-        this.ctx = this.canvas.getContext("2d");
-        this.loop = this.config.loop;
-        this.depInstall = this.config.depInstall;
 
-        config.debug = config.debug || false;
-        this.debug = this.config.debug;
+        /**@type {CanvasRenderingContext2D} */
+        this.ctx = this.canvas.getContext("2d");
+        
+        /**@type {Function} */
+        this.loop = this.config.loop;
+
+        /**@type {Number} */
+        this.width = this.canvas.width;
+
+        /**@type {Number} */
+        this.height = this.canvas.height;
+
+        /**@type {Boolean} */
+        this.debug = this.config.debug || false;
 
         if(typeof this.loop != "function") throw "Loop is not a function";
     };
@@ -203,12 +249,6 @@ class Reflex {
      */
 
     start() {
-        // download dep
-
-        if(this.depInstall == true) {
-            
-        };
-
         this.loop();
         this.stack.started = true;
         this.startMsg = `
@@ -242,9 +282,6 @@ class Reflex {
         `;
 
         console.log(this.startMsg);
-        if(this.depInstall) {
-            
-        };
     };
 
     /**
@@ -252,12 +289,12 @@ class Reflex {
      */
 
     clear() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.clearRect(0, 0, this.width, this.height);
     };
 
     /**
      * @description Removes/Deletes an Entity
-     * @param {RigidBody|Background|ProximitySound|Shadow|Particles|Text} entity A RigidBody | Background | ProximitySound | Shadow | Particles | Text
+     * @param {RigidBody|Background|ProximitySound|Shadow|Particles|Text|StaticLight} entity A RigidBody | Background | ProximitySound | Shadow | Particles | Text | StaticLight
      */
 
     remove(entity) {
@@ -322,8 +359,6 @@ class Reflex {
 
 
 /**
- *
- *
  * @class RigidBody
  * @description Creates a Rigid Body
  */
@@ -371,6 +406,8 @@ class RigidBody extends Reflex {
         this.othersAttached = [];
         this.hasShadow = false;
         this.selfShadow = undefined;
+        this.hasLight = false;
+        this.selfLight = undefined;
 
 
         this.r = r || undefined;
@@ -442,6 +479,13 @@ class RigidBody extends Reflex {
         if(this.shape == "circle") {
             this.centerX = this.x + this.r / 2;
             this.centerY = this.y + this.r / 2;
+        };
+
+        // set light pos
+
+        if(this.hasLight) {
+            this.selfLight.x = this.centerX;
+            this.selfLight.y = this.centerY;
         };
 
         switch(this.shape) {
@@ -1583,6 +1627,14 @@ class Particles extends Reflex {
     };
 };
 
+
+
+
+//#endregion
+
+//#region UI
+
+
 /**
  * @class Text
  * @description Creates text on the canvas
@@ -1660,14 +1712,255 @@ class Text extends Reflex {
     };
 };
 
+/**
+ * @class Button
+ * @description Creates a button on the canvas
+ */
 
+class Button extends Reflex {
+
+    /**
+     * @description Creates an interactive Button 
+     * @param {Number} x X pos
+     * @param {Number} y Y pos
+     * @param {Number} w Width of button
+     * @param {Number} h Height of button
+     * @param {Number} [r] Radius of button, optional, required if shape is roundrect
+     * @param {String} text Text to display in the button
+     * @param {Object} styles Object containing all the styles for the button and the text
+     * @param {String} styles.shape Shape of button, rect, roundrect, or image
+     * @param {String} styles.color Hex color(with "#"), rgb, or rgba
+     * @param {String} [styles.imgPath] Img path of button, only required if shape is image
+     * @param {Object} [styles.stroke] Object containing stroke styles for button
+     * @param {String} [styles.stroke.style] Color of stroke
+     * @param {Number} [styles.stroke.width] Width of stroke
+     * @param {Object} styles.text Object containing all text styles
+     * @param {String} styles.text.font Font of text in CSS style
+     * @param {String} styles.text.color Hex Color of text with "#"
+     * @param {String} styles.text.method Text render method, valid: fill, stroke, fillstroke
+     * @param {Function} cb onclick callback
+     *
+     * @memberof Button
+     */
+
+    constructor(x, y, w, h, r, text, styles, cb) {
+        super(ReflexConfig);
+        this.type = "Button"
+        this.id = randomInt(1, 100000);
+
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+        this.r = r || 0;
+        this.text = text;
+        this.styles = styles;
+        this.cb = cb;
+
+        this.shape = this.styles.shape.toLowerCase();
+        this.color = this.styles.color;
+        this.imgPath = this.styles.imgPath || undefined;
+
+        this.stroke = this.styles.stroke || undefined;
+        this.strokeStyle = this.stroke.style || undefined;
+        this.strokeWidth = this.stroke.width || undefined;
+
+        this.font = this.styles.text.font;
+        this.fontColor = this.styles.text.color;
+        this.textMethod = this.styles.text.method;
+
+        this.textX = this.x + this.w/2-this.text.length*1.75;
+        this.textY = this.y + this.y/2;
+
+
+        if(typeof this.cb != "function") throw `Button cb is not a function`;
+
+
+        this.canvas.addEventListener("click", (e) => {
+            let mousePos = this.getMousePos(e);
+
+            if(this.isInside(mousePos, this)) {
+                this.cb();
+            };
+        }, false);
+
+        if(this.imgPath &amp;&amp; this.shape == "image") {
+            this.imgObj = new Image();
+        }; 
+
+        Entitys._Button.push(this);
+    };
+
+    draw() {
+        switch(this.shape) {
+            case "rect":
+                this.ctx.fillStyle = this.color;
+                this.ctx.lineWidth = this.strokeWidth;
+                this.ctx.strokeStyle = this.strokeStyle;
+                this.ctx.fillRect(this.x, this.y, this.w, this.h);
+                this.stroke();
+            break;
+        
+            case "roundrect":
+                if (this.w &lt; 2 * this.r) this.r = this.w / 2;
+                if (this.h &lt; 2 * this.r) this.r = this.h / 2;
+                this.ctx.beginPath();
+                this.ctx.moveTo(this.x+this.r, this.y);
+                this.ctx.arcTo(this.x+this.w, this.y,   this.x+this.w, this.y+this.h, this.r);
+                this.ctx.arcTo(this.x+this.w, this.y+this.h, this.x,   this.y+this.h, this.r);
+                this.ctx.arcTo(this.x,   this.y+this.h, this.x,   this.y,   this.r);
+                this.ctx.arcTo(this.x,   this.y,   this.x+this.w, this.y,   this.r);
+                this.ctx.closePath();
+                this.ctx.fillStyle = this.color;
+                this.ctx.lineWidth = this.strokeWidth;
+                this.ctx.strokeStyle = this.strokeStyle;
+                this.ctx.fill();
+                this.ctx.stroke();
+            break;
+
+            case "image":
+                this.imgObj.src = this.imgPath;
+                this.ctx.drawImage(this.imgObj, this.x, this.y, this.w, this.h);
+            break;
+        
+            default:
+                throw `${this.shape} is not a rect, roundrect, or circle.`
+            break;
+        };
+    };
+
+    /**
+     * @description Gets the mouse cursor postion
+     * @param {MouseEvent} event 
+     * @returns {Object} Object with x and y properties
+     */
+
+    getMousePos(event) {
+        let rect = this.canvas.getBoundingClientRect();
+        return {
+            x: event.clientX - rect.left,
+            y: event.clientY - rect.top
+        };
+    };
+
+    /**
+     * @description Detects if button is being pressed
+     * @param {Object} pos Object with x and y pos of mouse cursor
+     * @param {Button} rect Button
+     * @returns Boolean
+     */
+
+    isInside(pos, rect) {
+        return pos.x > rect.x &amp;&amp; pos.x &lt; rect.x+rect.w &amp;&amp; pos.y &lt; rect.y+rect.h &amp;&amp; pos.y > rect.y;
+    };
+
+
+};
+
+// end ui
+//#endregion
+
+//#region Lights
+
+/**
+ * @class StaticLight
+ * @description Creates a StaticLight
+ */
+
+class StaticLight extends Reflex {
+
+    /**
+     * @description Creates a StaticLight which is a "fake" light
+     * @param {Number} x X pos
+     * @param {Number} y Y pos
+     * @param {Number} r Radius of the light
+     * @param {String} color Color of the light, RGBA color
+     * @param {Number} blur Blur intenstity
+     *
+     * @memberof StaticLight
+     */
+
+    constructor(x, y, r, color, blur) {
+        super(ReflexConfig);
+        this.type = "StaticLight"
+        this.id = randomInt(1, 100000);
+
+        this.x = x;
+        this.y = y;
+        this.r = r;
+        this.color = color;
+        this.blur = blur;
+
+        this.isEmitting = false;
+        this.isAttached = false;
+        this.appenedTo = undefined;
+
+        Entitys._StaticLight.push(this);
+    };
+
+    draw() {
+        if(this.isEmitting) {
+            this.ctx.globalCompositeOperation = "lighter";
+            this.ctx.beginPath();
+            this.ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
+            this.ctx.fillStyle = this.color;
+            this.ctx.fill();
+            this.ctx.globalCompositeOperation = "source-over";
+        };
+    };
+
+    /**
+     * @description Starts emitting light
+     */
+
+    emit() {
+        this.isEmitting = true;
+    };
+
+    /**
+     * @description Stops emitting light
+     */
+
+    stopEmitting() {
+        this.isEmitting = false;
+    };
+
+    /**
+     * @description Appends the light to a RigidBdy
+     * @param {RigidBody} rigidbody A RigidBody
+     */
+
+    appendTo(rigidbody) {
+        if(rigidbody.type != "RigidBody") throw `Cannot append shadow to ${rigidbody.type}`;
+        rigidbody.hasLight = true;
+        rigidbody.selfLight = this;
+        this.isAttached = true;
+        this.appenedTo = rigidbody;
+    };
+
+    /**
+     * @description Removes a light from a RigidBdy
+     * @param {RigidBody} rigidbody A RigidBody
+     */
+
+    unappend(rigidbody) {
+        if(rigidbody.type != "RigidBody") throw `Cannot remove light from ${rigidbody.type}`;
+        if(!rigidbody.hasLight) throw `Cannot remove light, ${rigidbody} does not have a light to remove`;
+        rigidbody.selfLight = undefined;
+        rigidbody.hasLight = false;
+        this.isAppened = false;
+        this.appenedTo = undefined;
+    };
+};
+
+// end lights
 //#endregion
 
 //#region Exports and Groups
 
 /**
  * @namespace
- * @description Holder Object classes
+ * @description Reflex Object classes
  * @property {RigidBody} RigidBody
  * @property {Background} Background
  */
@@ -1679,17 +1972,29 @@ let Objects = {
 
 /**
  * @namespace
- * @description Holder UI classes
- * @property {Text} Text
+ * @description Reflex Light classes
+ * @property {StaticLight} StaticLight
  */
 
-let UI = {
-    Text: Text
+let Lights = {
+    StaticLight: StaticLight
 };
 
 /**
  * @namespace
- * @description Holder GFX classes
+ * @description Reflex UI classes
+ * @property {Text} Text
+ * @property {Button} Button
+ */
+
+let UI = {
+    Text: Text,
+    Button: Button
+};
+
+/**
+ * @namespace
+ * @description Reflex GFX classes
  * @property {Shadow} Shadow
  * @property {Particles} Particles
  */
@@ -1701,7 +2006,7 @@ let GFX = {
 
 /**
  * @namespace
- * @description Holder Audio classes
+ * @description Reflex Audio classes
  * @property {Sound} Sound
  * @property {ProximitySound} ProximitySound
  */
@@ -1713,7 +2018,7 @@ let Audio = {
 
 /**
  * @namespace
- * @description Holder Misc classes
+ * @description Reflex Misc classes
  * @property {SpriteSheet} SpriteSheet
  */
 
@@ -1737,6 +2042,7 @@ let Data = {
 export {
     Reflex,
     Objects,
+    Lights,
     Misc, 
     Audio,
     GFX,
@@ -1755,13 +2061,13 @@ export {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="Audio.html">Audio</a></li><li><a href="Data.html">Data</a></li><li><a href="GFX.html">GFX</a></li><li><a href="Misc.html">Misc</a></li><li><a href="Objects.html">Objects</a></li><li><a href="UI.html">UI</a></li></ul><h3>Classes</h3><ul><li><a href="Background.html">Background</a></li><li><a href="Background.Background.html">Background</a></li><li><a href="Particles.html">Particles</a></li><li><a href="Particles.Particles.html">Particles</a></li><li><a href="ProximitySound.html">ProximitySound</a></li><li><a href="ProximitySound.ProximitySound.html">ProximitySound</a></li><li><a href="Reflex.html">Reflex</a></li><li><a href="Reflex.Reflex.html">Reflex</a></li><li><a href="RigidBody.html">RigidBody</a></li><li><a href="RigidBody.RigidBody.html">RigidBody</a></li><li><a href="Shadow.html">Shadow</a></li><li><a href="Sound.html">Sound</a></li><li><a href="Sound.Sound.html">Sound</a></li><li><a href="SpriteSheet.html">SpriteSheet</a></li><li><a href="Text.html">Text</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="Audio.html">Audio</a></li><li><a href="Data.html">Data</a></li><li><a href="GFX.html">GFX</a></li><li><a href="Lights.html">Lights</a></li><li><a href="Misc.html">Misc</a></li><li><a href="Objects.html">Objects</a></li><li><a href="UI.html">UI</a></li></ul><h3>Classes</h3><ul><li><a href="Background.html">Background</a></li><li><a href="Background.Background.html">Background</a></li><li><a href="Button.html">Button</a></li><li><a href="Button.Button.html">Button</a></li><li><a href="Particles.html">Particles</a></li><li><a href="Particles.Particles.html">Particles</a></li><li><a href="ProximitySound.html">ProximitySound</a></li><li><a href="ProximitySound.ProximitySound.html">ProximitySound</a></li><li><a href="Reflex.html">Reflex</a></li><li><a href="Reflex.Reflex.html">Reflex</a></li><li><a href="RigidBody.html">RigidBody</a></li><li><a href="RigidBody.RigidBody.html">RigidBody</a></li><li><a href="Shadow.html">Shadow</a></li><li><a href="Sound.html">Sound</a></li><li><a href="Sound.Sound.html">Sound</a></li><li><a href="SpriteSheet.html">SpriteSheet</a></li><li><a href="StaticLight.html">StaticLight</a></li><li><a href="StaticLight.StaticLight.html">StaticLight</a></li><li><a href="Text.html">Text</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Wed Apr 21 2021 09:38:08 GMT-0400 (Eastern Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Thu Apr 22 2021 09:50:25 GMT-0400 (Eastern Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

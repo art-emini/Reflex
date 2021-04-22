@@ -20,6 +20,7 @@ Plans that have been completed gets removed after it has been merged.
 - [x] Add Lights group
 - [x] Add Reflex.width and Reflex.height
 - [x] JsDoc Reflex Class Props
+- [x] Re build docs
 
 ## 2.0.0
 

@@ -156,11 +156,17 @@ let Entitys = {
 /**
  * Reflex
  *
+ * Since April 6, 2021
+ *
+ * MIT License
+ *
+ * Copyright (c) 2021 Bleart Emini
+ *
  * @description A simple Javascript game engine.
  * @author Bleart Emini
  * @license MIT
- * @since 1.0.0-beta
- * @version 1.2.1
+ * @since April 6, 2021, 1.0.0-beta
+ * @version 1.3.0
  */
 
 
@@ -189,22 +195,22 @@ class Reflex {
             started: false
         };
 
-        /**@type {HTMLElement} Canvas Element */
+        /**@type {HTMLElement} */
         this.canvas = document.querySelector("canvas");
 
-        /**@type {CanvasRenderingContext2D} 2d canvas context */
+        /**@type {CanvasRenderingContext2D} */
         this.ctx = this.canvas.getContext("2d");
         
-        /**@type {Function} Reflex loop */
+        /**@type {Function} */
         this.loop = this.config.loop;
 
-        /**@type {Number} Width of canvas */
+        /**@type {Number} */
         this.width = this.canvas.width;
 
-        /**@type {Number} Height of canvas */
+        /**@type {Number} */
         this.height = this.canvas.height;
 
-        /**@type {Boolean} Debug boolean */
+        /**@type {Boolean} */
         this.debug = this.config.debug || false;
 
         if(typeof this.loop != "function") throw "Loop is not a function";
@@ -325,8 +331,6 @@ class Reflex {
 
 
 /**
- *
- *
  * @class RigidBody
  * @description Creates a Rigid Body
  */
