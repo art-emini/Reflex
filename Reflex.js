@@ -166,7 +166,7 @@ let Entitys = {
  * @author Bleart Emini
  * @license MIT
  * @since April 6, 2021, 1.0.0-beta
- * @version 1.3.0
+ * @version 1.3.1
  */
 
 
