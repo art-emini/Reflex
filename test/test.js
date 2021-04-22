@@ -4,7 +4,7 @@ import * as Engine from "../Reflex.js"
 
 // Init Reflex
 
-var App = new Engine.Reflex({loop: loop, debug: true, depInstall: true});
+var World = new Engine.Reflex({loop: loop, debug: true, depInstall: true});
 
 // create a rigid body rect
 
@@ -21,7 +21,7 @@ var myRoundRect = new Engine.Objects.RigidBody(50, 50, 50, 50, 15, "roundrect", 
 // rigid body event listener
 
 myRoundRect.on("move", () => {
-    console.log("moved");
+    //console.log("moved");
 });
 
 // create a rigid body rect
@@ -53,7 +53,7 @@ myShadow.appendTo(myRoundRect);
 // ProximitySound
 
 let mySound1 = new Engine.Audio.Sound({src: "./bg-music.mp3", autoplay: true, loop: true})
-let myProxSound = new Engine.Audio.ProximitySound(450, 50, mySound1, {volume: 1, radius: 250, debugCirlce: true}, [myRoundRect]);
+let myProxSound = new Engine.Audio.ProximitySound(450, 50, mySound1, {volume: 0.2, radius: 250, debugCirlce: true}, [myRoundRect]);
 
 // create particles
 
@@ -78,10 +78,30 @@ let myText = new Engine.UI.Text(400, 400, "Hello, World!", {
     strokeWidth: 2
 });
 
+// create a button
+
+let myButton = new Engine.UI.Button(100, 400, 100, 50, 35, "Hi!", {
+    shape: "roundrect", 
+    color: "rgba(255, 255, 255, 0.4)", 
+    stroke: {
+        style: "#000000", 
+        width: 2
+    },
+    text: {
+        font: "16px Arial",
+        color: "#000000",
+        method: "fill"
+    }
+}, () => {console.log("clicked")});
+
+// create a StaticLight
+
+let myStaticLight = new Engine.Lights.StaticLight(250, 250, 75, "rgba(255, 255, 255, 0.1)", 0.3, 30);
+myStaticLight.emit();
 
 // create a background
 
-var background = new Engine.Objects.Background(0, 0, App.canvas.width + 100, App.canvas.width + 100, "https://upload.wikimedia.org/wikipedia/commons/b/b5/800x600_Wallpaper_Blue_Sky.png");
+var background = new Engine.Objects.Background(0, 0, World.width + 100, World.width + 100, "https://upload.wikimedia.org/wikipedia/commons/b/b5/800x600_Wallpaper_Blue_Sky.png");
 background.wobble(0.25, 100);
 
 // remove an Entity
@@ -90,12 +110,12 @@ background.wobble(0.25, 100);
 //console.log(Engine.Data.Entitys)
 
 function loop() {
-    App.clear(); // clears canvas
+    World.clear(); // clears canvas
 
     // draw background and shadows first
     background.draw();
     myShadow.draw();
-
+    
 
     myCircle.draw();
     myRect.draw();
@@ -106,12 +126,17 @@ function loop() {
     myParticles.draw();
 
     myText.draw();
+    myButton.draw();
+    
 
+    // draw lights
 
+    myStaticLight.draw();
+    
     // draw proxsound
     myProxSound.draw();
 
     requestAnimationFrame(loop);
 };
 
-App.start(); // starts loop and adds dependencies if config depInstall is true
+World.start(); // starts loop and adds dependencies if config depInstall is true
