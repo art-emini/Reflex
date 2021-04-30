@@ -46,7 +46,6 @@ A simple Javascript game engine.
 2. Change the from to the [CDN link.](https://cdn.jsdelivr.net/gh/ksplatdev/reflex@1.2.0/Reflex.js)
 3. Done, [Read The Docs](https://ksplatdev.github.io/Reflex/index.html).
 
-
 <br>
 
 ## [Docs](https://ksplatdev.github.io/Reflex/index.html)
@@ -71,10 +70,10 @@ A simple Javascript game engine.
 
 ## Branches
 
-- main
+-   main
 
     Master branch, production branch, merge to, do not commit
 
-- features
+-   features
 
     Features to be merged to main on completion
