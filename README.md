@@ -19,9 +19,10 @@ A simple Javascript game engine.
 11. Particles with images or colors and preset animations such as explosion and smoke.
 12. Text and Button UI.
 13. Basic Shadow.
-14. Future Plans such as dynamic lighting.
-15. Weekly updates/patches.
-16. And way more.
+14. Great performance.
+15. Future Plans such as dynamic lighting.
+16. Often updates/patches.
+17. And way more.
 
 <br>
 

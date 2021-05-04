@@ -12,6 +12,8 @@ Plans that have been completed gets removed after it has been merged.
 -   -   [ ] Add RigidBody imgPath spritesheet detection with imgPath.type to specify how many images per row, how big in width and height one item is, etc..
 -   [ ] Add ProximitySound.attachTo(RigidBody)
 -   [ ] Add ProximitySound.detach(RigidBody)
+-   [x] Stress test particles [(Results)](test/stress/stress.js)
+-   [x] Add FPS Counter
 -   [x] Add Button class which creates a button on the canvas
 -   -   [x] Add it to UI group
 -   -   [x] Make it an Entity

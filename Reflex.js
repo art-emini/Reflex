@@ -45,161 +45,161 @@ SOFTWARE.
 
 function componentToHex(c) {
 	var hex = c.toString(16);
-	return hex.length == 1 ? "0" + hex : hex;
+	return hex.length == 1 ? '0' + hex : hex;
 }
 
 function rgbToHex(r, g, b) {
-	return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+	return '#' + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 
 // https://stackoverflow.com/questions/1573053/javascript-function-to-convert-color-names-to-hex-codes/24390910
 
 function nameTohex(colour) {
 	var colours = {
-		aliceblue: "#f0f8ff",
-		antiquewhite: "#faebd7",
-		aqua: "#00ffff",
-		aquamarine: "#7fffd4",
-		azure: "#f0ffff",
-		beige: "#f5f5dc",
-		bisque: "#ffe4c4",
-		black: "#000000",
-		blanchedalmond: "#ffebcd",
-		blue: "#0000ff",
-		blueviolet: "#8a2be2",
-		brown: "#a52a2a",
-		burlywood: "#deb887",
-		cadetblue: "#5f9ea0",
-		chartreuse: "#7fff00",
-		chocolate: "#d2691e",
-		coral: "#ff7f50",
-		cornflowerblue: "#6495ed",
-		cornsilk: "#fff8dc",
-		crimson: "#dc143c",
-		cyan: "#00ffff",
-		darkblue: "#00008b",
-		darkcyan: "#008b8b",
-		darkgoldenrod: "#b8860b",
-		darkgray: "#a9a9a9",
-		darkgreen: "#006400",
-		darkkhaki: "#bdb76b",
-		darkmagenta: "#8b008b",
-		darkolivegreen: "#556b2f",
-		darkorange: "#ff8c00",
-		darkorchid: "#9932cc",
-		darkred: "#8b0000",
-		darksalmon: "#e9967a",
-		darkseagreen: "#8fbc8f",
-		darkslateblue: "#483d8b",
-		darkslategray: "#2f4f4f",
-		darkturquoise: "#00ced1",
-		darkviolet: "#9400d3",
-		deeppink: "#ff1493",
-		deepskyblue: "#00bfff",
-		dimgray: "#696969",
-		dodgerblue: "#1e90ff",
-		firebrick: "#b22222",
-		floralwhite: "#fffaf0",
-		forestgreen: "#228b22",
-		fuchsia: "#ff00ff",
-		gainsboro: "#dcdcdc",
-		ghostwhite: "#f8f8ff",
-		gold: "#ffd700",
-		goldenrod: "#daa520",
-		gray: "#808080",
-		green: "#008000",
-		greenyellow: "#adff2f",
-		honeydew: "#f0fff0",
-		hotpink: "#ff69b4",
-		"indianred ": "#cd5c5c",
-		indigo: "#4b0082",
-		ivory: "#fffff0",
-		khaki: "#f0e68c",
-		lavender: "#e6e6fa",
-		lavenderblush: "#fff0f5",
-		lawngreen: "#7cfc00",
-		lemonchiffon: "#fffacd",
-		lightblue: "#add8e6",
-		lightcoral: "#f08080",
-		lightcyan: "#e0ffff",
-		lightgoldenrodyellow: "#fafad2",
-		lightgrey: "#d3d3d3",
-		lightgreen: "#90ee90",
-		lightpink: "#ffb6c1",
-		lightsalmon: "#ffa07a",
-		lightseagreen: "#20b2aa",
-		lightskyblue: "#87cefa",
-		lightslategray: "#778899",
-		lightsteelblue: "#b0c4de",
-		lightyellow: "#ffffe0",
-		lime: "#00ff00",
-		limegreen: "#32cd32",
-		linen: "#faf0e6",
-		magenta: "#ff00ff",
-		maroon: "#800000",
-		mediumaquamarine: "#66cdaa",
-		mediumblue: "#0000cd",
-		mediumorchid: "#ba55d3",
-		mediumpurple: "#9370d8",
-		mediumseagreen: "#3cb371",
-		mediumslateblue: "#7b68ee",
-		mediumspringgreen: "#00fa9a",
-		mediumturquoise: "#48d1cc",
-		mediumvioletred: "#c71585",
-		midnightblue: "#191970",
-		mintcream: "#f5fffa",
-		mistyrose: "#ffe4e1",
-		moccasin: "#ffe4b5",
-		navajowhite: "#ffdead",
-		navy: "#000080",
-		oldlace: "#fdf5e6",
-		olive: "#808000",
-		olivedrab: "#6b8e23",
-		orange: "#ffa500",
-		orangered: "#ff4500",
-		orchid: "#da70d6",
-		palegoldenrod: "#eee8aa",
-		palegreen: "#98fb98",
-		paleturquoise: "#afeeee",
-		palevioletred: "#d87093",
-		papayawhip: "#ffefd5",
-		peachpuff: "#ffdab9",
-		peru: "#cd853f",
-		pink: "#ffc0cb",
-		plum: "#dda0dd",
-		powderblue: "#b0e0e6",
-		purple: "#800080",
-		rebeccapurple: "#663399",
-		red: "#ff0000",
-		rosybrown: "#bc8f8f",
-		royalblue: "#4169e1",
-		saddlebrown: "#8b4513",
-		salmon: "#fa8072",
-		sandybrown: "#f4a460",
-		seagreen: "#2e8b57",
-		seashell: "#fff5ee",
-		sienna: "#a0522d",
-		silver: "#c0c0c0",
-		skyblue: "#87ceeb",
-		slateblue: "#6a5acd",
-		slategray: "#708090",
-		snow: "#fffafa",
-		springgreen: "#00ff7f",
-		steelblue: "#4682b4",
-		tan: "#d2b48c",
-		teal: "#008080",
-		thistle: "#d8bfd8",
-		tomato: "#ff6347",
-		turquoise: "#40e0d0",
-		violet: "#ee82ee",
-		wheat: "#f5deb3",
-		white: "#ffffff",
-		whitesmoke: "#f5f5f5",
-		yellow: "#ffff00",
-		yellowgreen: "#9acd32",
+		aliceblue: '#f0f8ff',
+		antiquewhite: '#faebd7',
+		aqua: '#00ffff',
+		aquamarine: '#7fffd4',
+		azure: '#f0ffff',
+		beige: '#f5f5dc',
+		bisque: '#ffe4c4',
+		black: '#000000',
+		blanchedalmond: '#ffebcd',
+		blue: '#0000ff',
+		blueviolet: '#8a2be2',
+		brown: '#a52a2a',
+		burlywood: '#deb887',
+		cadetblue: '#5f9ea0',
+		chartreuse: '#7fff00',
+		chocolate: '#d2691e',
+		coral: '#ff7f50',
+		cornflowerblue: '#6495ed',
+		cornsilk: '#fff8dc',
+		crimson: '#dc143c',
+		cyan: '#00ffff',
+		darkblue: '#00008b',
+		darkcyan: '#008b8b',
+		darkgoldenrod: '#b8860b',
+		darkgray: '#a9a9a9',
+		darkgreen: '#006400',
+		darkkhaki: '#bdb76b',
+		darkmagenta: '#8b008b',
+		darkolivegreen: '#556b2f',
+		darkorange: '#ff8c00',
+		darkorchid: '#9932cc',
+		darkred: '#8b0000',
+		darksalmon: '#e9967a',
+		darkseagreen: '#8fbc8f',
+		darkslateblue: '#483d8b',
+		darkslategray: '#2f4f4f',
+		darkturquoise: '#00ced1',
+		darkviolet: '#9400d3',
+		deeppink: '#ff1493',
+		deepskyblue: '#00bfff',
+		dimgray: '#696969',
+		dodgerblue: '#1e90ff',
+		firebrick: '#b22222',
+		floralwhite: '#fffaf0',
+		forestgreen: '#228b22',
+		fuchsia: '#ff00ff',
+		gainsboro: '#dcdcdc',
+		ghostwhite: '#f8f8ff',
+		gold: '#ffd700',
+		goldenrod: '#daa520',
+		gray: '#808080',
+		green: '#008000',
+		greenyellow: '#adff2f',
+		honeydew: '#f0fff0',
+		hotpink: '#ff69b4',
+		'indianred ': '#cd5c5c',
+		indigo: '#4b0082',
+		ivory: '#fffff0',
+		khaki: '#f0e68c',
+		lavender: '#e6e6fa',
+		lavenderblush: '#fff0f5',
+		lawngreen: '#7cfc00',
+		lemonchiffon: '#fffacd',
+		lightblue: '#add8e6',
+		lightcoral: '#f08080',
+		lightcyan: '#e0ffff',
+		lightgoldenrodyellow: '#fafad2',
+		lightgrey: '#d3d3d3',
+		lightgreen: '#90ee90',
+		lightpink: '#ffb6c1',
+		lightsalmon: '#ffa07a',
+		lightseagreen: '#20b2aa',
+		lightskyblue: '#87cefa',
+		lightslategray: '#778899',
+		lightsteelblue: '#b0c4de',
+		lightyellow: '#ffffe0',
+		lime: '#00ff00',
+		limegreen: '#32cd32',
+		linen: '#faf0e6',
+		magenta: '#ff00ff',
+		maroon: '#800000',
+		mediumaquamarine: '#66cdaa',
+		mediumblue: '#0000cd',
+		mediumorchid: '#ba55d3',
+		mediumpurple: '#9370d8',
+		mediumseagreen: '#3cb371',
+		mediumslateblue: '#7b68ee',
+		mediumspringgreen: '#00fa9a',
+		mediumturquoise: '#48d1cc',
+		mediumvioletred: '#c71585',
+		midnightblue: '#191970',
+		mintcream: '#f5fffa',
+		mistyrose: '#ffe4e1',
+		moccasin: '#ffe4b5',
+		navajowhite: '#ffdead',
+		navy: '#000080',
+		oldlace: '#fdf5e6',
+		olive: '#808000',
+		olivedrab: '#6b8e23',
+		orange: '#ffa500',
+		orangered: '#ff4500',
+		orchid: '#da70d6',
+		palegoldenrod: '#eee8aa',
+		palegreen: '#98fb98',
+		paleturquoise: '#afeeee',
+		palevioletred: '#d87093',
+		papayawhip: '#ffefd5',
+		peachpuff: '#ffdab9',
+		peru: '#cd853f',
+		pink: '#ffc0cb',
+		plum: '#dda0dd',
+		powderblue: '#b0e0e6',
+		purple: '#800080',
+		rebeccapurple: '#663399',
+		red: '#ff0000',
+		rosybrown: '#bc8f8f',
+		royalblue: '#4169e1',
+		saddlebrown: '#8b4513',
+		salmon: '#fa8072',
+		sandybrown: '#f4a460',
+		seagreen: '#2e8b57',
+		seashell: '#fff5ee',
+		sienna: '#a0522d',
+		silver: '#c0c0c0',
+		skyblue: '#87ceeb',
+		slateblue: '#6a5acd',
+		slategray: '#708090',
+		snow: '#fffafa',
+		springgreen: '#00ff7f',
+		steelblue: '#4682b4',
+		tan: '#d2b48c',
+		teal: '#008080',
+		thistle: '#d8bfd8',
+		tomato: '#ff6347',
+		turquoise: '#40e0d0',
+		violet: '#ee82ee',
+		wheat: '#f5deb3',
+		white: '#ffffff',
+		whitesmoke: '#f5f5f5',
+		yellow: '#ffff00',
+		yellowgreen: '#9acd32',
 	};
 
-	if (typeof colours[colour.toLowerCase()] != "undefined")
+	if (typeof colours[colour.toLowerCase()] != 'undefined')
 		return colours[colour.toLowerCase()];
 
 	return false;
@@ -301,10 +301,10 @@ class Reflex {
 		};
 
 		/**@type {HTMLElement} */
-		this.canvas = document.querySelector("canvas");
+		this.canvas = document.querySelector('canvas');
 
 		/**@type {CanvasRenderingContext2D} */
-		this.ctx = this.canvas.getContext("2d");
+		this.ctx = this.canvas.getContext('2d');
 
 		/**@type {Function} */
 		this.loop = this.config.loop;
@@ -318,7 +318,45 @@ class Reflex {
 		/**@type {Boolean} */
 		this.debug = this.config.debug || false;
 
-		if (typeof this.loop != "function") throw "Loop is not a function";
+		this.fps = {
+			sampleSize: 60,
+			value: 0,
+			_sample_: [],
+			_index_: 0,
+			_lastTick_: false,
+			tick: function () {
+				// if is first tick, just set tick timestamp and return
+				if (!this._lastTick_) {
+					this._lastTick_ = performance.now();
+					return 0;
+				}
+				// calculate necessary values to obtain current tick FPS
+				let now = performance.now();
+				let delta = (now - this._lastTick_) / 1000;
+				let fps = 1 / delta;
+				// add to fps samples, current tick fps value
+				this._sample_[this._index_] = Math.round(fps);
+
+				// iterate samples to obtain the average
+				let average = 0;
+				for (let i = 0; i < this._sample_.length; i++)
+					average += this._sample_[i];
+
+				average = Math.round(average / this._sample_.length);
+
+				// set new FPS
+				this.value = average;
+				// store current timestamp
+				this._lastTick_ = now;
+				// increase sample index counter, and reset it
+				// to 0 if exceded maximum sampleSize limit
+				this._index_++;
+				if (this._index_ === this.sampleSize) this._index_ = 0;
+				return this.value;
+			},
+		};
+
+		if (typeof this.loop != 'function') throw 'Loop is not a function';
 	}
 
 	/**
@@ -392,150 +430,150 @@ class Reflex {
 
 	nameTohex(colour) {
 		var colours = {
-			aliceblue: "#f0f8ff",
-			antiquewhite: "#faebd7",
-			aqua: "#00ffff",
-			aquamarine: "#7fffd4",
-			azure: "#f0ffff",
-			beige: "#f5f5dc",
-			bisque: "#ffe4c4",
-			black: "#000000",
-			blanchedalmond: "#ffebcd",
-			blue: "#0000ff",
-			blueviolet: "#8a2be2",
-			brown: "#a52a2a",
-			burlywood: "#deb887",
-			cadetblue: "#5f9ea0",
-			chartreuse: "#7fff00",
-			chocolate: "#d2691e",
-			coral: "#ff7f50",
-			cornflowerblue: "#6495ed",
-			cornsilk: "#fff8dc",
-			crimson: "#dc143c",
-			cyan: "#00ffff",
-			darkblue: "#00008b",
-			darkcyan: "#008b8b",
-			darkgoldenrod: "#b8860b",
-			darkgray: "#a9a9a9",
-			darkgreen: "#006400",
-			darkkhaki: "#bdb76b",
-			darkmagenta: "#8b008b",
-			darkolivegreen: "#556b2f",
-			darkorange: "#ff8c00",
-			darkorchid: "#9932cc",
-			darkred: "#8b0000",
-			darksalmon: "#e9967a",
-			darkseagreen: "#8fbc8f",
-			darkslateblue: "#483d8b",
-			darkslategray: "#2f4f4f",
-			darkturquoise: "#00ced1",
-			darkviolet: "#9400d3",
-			deeppink: "#ff1493",
-			deepskyblue: "#00bfff",
-			dimgray: "#696969",
-			dodgerblue: "#1e90ff",
-			firebrick: "#b22222",
-			floralwhite: "#fffaf0",
-			forestgreen: "#228b22",
-			fuchsia: "#ff00ff",
-			gainsboro: "#dcdcdc",
-			ghostwhite: "#f8f8ff",
-			gold: "#ffd700",
-			goldenrod: "#daa520",
-			gray: "#808080",
-			green: "#008000",
-			greenyellow: "#adff2f",
-			honeydew: "#f0fff0",
-			hotpink: "#ff69b4",
-			"indianred ": "#cd5c5c",
-			indigo: "#4b0082",
-			ivory: "#fffff0",
-			khaki: "#f0e68c",
-			lavender: "#e6e6fa",
-			lavenderblush: "#fff0f5",
-			lawngreen: "#7cfc00",
-			lemonchiffon: "#fffacd",
-			lightblue: "#add8e6",
-			lightcoral: "#f08080",
-			lightcyan: "#e0ffff",
-			lightgoldenrodyellow: "#fafad2",
-			lightgrey: "#d3d3d3",
-			lightgreen: "#90ee90",
-			lightpink: "#ffb6c1",
-			lightsalmon: "#ffa07a",
-			lightseagreen: "#20b2aa",
-			lightskyblue: "#87cefa",
-			lightslategray: "#778899",
-			lightsteelblue: "#b0c4de",
-			lightyellow: "#ffffe0",
-			lime: "#00ff00",
-			limegreen: "#32cd32",
-			linen: "#faf0e6",
-			magenta: "#ff00ff",
-			maroon: "#800000",
-			mediumaquamarine: "#66cdaa",
-			mediumblue: "#0000cd",
-			mediumorchid: "#ba55d3",
-			mediumpurple: "#9370d8",
-			mediumseagreen: "#3cb371",
-			mediumslateblue: "#7b68ee",
-			mediumspringgreen: "#00fa9a",
-			mediumturquoise: "#48d1cc",
-			mediumvioletred: "#c71585",
-			midnightblue: "#191970",
-			mintcream: "#f5fffa",
-			mistyrose: "#ffe4e1",
-			moccasin: "#ffe4b5",
-			navajowhite: "#ffdead",
-			navy: "#000080",
-			oldlace: "#fdf5e6",
-			olive: "#808000",
-			olivedrab: "#6b8e23",
-			orange: "#ffa500",
-			orangered: "#ff4500",
-			orchid: "#da70d6",
-			palegoldenrod: "#eee8aa",
-			palegreen: "#98fb98",
-			paleturquoise: "#afeeee",
-			palevioletred: "#d87093",
-			papayawhip: "#ffefd5",
-			peachpuff: "#ffdab9",
-			peru: "#cd853f",
-			pink: "#ffc0cb",
-			plum: "#dda0dd",
-			powderblue: "#b0e0e6",
-			purple: "#800080",
-			rebeccapurple: "#663399",
-			red: "#ff0000",
-			rosybrown: "#bc8f8f",
-			royalblue: "#4169e1",
-			saddlebrown: "#8b4513",
-			salmon: "#fa8072",
-			sandybrown: "#f4a460",
-			seagreen: "#2e8b57",
-			seashell: "#fff5ee",
-			sienna: "#a0522d",
-			silver: "#c0c0c0",
-			skyblue: "#87ceeb",
-			slateblue: "#6a5acd",
-			slategray: "#708090",
-			snow: "#fffafa",
-			springgreen: "#00ff7f",
-			steelblue: "#4682b4",
-			tan: "#d2b48c",
-			teal: "#008080",
-			thistle: "#d8bfd8",
-			tomato: "#ff6347",
-			turquoise: "#40e0d0",
-			violet: "#ee82ee",
-			wheat: "#f5deb3",
-			white: "#ffffff",
-			whitesmoke: "#f5f5f5",
-			yellow: "#ffff00",
-			yellowgreen: "#9acd32",
+			aliceblue: '#f0f8ff',
+			antiquewhite: '#faebd7',
+			aqua: '#00ffff',
+			aquamarine: '#7fffd4',
+			azure: '#f0ffff',
+			beige: '#f5f5dc',
+			bisque: '#ffe4c4',
+			black: '#000000',
+			blanchedalmond: '#ffebcd',
+			blue: '#0000ff',
+			blueviolet: '#8a2be2',
+			brown: '#a52a2a',
+			burlywood: '#deb887',
+			cadetblue: '#5f9ea0',
+			chartreuse: '#7fff00',
+			chocolate: '#d2691e',
+			coral: '#ff7f50',
+			cornflowerblue: '#6495ed',
+			cornsilk: '#fff8dc',
+			crimson: '#dc143c',
+			cyan: '#00ffff',
+			darkblue: '#00008b',
+			darkcyan: '#008b8b',
+			darkgoldenrod: '#b8860b',
+			darkgray: '#a9a9a9',
+			darkgreen: '#006400',
+			darkkhaki: '#bdb76b',
+			darkmagenta: '#8b008b',
+			darkolivegreen: '#556b2f',
+			darkorange: '#ff8c00',
+			darkorchid: '#9932cc',
+			darkred: '#8b0000',
+			darksalmon: '#e9967a',
+			darkseagreen: '#8fbc8f',
+			darkslateblue: '#483d8b',
+			darkslategray: '#2f4f4f',
+			darkturquoise: '#00ced1',
+			darkviolet: '#9400d3',
+			deeppink: '#ff1493',
+			deepskyblue: '#00bfff',
+			dimgray: '#696969',
+			dodgerblue: '#1e90ff',
+			firebrick: '#b22222',
+			floralwhite: '#fffaf0',
+			forestgreen: '#228b22',
+			fuchsia: '#ff00ff',
+			gainsboro: '#dcdcdc',
+			ghostwhite: '#f8f8ff',
+			gold: '#ffd700',
+			goldenrod: '#daa520',
+			gray: '#808080',
+			green: '#008000',
+			greenyellow: '#adff2f',
+			honeydew: '#f0fff0',
+			hotpink: '#ff69b4',
+			'indianred ': '#cd5c5c',
+			indigo: '#4b0082',
+			ivory: '#fffff0',
+			khaki: '#f0e68c',
+			lavender: '#e6e6fa',
+			lavenderblush: '#fff0f5',
+			lawngreen: '#7cfc00',
+			lemonchiffon: '#fffacd',
+			lightblue: '#add8e6',
+			lightcoral: '#f08080',
+			lightcyan: '#e0ffff',
+			lightgoldenrodyellow: '#fafad2',
+			lightgrey: '#d3d3d3',
+			lightgreen: '#90ee90',
+			lightpink: '#ffb6c1',
+			lightsalmon: '#ffa07a',
+			lightseagreen: '#20b2aa',
+			lightskyblue: '#87cefa',
+			lightslategray: '#778899',
+			lightsteelblue: '#b0c4de',
+			lightyellow: '#ffffe0',
+			lime: '#00ff00',
+			limegreen: '#32cd32',
+			linen: '#faf0e6',
+			magenta: '#ff00ff',
+			maroon: '#800000',
+			mediumaquamarine: '#66cdaa',
+			mediumblue: '#0000cd',
+			mediumorchid: '#ba55d3',
+			mediumpurple: '#9370d8',
+			mediumseagreen: '#3cb371',
+			mediumslateblue: '#7b68ee',
+			mediumspringgreen: '#00fa9a',
+			mediumturquoise: '#48d1cc',
+			mediumvioletred: '#c71585',
+			midnightblue: '#191970',
+			mintcream: '#f5fffa',
+			mistyrose: '#ffe4e1',
+			moccasin: '#ffe4b5',
+			navajowhite: '#ffdead',
+			navy: '#000080',
+			oldlace: '#fdf5e6',
+			olive: '#808000',
+			olivedrab: '#6b8e23',
+			orange: '#ffa500',
+			orangered: '#ff4500',
+			orchid: '#da70d6',
+			palegoldenrod: '#eee8aa',
+			palegreen: '#98fb98',
+			paleturquoise: '#afeeee',
+			palevioletred: '#d87093',
+			papayawhip: '#ffefd5',
+			peachpuff: '#ffdab9',
+			peru: '#cd853f',
+			pink: '#ffc0cb',
+			plum: '#dda0dd',
+			powderblue: '#b0e0e6',
+			purple: '#800080',
+			rebeccapurple: '#663399',
+			red: '#ff0000',
+			rosybrown: '#bc8f8f',
+			royalblue: '#4169e1',
+			saddlebrown: '#8b4513',
+			salmon: '#fa8072',
+			sandybrown: '#f4a460',
+			seagreen: '#2e8b57',
+			seashell: '#fff5ee',
+			sienna: '#a0522d',
+			silver: '#c0c0c0',
+			skyblue: '#87ceeb',
+			slateblue: '#6a5acd',
+			slategray: '#708090',
+			snow: '#fffafa',
+			springgreen: '#00ff7f',
+			steelblue: '#4682b4',
+			tan: '#d2b48c',
+			teal: '#008080',
+			thistle: '#d8bfd8',
+			tomato: '#ff6347',
+			turquoise: '#40e0d0',
+			violet: '#ee82ee',
+			wheat: '#f5deb3',
+			white: '#ffffff',
+			whitesmoke: '#f5f5f5',
+			yellow: '#ffff00',
+			yellowgreen: '#9acd32',
 		};
 
-		if (typeof colours[colour.toLowerCase()] != "undefined")
+		if (typeof colours[colour.toLowerCase()] != 'undefined')
 			return colours[colour.toLowerCase()];
 
 		return false;
@@ -580,7 +618,7 @@ class RigidBody extends Reflex {
 
 	constructor(x, y, w, h, r, shape, color, imgPath, options) {
 		super(ReflexConfig);
-		this.type = "RigidBody";
+		this.type = 'RigidBody';
 		this.id = randomInt(1, 100000);
 
 		this.x = x;
@@ -610,14 +648,14 @@ class RigidBody extends Reflex {
 
 		// fix centerX and centerY
 		if (
-			this.shape == "rect" ||
-			this.shape == "roundrect" ||
-			this.shape == "sprite"
+			this.shape == 'rect' ||
+			this.shape == 'roundrect' ||
+			this.shape == 'sprite'
 		) {
 			this.centerX = this.x + this.w / 2;
 			this.centerY = this.y + this.h / 2;
 		}
-		if (this.shape == "circle") {
+		if (this.shape == 'circle') {
 			this.centerX = this.x + this.r / 2;
 			this.centerY = this.y + this.r / 2;
 		}
@@ -636,19 +674,19 @@ class RigidBody extends Reflex {
 			this.maxSpeed = this.options.movement.maxSpeed;
 			this.canvasBounds = this.options.movement.canvasBounds;
 			if (this.acceleration != undefined && this.maxSpeed == undefined)
-				throw "acceleration is defined while maxSpeed is undefined";
+				throw 'acceleration is defined while maxSpeed is undefined';
 
-			window.addEventListener("keydown", (e) => {
+			window.addEventListener('keydown', (e) => {
 				this.keyListener(e);
 			});
-			window.addEventListener("keyup", (e) => {
+			window.addEventListener('keyup', (e) => {
 				this.keyListener(e);
 			});
 		}
 
 		// create one imgObj if shape is sprite instead of creating a million and recieving the flash effect
 
-		if (this.shape == "sprite") {
+		if (this.shape == 'sprite') {
 			this.imgObj = new Image();
 		}
 
@@ -665,14 +703,14 @@ class RigidBody extends Reflex {
 	draw() {
 		// fix centerX and centerY
 		if (
-			this.shape == "rect" ||
-			this.shape == "roundrect" ||
-			this.shape == "sprite"
+			this.shape == 'rect' ||
+			this.shape == 'roundrect' ||
+			this.shape == 'sprite'
 		) {
 			this.centerX = this.x + this.w / 2;
 			this.centerY = this.y + this.h / 2;
 		}
-		if (this.shape == "circle") {
+		if (this.shape == 'circle') {
 			this.centerX = this.x + this.r / 2;
 			this.centerY = this.y + this.r / 2;
 		}
@@ -685,12 +723,12 @@ class RigidBody extends Reflex {
 		}
 
 		switch (this.shape) {
-			case "rect":
+			case 'rect':
 				this.ctx.fillStyle = this.color;
 				this.ctx.fillRect(this.x, this.y, this.w, this.h);
 				break;
 
-			case "roundrect":
+			case 'roundrect':
 				if (this.w < 2 * this.r) this.r = this.w / 2;
 				if (this.h < 2 * this.r) this.r = this.h / 2;
 				this.ctx.beginPath();
@@ -716,14 +754,14 @@ class RigidBody extends Reflex {
 				this.ctx.fill();
 				break;
 
-			case "circle":
+			case 'circle':
 				this.ctx.beginPath();
 				this.ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
 				this.ctx.fillStyle = this.color;
 				this.ctx.fill();
 				break;
 
-			case "sprite":
+			case 'sprite':
 				this.imgObj.src = this.imgPath;
 				this.ctx.drawImage(this.imgObj, this.x, this.y, this.w, this.h);
 				break;
@@ -775,15 +813,15 @@ class RigidBody extends Reflex {
 
 		if (
 			this.controller.up &&
-			(this.options.movement.type == "TopDown" ||
-				this.options.movement.type == "Jump" ||
-				this.options.movement.type == "UpDown")
+			(this.options.movement.type == 'TopDown' ||
+				this.options.movement.type == 'Jump' ||
+				this.options.movement.type == 'UpDown')
 		) {
 			if (this.canvasBounds) {
 				if (
-					this.shape == "rect" ||
-					this.shape == "roundrect" ||
-					this.shape == "sprite"
+					this.shape == 'rect' ||
+					this.shape == 'roundrect' ||
+					this.shape == 'sprite'
 				) {
 					if (this.y > 0) {
 						this.y -= this.vel;
@@ -791,7 +829,7 @@ class RigidBody extends Reflex {
 					}
 				}
 
-				if (this.shape == "circle") {
+				if (this.shape == 'circle') {
 					if (this.y > 0 + this.r) {
 						this.y -= this.vel;
 						this.isMoving = true;
@@ -805,14 +843,14 @@ class RigidBody extends Reflex {
 
 		if (
 			this.controller.down &&
-			(this.options.movement.type == "TopDown" ||
-				this.options.movement.type == "UpDown")
+			(this.options.movement.type == 'TopDown' ||
+				this.options.movement.type == 'UpDown')
 		) {
 			if (this.canvasBounds) {
 				if (
-					this.shape == "rect" ||
-					this.shape == "roundrect" ||
-					this.shape == "sprite"
+					this.shape == 'rect' ||
+					this.shape == 'roundrect' ||
+					this.shape == 'sprite'
 				) {
 					if (this.y < this.canvas.height - this.h) {
 						this.y += this.vel;
@@ -820,7 +858,7 @@ class RigidBody extends Reflex {
 					}
 				}
 
-				if (this.shape == "circle") {
+				if (this.shape == 'circle') {
 					if (this.y < this.canvas.height - this.r) {
 						this.y += this.vel;
 						this.isMoving = true;
@@ -834,21 +872,21 @@ class RigidBody extends Reflex {
 
 		if (
 			this.controller.left &&
-			(this.options.movement.type == "TopDown" ||
-				this.options.movement.type == "LeftRight")
+			(this.options.movement.type == 'TopDown' ||
+				this.options.movement.type == 'LeftRight')
 		) {
 			if (this.canvasBounds) {
 				if (
-					this.shape == "rect" ||
-					this.shape == "roundrect" ||
-					this.shape == "sprite"
+					this.shape == 'rect' ||
+					this.shape == 'roundrect' ||
+					this.shape == 'sprite'
 				) {
 					if (this.x > 0) {
 						this.x -= this.vel;
 						this.isMoving = true;
 					}
 				}
-				if (this.shape == "circle") {
+				if (this.shape == 'circle') {
 					if (this.x > 0 + this.r) {
 						this.x -= this.vel;
 						this.isMoving = true;
@@ -862,14 +900,14 @@ class RigidBody extends Reflex {
 
 		if (
 			this.controller.right &&
-			(this.options.movement.type == "TopDown" ||
-				this.options.movement.type == "LeftRight")
+			(this.options.movement.type == 'TopDown' ||
+				this.options.movement.type == 'LeftRight')
 		) {
 			if (this.canvasBounds) {
 				if (
-					this.shape == "rect" ||
-					this.shape == "roundrect" ||
-					this.shape == "sprite"
+					this.shape == 'rect' ||
+					this.shape == 'roundrect' ||
+					this.shape == 'sprite'
 				) {
 					if (this.x < this.canvas.width - this.w) {
 						this.x += this.vel;
@@ -877,7 +915,7 @@ class RigidBody extends Reflex {
 					}
 				}
 
-				if (this.shape == "circle") {
+				if (this.shape == 'circle') {
 					if (this.x < this.canvas.width - this.r) {
 						this.x += this.vel;
 						this.isMoving = true;
@@ -897,7 +935,7 @@ class RigidBody extends Reflex {
 	 */
 
 	keyListener(event) {
-		let key_state = event.type == "keydown" ? true : false;
+		let key_state = event.type == 'keydown' ? true : false;
 
 		switch (event.keyCode) {
 			case 37: // left arrow
@@ -933,7 +971,7 @@ class RigidBody extends Reflex {
 				break;
 
 			case 32: // space
-				if (this.options.movement.type == "Jump") {
+				if (this.options.movement.type == 'Jump') {
 					this.controller.up = key_state;
 				}
 				break;
@@ -948,11 +986,11 @@ class RigidBody extends Reflex {
 	 */
 
 	addForce(axis, force) {
-		if (typeof force != "number") {
+		if (typeof force != 'number') {
 			throw `Force if not typeof number. Force is typeof ${typeof force}`;
 		}
-		if (typeof axis == "string") {
-			if (axis == "x") {
+		if (typeof axis == 'string') {
+			if (axis == 'x') {
 				if (Math.sign(force) == 1) {
 					this.x += force;
 				} else if (Math.sign(force) == -1) {
@@ -960,7 +998,7 @@ class RigidBody extends Reflex {
 				} else {
 					throw `Force cannot be 0`;
 				}
-			} else if (axis == "y") {
+			} else if (axis == 'y') {
 				if (Math.sign(force) == 1) {
 					this.y += force;
 				} else if (Math.sign(force) == -1) {
@@ -1034,10 +1072,10 @@ class RigidBody extends Reflex {
 	on(event, callback) {
 		// throw errors
 		// typeof
-		if (typeof event != "string")
+		if (typeof event != 'string')
 			throw `RigidBody.on event is not typeof string and is typeof ${typeof event} instead`;
 		else event = event.toLowerCase();
-		if (typeof callback != "function")
+		if (typeof callback != 'function')
 			throw `RigidBody.on callback is not typeof function and is typeof ${typeof callback} instead`;
 
 		// color change and image change vars
@@ -1045,19 +1083,19 @@ class RigidBody extends Reflex {
 		let imgSrc = this.imgPath;
 
 		let int = setInterval(() => {
-			if (event == "move") {
+			if (event == 'move') {
 				if (this.isMoving) {
 					callback();
 				}
 			}
 
-			if (event == "colorChange") {
+			if (event == 'colorChange') {
 				if (color != this.color) {
 					callback();
 				}
 			}
 
-			if (event == "imageChange") {
+			if (event == 'imageChange') {
 				if (imgSrc != this.imgPath) {
 					callback();
 				}
@@ -1067,26 +1105,26 @@ class RigidBody extends Reflex {
 
 	get getCenterX() {
 		if (
-			this.shape == "rect" ||
-			this.shape == "roundrect" ||
-			this.shape == "sprite"
+			this.shape == 'rect' ||
+			this.shape == 'roundrect' ||
+			this.shape == 'sprite'
 		) {
 			return this.x + this.w / 2;
 		}
-		if (this.shape == "circle") {
+		if (this.shape == 'circle') {
 			return this.x + this.r / 2;
 		}
 	}
 
 	get getCenterY() {
 		if (
-			this.shape == "rect" ||
-			this.shape == "roundrect" ||
-			this.shape == "sprite"
+			this.shape == 'rect' ||
+			this.shape == 'roundrect' ||
+			this.shape == 'sprite'
 		) {
 			return this.y + this.h / 2;
 		}
-		if (this.shape == "circle") {
+		if (this.shape == 'circle') {
 			return this.y + this.h / 2;
 		}
 	}
@@ -1121,7 +1159,7 @@ class Background extends Reflex {
 
 	constructor(x, y, w, h, imgPath) {
 		super(ReflexConfig);
-		this.type = "Background";
+		this.type = 'Background';
 		this.id = randomInt(1, 100000);
 
 		this.x = x;
@@ -1152,10 +1190,10 @@ class Background extends Reflex {
 	 */
 
 	addForce(axis, force) {
-		if (typeof force != "number")
+		if (typeof force != 'number')
 			throw `Force if not typeof number. Force is typeof ${typeof force}`;
-		if (typeof axis == "string") {
-			if (axis == "x") {
+		if (typeof axis == 'string') {
+			if (axis == 'x') {
 				if (Math.sign(force) == 1) {
 					this.x += force;
 				} else if (Math.sign(force) == -1) {
@@ -1163,7 +1201,7 @@ class Background extends Reflex {
 				} else {
 					throw `Force cannot be 0`;
 				}
-			} else if (axis == "y") {
+			} else if (axis == 'y') {
 				if (Math.sign(force) == 1) {
 					this.y += force;
 				} else if (Math.sign(force) == -1) {
@@ -1188,7 +1226,7 @@ class Background extends Reflex {
 	wobble(intenstiy, ms) {
 		this.isWobbling = true;
 
-		if (this.debug) console.log("Started background wobble");
+		if (this.debug) console.log('Started background wobble');
 
 		let int = setInterval(() => {
 			let random = Math.floor(Math.random() * (6 - 1 + 1) + 1);
@@ -1212,7 +1250,7 @@ class Background extends Reflex {
 
 	stopWobble() {
 		this.isWobbling = false;
-		if (this.debug) console.log("Stopped background wobble");
+		if (this.debug) console.log('Stopped background wobble');
 	}
 }
 
@@ -1224,7 +1262,7 @@ class Background extends Reflex {
 class SpriteSheet extends Reflex {
 	constructor(rows, column, imgW, imgH, singleW, singleH) {
 		super(ReflexConfig);
-		this.type = "SpriteSheet"; // instead of contructor.name as minified files can cause problems
+		this.type = 'SpriteSheet'; // instead of contructor.name as minified files can cause problems
 		this.id = randomInt(1, 100000);
 
 		this.rows = rows;
@@ -1282,7 +1320,7 @@ class Sound extends Reflex {
 
 	constructor(options) {
 		super(ReflexConfig);
-		this.type = "Sound";
+		this.type = 'Sound';
 		this.id = randomInt(1, 100000);
 
 		this.options = options;
@@ -1303,27 +1341,27 @@ class Sound extends Reflex {
 		this.onDestroy = this.options.onDestroy || function () {};
 
 		// throw typeof errors
-		if (typeof this.options != "object")
+		if (typeof this.options != 'object')
 			throw `options must be a typeof object`;
-		if (typeof this.src != "string") throw `src must be a string`;
-		if (typeof this.autoplay != "boolean")
+		if (typeof this.src != 'string') throw `src must be a string`;
+		if (typeof this.autoplay != 'boolean')
 			throw `autoplay must be typeof boolean`;
-		if (typeof this.onPlay != "function")
+		if (typeof this.onPlay != 'function')
 			throw `onPlay must be typeof function`;
-		if (typeof this.onPause != "function")
+		if (typeof this.onPause != 'function')
 			throw `onPause must be typeof function`;
-		if (typeof this.onVolumeChange != "function")
+		if (typeof this.onVolumeChange != 'function')
 			throw `onVolumeChange must be typeof function`;
-		if (typeof this.onEnd != "function")
+		if (typeof this.onEnd != 'function')
 			throw `onEnd must be typeof function`;
-		if (typeof this.onDestroy != "function")
+		if (typeof this.onDestroy != 'function')
 			throw `onDestroy must be typeof function`;
-		if (typeof this.volume != "number")
+		if (typeof this.volume != 'number')
 			throw `volume must be typeof number`;
 
 		// Main Sound Functionality
 
-		this.element = document.createElement("audio");
+		this.element = document.createElement('audio');
 
 		// main attr
 		this.element.volume = this.volume;
@@ -1350,7 +1388,7 @@ class Sound extends Reflex {
 		// destroyAfter
 
 		if (this.destroyAfter) {
-			this.element.addEventListener("ended", () => {
+			this.element.addEventListener('ended', () => {
 				this.element.onDestroy();
 				this.element.remove();
 			});
@@ -1379,7 +1417,7 @@ class Sound extends Reflex {
 	 */
 
 	playAfter(sound) {
-		this.element.addEventListener("ended", () => {
+		this.element.addEventListener('ended', () => {
 			sound.play();
 		});
 	}
@@ -1449,12 +1487,12 @@ class ProximitySound extends Reflex {
 
 	constructor(x, y, sound, options, affects) {
 		super(ReflexConfig);
-		this.type = "ProximitySound";
+		this.type = 'ProximitySound';
 		this.id = randomInt(1, 100000);
 
 		this.x = x;
 		this.y = y;
-		this.color = "rgba(0, 0, 0, 0)";
+		this.color = 'rgba(0, 0, 0, 0)';
 
 		this.sound = sound;
 		this.options = options;
@@ -1463,7 +1501,7 @@ class ProximitySound extends Reflex {
 		this.showDebugCircle = this.options.debugCirlce || false;
 
 		if (this.showDebugCircle) {
-			this.color = "rgba(0, 0, 0, 0.1)";
+			this.color = 'rgba(0, 0, 0, 0.1)';
 		}
 
 		this.r = this.options.radius;
@@ -1471,7 +1509,7 @@ class ProximitySound extends Reflex {
 		this.sound.changeVolume(0);
 
 		// throw typeof errors
-		if (typeof this.options != "object") throw `options is not an object`;
+		if (typeof this.options != 'object') throw `options is not an object`;
 		if (!Array.isArray(this.affects)) throw `affects is not an array`;
 
 		Entitys._ProximitySound.push(this);
@@ -1541,7 +1579,7 @@ class Shadow extends Reflex {
 
 	constructor(alpha, radius, offsetX, offsetY) {
 		super(ReflexConfig);
-		this.type = "Shadow";
+		this.type = 'Shadow';
 		this.id = randomInt(1, 100000);
 
 		this.alpha = alpha;
@@ -1579,7 +1617,7 @@ class Shadow extends Reflex {
 	 */
 
 	appendTo(rigidbody) {
-		if (rigidbody.type != "RigidBody")
+		if (rigidbody.type != 'RigidBody')
 			throw `Cannot append shadow to ${rigidbody.type}`;
 		rigidbody.hasShadow = true;
 		rigidbody.selfShadow = this;
@@ -1593,7 +1631,7 @@ class Shadow extends Reflex {
 	 */
 
 	removeFrom(rigidbody) {
-		if (rigidbody.type != "RigidBody")
+		if (rigidbody.type != 'RigidBody')
 			throw `Cannot remove shadow from ${rigidbody.type}`;
 		if (!rigidbody.hasShadow)
 			throw `Cannot remove shadow, ${rigidbody} does not have a shadow to remove`;
@@ -1632,7 +1670,7 @@ class Particles extends Reflex {
 
 	constructor(shape, graphic, options, w, h, r) {
 		super(ReflexConfig);
-		this.type = "Particles";
+		this.type = 'Particles';
 		this.id = randomInt(1, 100000);
 
 		this.shape = shape.toLowerCase();
@@ -1657,7 +1695,7 @@ class Particles extends Reflex {
 		this.isEmitting = false;
 		this.isWobbling = false;
 		this.isPreset = false;
-		this.currentPreset = "";
+		this.currentPreset = '';
 
 		// push particles to list
 		this.create();
@@ -1671,7 +1709,7 @@ class Particles extends Reflex {
 
 	create() {
 		switch (this.shape) {
-			case "rect":
+			case 'rect':
 				for (let i = 0; i < this.amount; i++) {
 					this.randomX = randomInt(this.minX, this.maxX);
 					this.randomY = randomInt(this.minY, this.maxY);
@@ -1681,15 +1719,15 @@ class Particles extends Reflex {
 						this.w,
 						this.h,
 						0,
-						"rect",
+						'rect',
 						this.graphic
 					);
-					p.type = "ParticleChild";
+					p.type = 'ParticleChild';
 					this.list.push(p);
 				}
 				break;
 
-			case "roundrect":
+			case 'roundrect':
 				for (let i = 0; i < this.amount; i++) {
 					this.randomX = randomInt(this.minX, this.maxX);
 					this.randomY = randomInt(this.minY, this.maxY);
@@ -1699,15 +1737,15 @@ class Particles extends Reflex {
 						this.w,
 						this.h,
 						this.r,
-						"roundrect",
+						'roundrect',
 						this.graphic
 					);
-					p.type = "ParticleChild";
+					p.type = 'ParticleChild';
 					this.list.push(p);
 				}
 				break;
 
-			case "circle":
+			case 'circle':
 				for (let i = 0; i < this.amount; i++) {
 					this.randomX = randomInt(this.minX, this.maxX);
 					this.randomY = randomInt(this.minY, this.maxY);
@@ -1717,15 +1755,15 @@ class Particles extends Reflex {
 						this.w,
 						this.h,
 						this.r,
-						"circle",
+						'circle',
 						this.graphic
 					);
-					p.type = "ParticleChild";
+					p.type = 'ParticleChild';
 					this.list.push(p);
 				}
 				break;
 
-			case "sprite":
+			case 'sprite':
 				for (let i = 0; i < this.amount; i++) {
 					this.randomX = randomInt(this.minX, this.maxX);
 					this.randomY = randomInt(this.minY, this.maxY);
@@ -1736,7 +1774,7 @@ class Particles extends Reflex {
 							this.w,
 							this.h,
 							0,
-							"sprite",
+							'sprite',
 							undefined,
 							this.graphic
 						)
@@ -1745,7 +1783,7 @@ class Particles extends Reflex {
 				break;
 
 			default:
-				throw "Particles.shape is not a rect, roundrect, circle, or sprite.";
+				throw 'Particles.shape is not a rect, roundrect, circle, or sprite.';
 				break;
 		}
 	}
@@ -1768,7 +1806,7 @@ class Particles extends Reflex {
 
 	emit() {
 		this.isEmitting = true;
-		if (this.debug) console.log("Started Emitting Particles");
+		if (this.debug) console.log('Started Emitting Particles');
 	}
 
 	/**
@@ -1777,7 +1815,7 @@ class Particles extends Reflex {
 
 	stopEmitting() {
 		this.isEmitting = false;
-		if (this.debug) console.log("Stopped Emitting Particles");
+		if (this.debug) console.log('Stopped Emitting Particles');
 	}
 
 	/**
@@ -1786,7 +1824,7 @@ class Particles extends Reflex {
 	 */
 
 	wobble(speed) {
-		if (typeof speed != "number")
+		if (typeof speed != 'number')
 			throw `Particles.wobble speed is not a number and is typeof ${typeof speed}`;
 
 		this.list.forEach((particle) => {
@@ -1811,7 +1849,7 @@ class Particles extends Reflex {
 	animate(preset, speed, dir) {
 		// (very messy code)
 		switch (preset) {
-			case "explosion":
+			case 'explosion':
 				let chunked = chunkify(
 					this.list,
 					8,
@@ -1872,16 +1910,16 @@ class Particles extends Reflex {
 
 				break;
 
-			case "smoke":
+			case 'smoke':
 				this.list.forEach((particle) => {
 					particle.y -= speed;
 				});
-				if (dir == "left") {
+				if (dir == 'left') {
 					this.list.forEach((particle) => {
 						particle.x -= speed / 2;
 					});
 				}
-				if (dir == "right") {
+				if (dir == 'right') {
 					this.list.forEach((particle) => {
 						particle.x += speed / 2;
 					});
@@ -1901,7 +1939,7 @@ class Particles extends Reflex {
 
 	destroy(amount) {
 		if (amount > this.list.length)
-			throw "Particles.destroy amount is greater than amount of particles";
+			throw 'Particles.destroy amount is greater than amount of particles';
 
 		amount = amount || this.list.length;
 
@@ -1912,7 +1950,7 @@ class Particles extends Reflex {
 				this.list.splice(i, 1);
 			}
 		} else {
-			if (this.debug) console.log("Destroyed all particles");
+			if (this.debug) console.log('Destroyed all particles');
 
 			this.stopEmitting();
 			this.list.length = 0;
@@ -1946,7 +1984,7 @@ class Text extends Reflex {
 
 	constructor(x, y, text, styles) {
 		super(ReflexConfig);
-		this.type = "Text";
+		this.type = 'Text';
 		this.id = randomInt(1, 100000);
 
 		this.x = x;
@@ -1957,9 +1995,9 @@ class Text extends Reflex {
 
 		this.font = this.styles.font;
 		this.color = this.styles.color;
-		this.textAlign = this.styles.textAlign || "start";
+		this.textAlign = this.styles.textAlign || 'start';
 		this.method = this.styles.method;
-		this.strokeStyle = this.styles.strokeStyle || "#000000";
+		this.strokeStyle = this.styles.strokeStyle || '#000000';
 		this.strokeWidth = this.styles.strokeWidth || 1;
 
 		Entitys._Text.push(this);
@@ -1970,7 +2008,7 @@ class Text extends Reflex {
 	 */
 
 	draw() {
-		if (this.method == "fill") {
+		if (this.method == 'fill') {
 			this.ctx.font = this.font;
 			this.ctx.fillStyle = this.color;
 			this.ctx.textAlign = this.textAlign;
@@ -1979,7 +2017,7 @@ class Text extends Reflex {
 			this.ctx.fillText(this.text, this.x, this.y);
 		}
 
-		if (this.method == "stroke") {
+		if (this.method == 'stroke') {
 			this.ctx.font = this.font;
 			this.ctx.fillStyle = this.color;
 			this.ctx.textAlign = this.textAlign;
@@ -1988,7 +2026,7 @@ class Text extends Reflex {
 			this.ctx.strokeText(this.text, this.x, this.y);
 		}
 
-		if (this.method == "fillstroke") {
+		if (this.method == 'fillstroke') {
 			this.ctx.font = this.font;
 			this.ctx.fillStyle = this.color;
 			this.ctx.textAlign = this.textAlign;
@@ -2032,7 +2070,7 @@ class Button extends Reflex {
 
 	constructor(x, y, w, h, r, text, styles, cb) {
 		super(ReflexConfig);
-		this.type = "Button";
+		this.type = 'Button';
 		this.id = randomInt(1, 100000);
 
 		this.x = x;
@@ -2059,10 +2097,10 @@ class Button extends Reflex {
 		this.textX = this.x + this.w / 2 - this.text.length * 1.75;
 		this.textY = this.y + this.y / 2;
 
-		if (typeof this.cb != "function") throw `Button cb is not a function`;
+		if (typeof this.cb != 'function') throw `Button cb is not a function`;
 
 		this.canvas.addEventListener(
-			"click",
+			'click',
 			(e) => {
 				let mousePos = this.getMousePos(e);
 
@@ -2073,7 +2111,7 @@ class Button extends Reflex {
 			false
 		);
 
-		if (this.imgPath && this.shape == "image") {
+		if (this.imgPath && this.shape == 'image') {
 			this.imgObj = new Image();
 		}
 
@@ -2082,7 +2120,7 @@ class Button extends Reflex {
 
 	draw() {
 		switch (this.shape) {
-			case "rect":
+			case 'rect':
 				this.ctx.fillStyle = this.color;
 				this.ctx.lineWidth = this.strokeWidth;
 				this.ctx.strokeStyle = this.strokeStyle;
@@ -2090,7 +2128,7 @@ class Button extends Reflex {
 				this.stroke();
 				break;
 
-			case "roundrect":
+			case 'roundrect':
 				if (this.w < 2 * this.r) this.r = this.w / 2;
 				if (this.h < 2 * this.r) this.r = this.h / 2;
 				this.ctx.beginPath();
@@ -2119,7 +2157,7 @@ class Button extends Reflex {
 				this.ctx.stroke();
 				break;
 
-			case "image":
+			case 'image':
 				this.imgObj.src = this.imgPath;
 				this.ctx.drawImage(this.imgObj, this.x, this.y, this.w, this.h);
 				break;
@@ -2185,7 +2223,7 @@ class StaticLight extends Reflex {
 
 	constructor(x, y, r, color, blur) {
 		super(ReflexConfig);
-		this.type = "StaticLight";
+		this.type = 'StaticLight';
 		this.id = randomInt(1, 100000);
 
 		this.x = x;
@@ -2203,12 +2241,12 @@ class StaticLight extends Reflex {
 
 	draw() {
 		if (this.isEmitting) {
-			this.ctx.globalCompositeOperation = "lighter";
+			this.ctx.globalCompositeOperation = 'lighter';
 			this.ctx.beginPath();
 			this.ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
 			this.ctx.fillStyle = this.color;
 			this.ctx.fill();
-			this.ctx.globalCompositeOperation = "source-over";
+			this.ctx.globalCompositeOperation = 'source-over';
 		}
 	}
 
@@ -2234,7 +2272,7 @@ class StaticLight extends Reflex {
 	 */
 
 	appendTo(rigidbody) {
-		if (rigidbody.type != "RigidBody")
+		if (rigidbody.type != 'RigidBody')
 			throw `Cannot append shadow to ${rigidbody.type}`;
 		rigidbody.hasLight = true;
 		rigidbody.selfLight = this;
@@ -2248,7 +2286,7 @@ class StaticLight extends Reflex {
 	 */
 
 	unappend(rigidbody) {
-		if (rigidbody.type != "RigidBody")
+		if (rigidbody.type != 'RigidBody')
 			throw `Cannot remove light from ${rigidbody.type}`;
 		if (!rigidbody.hasLight)
 			throw `Cannot remove light, ${rigidbody} does not have a light to remove`;

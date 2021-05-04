@@ -188,6 +188,8 @@ background.wobble(0.25, 100);
 
 function loop() {
 	World.clear(); // clears canvas
+	let fps = World.fps.tick();
+	document.querySelector('#fps').innerHTML = `FPS: ${fps}`;
 
 	// draw background and shadows first
 	background.draw();
