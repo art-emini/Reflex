@@ -43,8 +43,16 @@ A simple Javascript game engine.
 
 ### CDN Module
 
+**Development**
+
 1. Import Reflex as a module. ([Help here](#importing))
-2. Change the from to the [CDN link.](https://cdn.jsdelivr.net/gh/ksplatdev/reflex@1.2.0/Reflex.js)
+2. Change the from to the [CDN link.](https://cdn.jsdelivr.net/gh/ksplatdev/reflex@1.4.0/Reflex.js)
+3. Done, [Read The Docs](https://ksplatdev.github.io/Reflex/index.html).
+
+**Production**
+
+1. Import Reflex as a module. ([Help here](#importing))
+2. Change the from to the [CDN link.](https://cdn.jsdelivr.net/gh/ksplatdev/reflex@1.4.0/Reflex.min.js)
 3. Done, [Read The Docs](https://ksplatdev.github.io/Reflex/index.html).
 
 <br>

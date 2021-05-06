@@ -278,8 +278,8 @@ let Entitys = {
  */
 
 /**
- * @description Main Reflex Class
  * @class Reflex
+ * @classdesc Main Reflex Class
  */
 
 class Reflex {
@@ -586,7 +586,7 @@ class Reflex {
 
 /**
  * @class RigidBody
- * @description Creates a Rigid Body
+ * @classdesc Creates a Rigid Body
  */
 
 class RigidBody extends Reflex {
@@ -1142,7 +1142,7 @@ class RigidBody extends Reflex {
 
 /**
  * @class Background
- * @description Creates a background
+ * @classdesc Creates a background
  */
 
 class Background extends Reflex {
@@ -1256,7 +1256,7 @@ class Background extends Reflex {
 
 /**
  * @class SpriteSheet
- * @description Creates a SpriteSheet
+ * @classdesc Creates a SpriteSheet
  */
 
 class SpriteSheet extends Reflex {
@@ -1296,7 +1296,7 @@ class SpriteSheet extends Reflex {
 
 /**
  * @class Sound
- * @description Creates a Sound
+ * @classdesc Creates a Sound
  */
 
 class Sound extends Reflex {
@@ -1467,7 +1467,7 @@ class Sound extends Reflex {
 
 /**
  * @class ProximitySound
- * @description Creates a ProximitySound
+ * @classdesc Creates a ProximitySound
  */
 
 class ProximitySound extends Reflex {
@@ -1565,7 +1565,7 @@ class ProximitySound extends Reflex {
 
 /**
  * @class Shadow
- * @description Creates a basic circle shadow
+ * @classdesc Creates a basic circle shadow
  */
 
 class Shadow extends Reflex {
@@ -1645,7 +1645,7 @@ class Shadow extends Reflex {
 
 /**
  * @class Particles
- * @description Creates Particles
+ * @classdesc Creates Particles
  */
 
 class Particles extends Reflex {
@@ -1964,7 +1964,7 @@ class Particles extends Reflex {
 
 /**
  * @class Text
- * @description Creates text on the canvas
+ * @classdesc Creates text on the canvas
  */
 
 class Text extends Reflex {
@@ -2040,7 +2040,7 @@ class Text extends Reflex {
 
 /**
  * @class Button
- * @description Creates a button on the canvas
+ * @classdesc Creates a button on the canvas
  */
 
 class Button extends Reflex {
@@ -2206,7 +2206,7 @@ class Button extends Reflex {
 
 /**
  * @class StaticLight
- * @description Creates a StaticLight
+ * @classdesc Creates a StaticLight
  */
 
 class StaticLight extends Reflex {
@@ -2297,6 +2297,158 @@ class StaticLight extends Reflex {
 	}
 }
 
+/**
+ * @class Gamepad
+ * @classdesc Creates a Gamepad listener
+ */
+
+class Gamepad extends Reflex {
+	/**
+	 * @description
+	 * @param {object} options Options object
+	 * @param {boolean} options.turbo Determines if holding a button down is allowed
+	 * @param {Function} [options.turbo_fire=() => {}] Function to be called if button is being held
+	 * @param {Function} options.managePause Function to be called if button is being pressed
+	 *
+	 * @returns gamepadAPI
+	 * @memberof Gamepad
+	 */
+
+	constructor(options) {
+		super(ReflexConfig);
+		this.id = randomInt(1, 100000);
+		this.type = 'Gamepad';
+
+		this.turbo_fire = function () {} || options.turbo_fire;
+		this.managePause = function () {} || options.managePause;
+
+		this.gamepadAPI = {
+			controller: {},
+			turbo: false || options.turbo,
+			connect: (evt) => {
+				this.gamepadAPI.controller = evt.gamepad;
+				this.gamepadAPI.turbo = true;
+				if (this.debug) console.log('Gamepad device connected');
+			},
+			disconnect: (evt) => {
+				this.gamepadAPI.turbo = false;
+				delete this.gamepadAPI.controller;
+				if (this.debug) console.log('Gamepad device disconnected');
+			},
+			update: (evt) => {
+				this.gamepadAPI.buttonsCache = [];
+
+				for (let k = 0; k < this.gamepadAPI.buttonsStatus.length; k++) {
+					this.gamepadAPI.buttonsCache[
+						k
+					] = this.gamepadAPI.buttonsStatus[k];
+				}
+
+				this.gamepadAPI.buttonsStatus = [];
+
+				let c = this.gamepadAPI.controller || {};
+
+				let pressed = [];
+				if (c.buttons) {
+					for (let b = 0, t = c.buttons.length; b < t; b++) {
+						if (c.buttons[b].pressed) {
+							pressed.push(this.gamepadAPI.buttons[b]);
+						}
+					}
+				}
+
+				let axes = [];
+				if (c.axes) {
+					for (let a = 0, x = c.axes.length; a < x; a++) {
+						axes.push(c.axes[a].toFixed(2));
+					}
+				}
+
+				this.gamepadAPI.axesStatus = axes;
+				this.gamepadAPI.buttonsStatus = pressed;
+
+				return pressed;
+			},
+			buttonPressed: function (button, hold) {
+				let newPress = false;
+				// loop through pressed buttons
+				for (
+					let i = 0, s = this.gamepadAPI.buttonsStatus.length;
+					i < s;
+					i++
+				) {
+					// if we found the button we're looking for...
+					if (this.gamepadAPI.buttonsStatus[i] == button) {
+						// set the boolean variable to true
+						newPress = true;
+						// if we want to check the single press
+						if (!hold) {
+							// loop through the cached states from the previous frame
+							for (
+								var j = 0,
+									p = this.gamepadAPI.buttonsCache.length;
+								j < p;
+								j++
+							) {
+								// if the button was already pressed, ignore new press
+								if (this.gamepadAPI.buttonsCache[j] == button) {
+									newPress = false;
+								}
+							}
+						}
+					}
+				}
+				return newPress;
+			},
+			buttons: [
+				'DPad-Up',
+				'DPad-Down',
+				'DPad-Left',
+				'DPad-Right',
+				'Start',
+				'Back',
+				'Axis-Left',
+				'Axis-Right',
+				'LB',
+				'RB',
+				'Power',
+				'A',
+				'B',
+				'X',
+				'Y',
+			],
+			buttonsCache: [],
+			buttonsStatus: [],
+			axesStatus: [],
+		};
+
+		if (this.gamepadAPI.turbo) {
+			if (this.gamepadAPI.buttonPressed('A', 'hold')) {
+				this.turbo_fire();
+			}
+			if (this.gamepadAPI.buttonPressed('B')) {
+				this.managePause();
+			}
+		}
+
+		return this.gamepadAPI;
+	}
+
+	init() {
+		window.addEventListener('gamepadconnected', this.gamepadAPI.connect);
+		window.addEventListener(
+			'gamepaddisconnected',
+			this.gamepadAPI.disconnect
+		);
+	}
+}
+
+class TouchController {
+	constructor() {}
+
+	init() {}
+}
+
 // end lights
 //#endregion
 
@@ -2362,6 +2514,18 @@ let Audio = {
 
 /**
  * @namespace
+ * @description Reflex Movement classes
+ * @property {Gamepad} Gamepad
+ * @property {TouchController} TouchController
+ */
+
+let Movement = {
+	Gamepad: Gamepad,
+	TouchController: TouchController,
+};
+
+/**
+ * @namespace
  * @description Reflex Misc classes
  * @property {SpriteSheet} SpriteSheet
  */
@@ -2382,6 +2546,6 @@ let Data = {
 
 // export as a module
 
-export { Reflex, Objects, Lights, Misc, Audio, GFX, UI, Data };
+export { Reflex, Objects, Lights, Misc, Audio, Movement, GFX, UI, Data };
 
 //#endregion

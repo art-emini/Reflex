@@ -23,6 +23,15 @@ Plans that have been completed gets removed after it has been merged.
 -   [x] Add Reflex.width and Reflex.height
 -   [x] JsDoc Reflex Class Props
 -   [x] Re build docs
+-   [x] Add Movement group
+-   [ ] Add Gamepad class
+-   -   [ ] Add RigidBody Movement object can be a Gamepad instance
+-   -   [ ] Add full Gamepad support for RigidBody
+-   [ ] Add TouchController class
+-   -   [ ] Add RigidBody Movement object can be a TouchController instance
+-   -   [ ] Add full TouchController support for RigidBody
+-   [x] Change jsdoc desc for classes to @classdesc
+-   [ ] Rebuild Docs
 
 ## 2.0.0
 
@@ -37,9 +46,3 @@ Plans that have been completed gets removed after it has been merged.
 -   [ ] Add more Particle Animations
 -   [ ] Add Particles.addForce
 -   [ ] Add circle collision detection and response
--   [ ] Add Gamepad class
--   -   [ ] Add RigidBody Movement object can be a Gamepad instance
--   -   [ ] Add full Gamepad support for RigidBody
--   [ ] Add TouchController class
--   -   [ ] Add RigidBody Movement object can be a TouchController instance
--   -   [ ] Add full TouchController support for RigidBody
