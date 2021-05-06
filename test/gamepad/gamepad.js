@@ -33,6 +33,10 @@ function loop() {
 	let fps = World.fps.tick();
 	document.querySelector('#fps').innerHTML = `FPS: ${fps}`;
 
+	myGamepad.update();
+
+	myRoundRect.draw();
+
 	requestAnimationFrame(loop);
 }
 

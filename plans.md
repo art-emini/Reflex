@@ -24,9 +24,8 @@ Plans that have been completed gets removed after it has been merged.
 -   [x] JsDoc Reflex Class Props
 -   [x] Re build docs
 -   [x] Add Movement group
--   [ ] Add Gamepad class
--   -   [ ] Add RigidBody Movement object can be a Gamepad instance
--   -   [ ] Add full Gamepad support for RigidBody
+-   [x] Add Gamepad class
+-   -   [x] Add return value of a gamepad
 -   [ ] Add TouchController class
 -   -   [ ] Add RigidBody Movement object can be a TouchController instance
 -   -   [ ] Add full TouchController support for RigidBody

@@ -2310,136 +2310,45 @@ class Gamepad extends Reflex {
 	 * @param {Function} [options.turbo_fire=() => {}] Function to be called if button is being held
 	 * @param {Function} options.managePause Function to be called if button is being pressed
 	 *
-	 * @returns gamepadAPI
+	 * @returns Gamepad | null
 	 * @memberof Gamepad
 	 */
 
-	constructor(options) {
+	constructor() {
 		super(ReflexConfig);
 		this.id = randomInt(1, 100000);
 		this.type = 'Gamepad';
 
-		this.turbo_fire = function () {} || options.turbo_fire;
-		this.managePause = function () {} || options.managePause;
+		this.gamepad;
 
-		this.gamepadAPI = {
-			controller: {},
-			turbo: false || options.turbo,
-			connect: (evt) => {
-				this.gamepadAPI.controller = evt.gamepad;
-				this.gamepadAPI.turbo = true;
-				if (this.debug) console.log('Gamepad device connected');
-			},
-			disconnect: (evt) => {
-				this.gamepadAPI.turbo = false;
-				delete this.gamepadAPI.controller;
-				if (this.debug) console.log('Gamepad device disconnected');
-			},
-			update: (evt) => {
-				this.gamepadAPI.buttonsCache = [];
+		this.connected = false;
 
-				for (let k = 0; k < this.gamepadAPI.buttonsStatus.length; k++) {
-					this.gamepadAPI.buttonsCache[
-						k
-					] = this.gamepadAPI.buttonsStatus[k];
-				}
-
-				this.gamepadAPI.buttonsStatus = [];
-
-				let c = this.gamepadAPI.controller || {};
-
-				let pressed = [];
-				if (c.buttons) {
-					for (let b = 0, t = c.buttons.length; b < t; b++) {
-						if (c.buttons[b].pressed) {
-							pressed.push(this.gamepadAPI.buttons[b]);
-						}
-					}
-				}
-
-				let axes = [];
-				if (c.axes) {
-					for (let a = 0, x = c.axes.length; a < x; a++) {
-						axes.push(c.axes[a].toFixed(2));
-					}
-				}
-
-				this.gamepadAPI.axesStatus = axes;
-				this.gamepadAPI.buttonsStatus = pressed;
-
-				return pressed;
-			},
-			buttonPressed: function (button, hold) {
-				let newPress = false;
-				// loop through pressed buttons
-				for (
-					let i = 0, s = this.gamepadAPI.buttonsStatus.length;
-					i < s;
-					i++
-				) {
-					// if we found the button we're looking for...
-					if (this.gamepadAPI.buttonsStatus[i] == button) {
-						// set the boolean variable to true
-						newPress = true;
-						// if we want to check the single press
-						if (!hold) {
-							// loop through the cached states from the previous frame
-							for (
-								var j = 0,
-									p = this.gamepadAPI.buttonsCache.length;
-								j < p;
-								j++
-							) {
-								// if the button was already pressed, ignore new press
-								if (this.gamepadAPI.buttonsCache[j] == button) {
-									newPress = false;
-								}
-							}
-						}
-					}
-				}
-				return newPress;
-			},
-			buttons: [
-				'DPad-Up',
-				'DPad-Down',
-				'DPad-Left',
-				'DPad-Right',
-				'Start',
-				'Back',
-				'Axis-Left',
-				'Axis-Right',
-				'LB',
-				'RB',
-				'Power',
-				'A',
-				'B',
-				'X',
-				'Y',
-			],
-			buttonsCache: [],
-			buttonsStatus: [],
-			axesStatus: [],
-		};
-
-		if (this.gamepadAPI.turbo) {
-			if (this.gamepadAPI.buttonPressed('A', 'hold')) {
-				this.turbo_fire();
-			}
-			if (this.gamepadAPI.buttonPressed('B')) {
-				this.managePause();
-			}
+		if (navigator.getGamepads()[0] != null) {
+			this.connected = true;
 		}
 
-		return this.gamepadAPI;
+		this.gamepadIndex;
+		window.addEventListener('gamepadconnected', (event) => {
+			this.gamepadIndex = event.gamepad.index;
+			this.connected = true;
+		});
+
+		return navigator.getGamepads()[this.gamepadIndex];
 	}
 
-	init() {
-		window.addEventListener('gamepadconnected', this.gamepadAPI.connect);
-		window.addEventListener(
-			'gamepaddisconnected',
-			this.gamepadAPI.disconnect
-		);
+	update() {
+		if (this.gamepad && this.gamepadIndex) {
+			this.gamepad = navigator.getGamepads()[this.gamepadIndex];
+			this.connected = true;
+			if (this.debug) {
+				console.log(
+					`Left stick at (${this.gamepad.axes[0]}, ${this.gamepad.axes[1]})`
+				);
+				console.log(
+					`Right stick at (${this.gamepad.axes[2]}, ${this.gamepad.axes[3]})`
+				);
+			}
+		}
 	}
 }
 
