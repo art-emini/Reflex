@@ -22,7 +22,7 @@ A simple Javascript game engine.
 14. Great performance.
 15. Future Plans such as dynamic lighting.
 16. Often updates/patches.
-17. And way more.
+17. And way more. Look at the [docs](https://ksplatdev.github.io/Reflex/index.html)!
 
 <br>
 

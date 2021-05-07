@@ -30,7 +30,7 @@ Plans that have been completed gets removed after it has been merged.
 -   -   [ ] Add RigidBody Movement object can be a TouchController instance
 -   -   [ ] Add full TouchController support for RigidBody
 -   [x] Change jsdoc desc for classes to @classdesc
--   [ ] Rebuild Docs
+-   [x] Rebuild Docs
 
 ## 2.0.0
 

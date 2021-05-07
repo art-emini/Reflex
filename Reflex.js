@@ -2303,7 +2303,7 @@ class StaticLight extends Reflex {
 
 class Gamepad extends Reflex {
 	/**
-	 * @description
+	 * @description Creates and returns a gamepad api object
 	 * @param {object} options Options object
 	 * @param {boolean} options.turbo Determines if holding a button down is allowed
 	 * @param {Function} [options.turbo_fire=() => {}] Function to be called if button is being held

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: StaticLight</title>
+    <title>JSDoc: Class: Gamepad</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: StaticLight</h1>
+    <h1 class="page-title">Class: Gamepad</h1>
 
     
 
@@ -29,7 +29,7 @@
 <header>
     
         <h2><span class="attribs"><span class="type-signature"></span></span>
-            <span class="ancestors"><a href="StaticLight.html">StaticLight</a>.</span>StaticLight<span class="signature">(x, y, r, color, blur)</span><span class="type-signature"></span></h2>
+            <span class="ancestors"><a href="Gamepad.html">Gamepad</a>.</span>Gamepad<span class="signature">(options)</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -42,7 +42,7 @@
     
 
     
-    <h4 class="name" id="StaticLight"><span class="type-signature"></span>new StaticLight<span class="signature">(x, y, r, color, blur)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Gamepad"><span class="type-signature"></span>new Gamepad<span class="signature">(options)</span><span class="type-signature"></span></h4>
     
 
     
@@ -50,7 +50,7 @@
 
 
 <div class="description">
-    Creates a StaticLight which is a "fake" light
+    Creates and returns a gamepad api object
 </div>
 
 
@@ -86,13 +86,13 @@
 
         <tr>
             
-                <td class="name"><code>x</code></td>
+                <td class="name"><code>options</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Number</span>
+<span class="param-type">object</span>
 
 
             
@@ -102,99 +102,146 @@
 
             
 
-            <td class="description last">X pos</td>
+            <td class="description last">Options object
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>turbo</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Determines if holding a button down is allowed</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>y</code></td>
+                <td class="name"><code>turbo_fire</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Number</span>
+<span class="param-type">function</span>
 
 
             
             </td>
 
             
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
 
+                
+
+                
+                </td>
             
 
-            <td class="description last">Y pos</td>
+            
+                <td class="default">
+                
+                    () => {}
+                
+                </td>
+            
+
+            <td class="description last">Function to be called if button is being held</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>r</code></td>
+                <td class="name"><code>managePause</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Number</span>
+<span class="param-type">function</span>
 
 
             
             </td>
 
             
+                <td class="attributes">
+                
 
+                
+
+                
+                </td>
             
 
-            <td class="description last">Radius of the light</td>
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Function to be called if button is being pressed</td>
         </tr>
 
     
+    </tbody>
+</table>
 
-        <tr>
-            
-                <td class="name"><code>color</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
             </td>
-
-            
-
-            
-
-            <td class="description last">Color of the light, RGBA color</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>blur</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Blur intenstity</td>
         </tr>
 
     
@@ -235,7 +282,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Reflex.js.html">Reflex.js</a>, <a href="Reflex.js.html#line2223">line 2223</a>
+        <a href="Reflex.js.html">Reflex.js</a>, <a href="Reflex.js.html#line2316">line 2316</a>
     </li></ul></dd>
     
 
@@ -260,6 +307,16 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Gamepad | null
+</div>
+
+
+
+    
 
 
 
