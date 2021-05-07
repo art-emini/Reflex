@@ -278,8 +278,8 @@ let Entitys = {
  */
 
 /**
- * @description Main Reflex Class
  * @class Reflex
+ * @classdesc Main Reflex Class
  */
 
 class Reflex {
@@ -586,7 +586,7 @@ class Reflex {
 
 /**
  * @class RigidBody
- * @description Creates a Rigid Body
+ * @classdesc Creates a Rigid Body
  */
 
 class RigidBody extends Reflex {
@@ -610,7 +610,6 @@ class RigidBody extends Reflex {
 	 * @param {String} [options.movement.type="UpDown"] W D
 	 * @param {Number} [options.movement.speed=2.5] Speed of Rigid Body, only used if acceleration is not present
 	 * @param {Number} [options.movement.acceleration=0.02] Acceleration of Rigid Body
-	 * @param {Number} [options.movement.friction=0.007] Friction of Rigid Body
 	 * @param {Number} [options.movement.maxSpeed=4] Max speed of Rigid Body, Only needed if acceleration is present
 	 *
 	 * @memberof RigidBody
@@ -1142,7 +1141,7 @@ class RigidBody extends Reflex {
 
 /**
  * @class Background
- * @description Creates a background
+ * @classdesc Creates a background
  */
 
 class Background extends Reflex {
@@ -1256,7 +1255,7 @@ class Background extends Reflex {
 
 /**
  * @class SpriteSheet
- * @description Creates a SpriteSheet
+ * @classdesc Creates a SpriteSheet
  */
 
 class SpriteSheet extends Reflex {
@@ -1296,7 +1295,7 @@ class SpriteSheet extends Reflex {
 
 /**
  * @class Sound
- * @description Creates a Sound
+ * @classdesc Creates a Sound
  */
 
 class Sound extends Reflex {
@@ -1467,7 +1466,7 @@ class Sound extends Reflex {
 
 /**
  * @class ProximitySound
- * @description Creates a ProximitySound
+ * @classdesc Creates a ProximitySound
  */
 
 class ProximitySound extends Reflex {
@@ -1565,7 +1564,7 @@ class ProximitySound extends Reflex {
 
 /**
  * @class Shadow
- * @description Creates a basic circle shadow
+ * @classdesc Creates a basic circle shadow
  */
 
 class Shadow extends Reflex {
@@ -1645,7 +1644,7 @@ class Shadow extends Reflex {
 
 /**
  * @class Particles
- * @description Creates Particles
+ * @classdesc Creates Particles
  */
 
 class Particles extends Reflex {
@@ -1964,7 +1963,7 @@ class Particles extends Reflex {
 
 /**
  * @class Text
- * @description Creates text on the canvas
+ * @classdesc Creates text on the canvas
  */
 
 class Text extends Reflex {
@@ -2040,7 +2039,7 @@ class Text extends Reflex {
 
 /**
  * @class Button
- * @description Creates a button on the canvas
+ * @classdesc Creates a button on the canvas
  */
 
 class Button extends Reflex {
@@ -2206,7 +2205,7 @@ class Button extends Reflex {
 
 /**
  * @class StaticLight
- * @description Creates a StaticLight
+ * @classdesc Creates a StaticLight
  */
 
 class StaticLight extends Reflex {
@@ -2297,6 +2296,65 @@ class StaticLight extends Reflex {
 	}
 }
 
+/**
+ * @class Gamepad
+ * @classdesc Creates a Gamepad listener
+ */
+
+class Gamepad extends Reflex {
+	/**
+	 * @description Creates and returns a gamepad api object
+	 * @param {object} options Options object
+	 * @param {boolean} options.turbo Determines if holding a button down is allowed
+	 * @param {Function} [options.turbo_fire=() => {}] Function to be called if button is being held
+	 * @param {Function} options.managePause Function to be called if button is being pressed
+	 *
+	 * @returns Gamepad | null
+	 * @memberof Gamepad
+	 */
+
+	constructor() {
+		super(ReflexConfig);
+		this.id = randomInt(1, 100000);
+		this.type = 'Gamepad';
+
+		this.gamepad;
+
+		this.connected = false;
+
+		if (navigator.getGamepads()[0] != null) {
+			this.connected = true;
+		}
+
+		this.gamepadIndex;
+		window.addEventListener('gamepadconnected', (event) => {
+			this.gamepadIndex = event.gamepad.index;
+			this.connected = true;
+		});
+
+		return navigator.getGamepads()[this.gamepadIndex];
+	}
+
+	/**
+	 * @description Updates the gamepad[s'] state
+	 */
+
+	update() {
+		if (this.gamepad && this.gamepadIndex) {
+			this.gamepad = navigator.getGamepads()[this.gamepadIndex];
+			this.connected = true;
+			if (this.debug) {
+				console.log(
+					`Left stick at (${this.gamepad.axes[0]}, ${this.gamepad.axes[1]})`
+				);
+				console.log(
+					`Right stick at (${this.gamepad.axes[2]}, ${this.gamepad.axes[3]})`
+				);
+			}
+		}
+	}
+}
+
 // end lights
 //#endregion
 
@@ -2362,6 +2420,17 @@ let Audio = {
 
 /**
  * @namespace
+ * @description Reflex Movement classes
+ * @property {Gamepad} Gamepad
+ * @property {TouchController} TouchController
+ */
+
+let Movement = {
+	Gamepad: Gamepad,
+};
+
+/**
+ * @namespace
  * @description Reflex Misc classes
  * @property {SpriteSheet} SpriteSheet
  */
@@ -2382,6 +2451,6 @@ let Data = {
 
 // export as a module
 
-export { Reflex, Objects, Lights, Misc, Audio, GFX, UI, Data };
+export { Reflex, Objects, Lights, Misc, Audio, Movement, GFX, UI, Data };
 
 //#endregion

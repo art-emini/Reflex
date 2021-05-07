@@ -22,7 +22,6 @@ var myRoundRect = new Engine.Objects.RigidBody(
 			type: 'TopDown',
 			maxSpeed: 4,
 			acceleration: 0.02,
-			friction: 0.9,
 			canvasBounds: true,
 		},
 	}

@@ -22,7 +22,7 @@ A simple Javascript game engine.
 14. Great performance.
 15. Future Plans such as dynamic lighting.
 16. Often updates/patches.
-17. And way more.
+17. And way more. Look at the [docs](https://ksplatdev.github.io/Reflex/index.html)!
 
 <br>
 
@@ -43,8 +43,16 @@ A simple Javascript game engine.
 
 ### CDN Module
 
+**Development**
+
 1. Import Reflex as a module. ([Help here](#importing))
-2. Change the from to the [CDN link.](https://cdn.jsdelivr.net/gh/ksplatdev/reflex@1.2.0/Reflex.js)
+2. Change the from to the [CDN link.](https://cdn.jsdelivr.net/gh/ksplatdev/reflex@1.4.0/Reflex.js)
+3. Done, [Read The Docs](https://ksplatdev.github.io/Reflex/index.html).
+
+**Production**
+
+1. Import Reflex as a module. ([Help here](#importing))
+2. Change the from to the [CDN link.](https://cdn.jsdelivr.net/gh/ksplatdev/reflex@1.4.0/Reflex.min.js)
 3. Done, [Read The Docs](https://ksplatdev.github.io/Reflex/index.html).
 
 <br>
