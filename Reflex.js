@@ -610,7 +610,6 @@ class RigidBody extends Reflex {
 	 * @param {String} [options.movement.type="UpDown"] W D
 	 * @param {Number} [options.movement.speed=2.5] Speed of Rigid Body, only used if acceleration is not present
 	 * @param {Number} [options.movement.acceleration=0.02] Acceleration of Rigid Body
-	 * @param {Number} [options.movement.friction=0.007] Friction of Rigid Body
 	 * @param {Number} [options.movement.maxSpeed=4] Max speed of Rigid Body, Only needed if acceleration is present
 	 *
 	 * @memberof RigidBody
@@ -2336,6 +2335,10 @@ class Gamepad extends Reflex {
 		return navigator.getGamepads()[this.gamepadIndex];
 	}
 
+	/**
+	 * @description Updates the gamepad[s'] state
+	 */
+
 	update() {
 		if (this.gamepad && this.gamepadIndex) {
 			this.gamepad = navigator.getGamepads()[this.gamepadIndex];
@@ -2350,12 +2353,6 @@ class Gamepad extends Reflex {
 			}
 		}
 	}
-}
-
-class TouchController {
-	constructor() {}
-
-	init() {}
 }
 
 // end lights
@@ -2430,7 +2427,6 @@ let Audio = {
 
 let Movement = {
 	Gamepad: Gamepad,
-	TouchController: TouchController,
 };
 
 /**
