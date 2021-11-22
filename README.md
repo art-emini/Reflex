@@ -1,5 +1,7 @@
 # Reflex
 
+**Archived and no longer maintained! Use a way more power game engine [DuckEngine](https://github.com/ksplatdev/DuckEngine) instead.**
+
 A simple Javascript game engine.
 
 [MIT LICENSE](./LICENSE)
